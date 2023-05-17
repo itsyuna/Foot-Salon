@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Header from "./compoents/organisms/Header";
+import Navigation from "./compoents/organisms/Navigation";
 
 const Wrapper = styled.div`
   border: 3px solid yellow;
@@ -12,6 +13,7 @@ function App() {
   return (
     <Wrapper>
       <Header />
+      <Navigation />
     </Wrapper>
   );
 }

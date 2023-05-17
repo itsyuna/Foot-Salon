@@ -9,4 +9,14 @@ export default createGlobalStyle`
     box-sizing: border-box;
     background-image: url(${backgroundImg})
   }
+  ul {
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  a { 
+    text-decoration: none;
+  }
 `;
