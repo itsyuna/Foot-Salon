@@ -12,9 +12,13 @@ export default createGlobalStyle`
   ul {
     padding-left: 0;
     list-style: none;
+    text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  li {
+    cursor: pointer;
   }
   a { 
     text-decoration: none;
