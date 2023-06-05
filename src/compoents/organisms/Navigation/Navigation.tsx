@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const NavWrapper = styled.nav`
   background-color: #33aa30;
   border-radius: 20px;
   width: 100%;
@@ -51,7 +51,7 @@ const SonnyCelebration = `${process.env.PUBLIC_URL}/assets/icon/sonny-celebratio
 
 const Navigation = () => {
   return (
-    <Wrapper>
+    <NavWrapper>
       <IconBox>
         <GoalpostIcon src={GoalPost} alt="Goalpost icon" />
         <SonnyCelebrationIcon
@@ -81,7 +81,7 @@ const Navigation = () => {
           </li>
         </ul>
       </Nav>
-    </Wrapper>
+    </NavWrapper>
   );
 };
 

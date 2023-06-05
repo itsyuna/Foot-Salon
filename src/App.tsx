@@ -10,6 +10,12 @@ const Wrapper = styled.div`
   margin: 15px auto;
 `;
 
+export const MainWrapper = styled.main`
+  width: 100%;
+  height: 65vh;
+  border: 2px solid yellow;
+`;
+
 function App() {
   return (
     <Wrapper>
