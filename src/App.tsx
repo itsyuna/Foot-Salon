@@ -1,7 +1,9 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+
 import Header from "./compoents/organisms/Header";
 import Navigation from "./compoents/organisms/Navigation";
+import Footer from "./compoents/organisms/Footer";
 
 const Wrapper = styled.div`
   border: 1px solid white;
@@ -22,6 +24,7 @@ function App() {
       <Header />
       <Navigation />
       <Outlet />
+      <Footer />
     </Wrapper>
   );
 }
