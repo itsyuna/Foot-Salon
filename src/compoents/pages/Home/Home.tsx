@@ -1,10 +1,22 @@
 import styled from "styled-components";
-import Carousel from "../../molecules/Carousel";
 
-const HomeWrapper = styled.div`
+import Carousel from "../../molecules/Carousel";
+import LeagueTable from "../../organisms/LeagueTable";
+import KoreaFixture from "../../organisms/KoreaFixture";
+import Transfer from "../../organisms/TransferTable";
+import { MainWrapper } from "../../../App";
+
+const HomeTopSection = styled.section`
   width: 100%;
-  height: 70%;
-  border: 2px solid yellow;
+  height: 40vh;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+`;
+
+const HomeBottomSection = styled(HomeTopSection)`
+  height: 20vh;
+  margin-top: 30px;
 `;
 
 const images = [
@@ -19,9 +31,16 @@ const images = [
 
 const Home = () => {
   return (
-    <HomeWrapper>
-      <Carousel images={images} />
-    </HomeWrapper>
+    <MainWrapper>
+      <HomeTopSection>
+        <Carousel images={images} />
+        <LeagueTable />
+      </HomeTopSection>
+      <HomeBottomSection>
+        <KoreaFixture />
+        <Transfer />
+      </HomeBottomSection>
+    </MainWrapper>
   );
 };
 
