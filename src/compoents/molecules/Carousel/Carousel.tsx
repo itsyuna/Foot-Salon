@@ -3,11 +3,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 
-const CarouselWrapper = styled.div`
-  border: 3px solid orange;
+const CarouselWrapper = styled.article`
   width: 50vw;
   height: 40vh;
-  margin: 15px 10px;
+  margin-right: 15px;
 `;
 
 const CustomCarousel = styled(Slider)`
@@ -32,6 +31,10 @@ const CustomCarousel = styled(Slider)`
   .slick-prev:before,
   .slick-next:before {
     font-size: 25px;
+  }
+
+  .slick-dots {
+    bottom: -20px;
   }
 
   .slick-dots li button:before {
@@ -69,7 +72,7 @@ const Carousel = ({ images }: { images: ImageName }) => {
           <CarouselItems
             key={i}
             src={`${process.env.PUBLIC_URL}/assets/img/${image}.svg`}
-            alt={"Carousel"}
+            alt="Carousel"
           />
         ))}
       </CustomCarousel>
