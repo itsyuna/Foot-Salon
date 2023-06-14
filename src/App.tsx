@@ -6,7 +6,7 @@ import Navigation from "./compoents/organisms/Navigation";
 import Footer from "./compoents/organisms/Footer";
 
 const Wrapper = styled.div`
-  border: 1px solid white;
+  border: 5px solid white;
   width: 80vw;
   height: 97vh;
   margin: 15px auto;
