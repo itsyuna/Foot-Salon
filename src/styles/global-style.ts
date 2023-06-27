@@ -9,6 +9,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     background-image: url(${backgroundImg})
   }
+
   ul {
     padding-left: 0;
     list-style: none;
@@ -17,10 +18,17 @@ export default createGlobalStyle`
     justify-content: space-between;
     align-items: center;
   }
+
   li {
     cursor: pointer;
   }
+
   a { 
     text-decoration: none;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
   }
 `;
