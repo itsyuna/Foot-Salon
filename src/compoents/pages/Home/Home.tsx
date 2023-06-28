@@ -11,7 +11,6 @@ const HomeTopSection = styled.section`
   height: 40vh;
   display: flex;
   justify-content: space-around;
-  margin-top: 10px;
 `;
 
 const HomeBottomSection = styled(HomeTopSection)`
