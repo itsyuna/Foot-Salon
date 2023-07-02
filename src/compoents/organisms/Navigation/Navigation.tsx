@@ -8,6 +8,7 @@ const NavWrapper = styled.nav`
   height: 5%;
   line-height: 50%;
   position: relative;
+  margin-bottom: 10px;
 `;
 
 const IconBox = styled.div`
