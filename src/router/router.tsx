@@ -8,6 +8,7 @@ import Play from "../compoents/pages/Play";
 import Stats from "../compoents/pages/Stats";
 import Login from "../compoents/pages/Login/Login";
 import SignUp from "../compoents/pages/SignUp/SignUp";
+import NewBoard from "../compoents/pages/NewBoard/NewBoard";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: "photos", element: <Photos /> },
       { path: "login", element: <Login /> },
       { path: "login/sign-up", element: <SignUp /> },
+      { path: "/play/new", element: <NewBoard /> },
     ],
   },
 ]);
