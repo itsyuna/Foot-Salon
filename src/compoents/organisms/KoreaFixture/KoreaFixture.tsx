@@ -12,7 +12,7 @@ const KoreaFixtureWrapper = styled.article`
   margin-right: 15px;
 `;
 
-const CotentsTitle = styled.p`
+const ContentsTitle = styled.p`
   font-size: 1.2rem;
   color: #16213e;
   margin-top: 10px;
@@ -89,7 +89,7 @@ const nationalCompetition = [
 const KoreaFixture = () => {
   return (
     <KoreaFixtureWrapper>
-      <CotentsTitle>남자축구 국가대표 경기 일정</CotentsTitle>
+      <ContentsTitle>남자축구 국가대표 경기 일정</ContentsTitle>
       <FixtureInfo>
         <KoreaFixtureList
           matchCategory={warmupMatchList}
