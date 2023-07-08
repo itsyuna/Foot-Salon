@@ -1,5 +1,12 @@
+import { MainWrapper } from "../../../App";
+import FootballVideo from "../../organisms/FootballVideo";
+
 const LineUp = () => {
-  return <div></div>;
+  return (
+    <MainWrapper>
+      <FootballVideo />
+    </MainWrapper>
+  );
 };
 
 export default LineUp;
