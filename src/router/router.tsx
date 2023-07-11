@@ -8,7 +8,8 @@ import Play from "../compoents/pages/Play";
 import Stats from "../compoents/pages/Stats";
 import Login from "../compoents/pages/Login/Login";
 import SignUp from "../compoents/pages/SignUp/SignUp";
-import NewBoard from "../compoents/pages/NewBoard/NewBoard";
+import NewPost from "../compoents/pages/NewPost/NewPost";
+import Post from "../compoents/pages/Post/Post";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
       { path: "photos", element: <Photos /> },
       { path: "login", element: <Login /> },
       { path: "login/sign-up", element: <SignUp /> },
-      { path: "/play/new", element: <NewBoard /> },
+      { path: "/play/new", element: <NewPost /> },
+      { path: "/play/:no", element: <Post /> },
     ],
   },
 ]);
