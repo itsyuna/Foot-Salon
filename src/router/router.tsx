@@ -6,10 +6,11 @@ import LineUp from "../compoents/pages/LineUp";
 import Photos from "../compoents/pages/Photos";
 import Play from "../compoents/pages/Play";
 import Stats from "../compoents/pages/Stats";
-import Login from "../compoents/pages/Login/Login";
-import SignUp from "../compoents/pages/SignUp/SignUp";
-import NewPost from "../compoents/pages/NewPost/NewPost";
-import Post from "../compoents/pages/Post/Post";
+import Login from "../compoents/pages/Login";
+import SignUp from "../compoents/pages/SignUp";
+import NewPost from "../compoents/pages/NewPost";
+import Post from "../compoents/pages/Post";
+import UpdatePost from "../compoents/pages/UpdatePost/UpdatePost";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       { path: "login/sign-up", element: <SignUp /> },
       { path: "/play/new", element: <NewPost /> },
       { path: "/play/:no", element: <Post /> },
+      { path: "/updatePlay/:no", element: <UpdatePost /> },
+      { path: "/half-time/new", element: <NewPost /> },
+      { path: "/half-time/:no", element: <Post /> },
+      { path: "/updateHalfTime/:no", element: <UpdatePost /> },
     ],
   },
 ]);
