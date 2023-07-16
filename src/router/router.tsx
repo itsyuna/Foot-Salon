@@ -11,6 +11,7 @@ import SignUp from "../compoents/pages/SignUp";
 import NewPost from "../compoents/pages/NewPost";
 import Post from "../compoents/pages/Post";
 import UpdatePost from "../compoents/pages/UpdatePost/UpdatePost";
+import NewDiary from "../compoents/pages/NewDiary/NewDiary";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
       { path: "/line-up", element: <LineUp /> },
       { path: "/play", element: <Play /> },
       { path: "/half-time", element: <HalfTime /> },
-      { path: "stats", element: <Stats /> },
+      { path: "/stats", element: <Stats /> },
       { path: "photos", element: <Photos /> },
       { path: "login", element: <Login /> },
       { path: "login/sign-up", element: <SignUp /> },
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: "/half-time/new", element: <NewPost /> },
       { path: "/half-time/:no", element: <Post /> },
       { path: "/updateHalfTime/:no", element: <UpdatePost /> },
+      { path: "/stats/new", element: <NewDiary /> },
     ],
   },
 ]);
