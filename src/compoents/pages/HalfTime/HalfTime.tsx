@@ -1,5 +1,12 @@
+import { MainWrapper } from "../../../App";
+import Board from "../../organisms/Board/Board";
+
 const HalfTime = () => {
-  return <div></div>;
+  return (
+    <MainWrapper>
+      <Board />
+    </MainWrapper>
+  );
 };
 
 export default HalfTime;
