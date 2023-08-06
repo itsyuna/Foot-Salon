@@ -43,11 +43,6 @@ const Img = styled.img`
   height: 200px;
 `;
 
-let korea = "KOREA";
-let epl = "ENGLAND";
-let laliga = "SPAIN";
-let serieA = "ITALY";
-
 const FootballVideo = ({ userInput }: { userInput: string }) => {
   let [table, setTable] = useState<TableProps[]>([]);
 
@@ -79,14 +74,6 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
   }, []);
 
   let dateHandler = (gameDate: string) => {
-    const date = gameDate.substring(0, 10);
-    const hour = gameDate.substring(11, 16);
-    const fullDateHour = `${date} ${hour}`;
-
-    return fullDateHour;
-  };
-
-  let koreaDateHandler = (gameDate: string) => {
     const newDate = new Date(gameDate);
 
     const year = newDate.getFullYear();
@@ -100,20 +87,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
     return koreaDate;
   };
 
-  const searchList: TableProps[] = [];
-  table.map((list) => {
-    if (
-      list.competition.name.includes(korea) ||
-      list.competition.name.includes(epl) ||
-      list.competition.name.includes(laliga) ||
-      list.competition.name.includes(serieA)
-    ) {
-      searchList.push(list);
-    }
-    return searchList;
-  });
-
-  const filteredList = searchList.filter((item) => {
+  const filteredList = table.filter((item) => {
     return item.title.toUpperCase().includes(userInput.toUpperCase());
   });
 
@@ -131,11 +105,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
               <Img src={list.thumbnail} alt="thumbnail" onError={imgHandler} />
             </a>
           </div>
-          <MatchDate>
-            {list.competition.name.includes(korea)
-              ? koreaDateHandler(list.date)
-              : dateHandler(list.date)}
-          </MatchDate>
+          <MatchDate>{dateHandler(list.date)}</MatchDate>
         </div>
       ))}
     </VideoItemWrapper>

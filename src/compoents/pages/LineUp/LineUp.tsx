@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import { MainWrapper } from "../../../App";
-import Card from "../../../ui/Card/Card";
+import Card from "../../../ui/Card";
 import FootballVideo from "../../organisms/FootballVideo";
-import Input from "../../atoms/Input/Input";
+import Input from "../../atoms/Input";
 import { useState } from "react";
 
-const Title = styled.h1`
+const Title = styled.h2`
   margin: 20px;
   text-align: center;
+  font-family: "Orelega One", cursive;
+
+  span {
+    color: #ff1700;
+  }
 `;
 
 const SearchWrapper = styled.div`
   height: 4vh;
-  text-align: center;
   margin: 10px auto;
   display: flex;
   justify-content: space-around;
@@ -21,7 +25,6 @@ const SearchWrapper = styled.div`
 
 const GuideText = styled.p`
   font-weight: 500;
-  margin-top: 2.3rem;
 `;
 
 const LineUp = () => {
@@ -34,8 +37,10 @@ const LineUp = () => {
   return (
     <MainWrapper>
       <Card>
-        <section>
-          <Title>All Football matches Line-up</Title>
+        <header>
+          <Title>
+            All Football matches <span>Line-up</span>
+          </Title>
           <SearchWrapper>
             <Input
               type="text"
@@ -47,10 +52,10 @@ const LineUp = () => {
               height="4vh"
             />
             <GuideText>
-              영상 클릭시 해당 링크로 이동합니다!😉 (*경기시간: 현지 시간 기준)
+              영상 클릭시 해당 링크로 이동합니다!😉 (*경기시간: 한국 시간 기준)
             </GuideText>
           </SearchWrapper>
-        </section>
+        </header>
         <FootballVideo userInput={userInput} />
       </Card>
     </MainWrapper>
