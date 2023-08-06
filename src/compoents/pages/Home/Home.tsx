@@ -1,10 +1,9 @@
 import styled from "styled-components";
-
-import Carousel from "../../molecules/Carousel";
-import LeagueTable from "../../organisms/LeagueTable";
-import KoreaFixture from "../../organisms/KoreaFixture";
-import Transfer from "../../organisms/TransferTable";
 import { MainWrapper } from "../../../App";
+
+import Carousel from "../../organisms/Carousel";
+import KoreaFixture from "../../organisms/KoreaFixture";
+import TableTemplate from "../../organisms/TableTemplate";
 
 const HomeTopSection = styled.section`
   width: 100%;
@@ -28,16 +27,38 @@ const images = [
   "jeonbuk",
 ];
 
+const standingsMenu = [
+  "순위",
+  "팀명",
+  "경기",
+  "승점",
+  "승",
+  "무",
+  "패",
+  "득실차",
+];
+
+const topscorersMenu = [
+  "순위",
+  "선수명",
+  "포지션",
+  "총 득점 수 / 페널티",
+  "어시스트",
+  "출장 수",
+  "소속팀",
+  "국적",
+];
+
 const Home = () => {
   return (
     <MainWrapper>
       <HomeTopSection>
         <Carousel images={images} />
-        <LeagueTable />
+        <TableTemplate category="STANDINGS" tableMenu={standingsMenu} />
       </HomeTopSection>
       <HomeBottomSection>
         <KoreaFixture />
-        <Transfer />
+        <TableTemplate category="TOPSCORERS" tableMenu={topscorersMenu} />
       </HomeBottomSection>
     </MainWrapper>
   );

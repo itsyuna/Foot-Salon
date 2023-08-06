@@ -29,27 +29,6 @@ const nationalCompetitionSubtitle = "국제 대회";
 const warmupMatchCategory = ["일시", "대진", "장소"];
 const nationalCompetitionCategory = ["대회 기간", "대회명", "장소", "D-DAY"];
 
-const warmupMatchList = [
-  {
-    date: "2023.06.16",
-    time: "20:00",
-    match: "대한민국 vs 페루",
-    place: "부산 아시아드주경기장",
-  },
-  {
-    date: "2023.06.20",
-    time: "20:00",
-    match: "대한민국 vs 엘살바도르",
-    place: "대전 월드컵 경기장",
-  },
-  {
-    date: "2023.09.07",
-    time: "시간 미정",
-    match: "대한민국 vs 웨일즈",
-    place: "웨일즈 카디프시티 경기장",
-  },
-];
-
 const competitionDday = (competitionDate: string) => {
   let date = new Date(competitionDate);
 
@@ -59,45 +38,79 @@ const competitionDday = (competitionDate: string) => {
   return dDay;
 };
 
+const checkMatchFinish = (finishDate: string) => {
+  let date = new Date(finishDate);
+
+  return new Date().getTime() > date.getTime();
+};
+
+const warmupMatchList = [
+  {
+    date: "2023.06.16",
+    time: "20:00",
+    match: "대한민국 vs 페루",
+    place: "부산 아시아드주경기장",
+    isFinish: checkMatchFinish("2023-06-16 22:00:00"),
+  },
+  {
+    date: "2023.06.20",
+    time: "20:00",
+    match: "대한민국 vs 엘살바도르",
+    place: "대전 월드컵 경기장",
+    isFinish: checkMatchFinish("2023-06-20 22:00:00"),
+  },
+  {
+    date: "2023.09.07",
+    time: "시간 미정",
+    match: "대한민국 vs 웨일즈",
+    place: "웨일즈 카디프시티 경기장",
+    isFinish: checkMatchFinish("2023-09-08 00:00:00"),
+  },
+];
+
 const nationalCompetition = [
   {
     date: "2023.05.21~06.12",
     match: "FIFA U-20 월드컵",
     place: "아르헨티나",
     status: competitionDday(`2023-05-21 00:00:00`),
+    isFinish: checkMatchFinish("2023-06-13 00:00:00"),
   },
   {
     date: "2023.09.23~10.08",
     match: "2023 항저우 아시안게임",
     place: "중국",
     status: competitionDday(`2023-09-23 00:00:00`),
+    isFinish: checkMatchFinish("2023-10-09 00:00:00"),
   },
   {
     date: "2024.01.12~02.10",
     match: "2023 AFC 카타르 아시안컵",
     place: "카타르",
     status: competitionDday(`2024-01-12 00:00:00`),
+    isFinish: checkMatchFinish(`2024-02-11 00:00:00`),
   },
   {
     date: "2024.07.26~08.11",
     match: "2024 파리 올림픽",
     place: "프랑스",
     status: competitionDday(`2024-07-26 00:00:00`),
+    isFinish: checkMatchFinish(`2024-08-12 00:00:00`),
   },
 ];
 
 const KoreaFixture = () => {
   return (
     <KoreaFixtureWrapper>
-      <ContentsTitle>남자축구 국가대표 경기 일정</ContentsTitle>
+      <ContentsTitle>2023-2024 남자축구 국가대표 경기 일정</ContentsTitle>
       <FixtureInfo>
         <KoreaFixtureList
-          matchCategory={warmupMatchList}
+          matchList={warmupMatchList}
           category={warmupMatchCategory}
           subtitle={warmupMatchSubtitle}
         />
         <KoreaFixtureList
-          matchCategory={nationalCompetition}
+          matchList={nationalCompetition}
           category={nationalCompetitionCategory}
           subtitle={nationalCompetitionSubtitle}
         />
