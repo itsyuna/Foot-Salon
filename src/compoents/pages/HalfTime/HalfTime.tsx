@@ -1,12 +1,7 @@
-import { MainWrapper } from "../../../App";
-import Board from "../../organisms/Board/Board";
+import BoardTemplate from "../../templates/BoardTemplate/BoardTemplate";
 
 const HalfTime = () => {
-  return (
-    <MainWrapper>
-      <Board />
-    </MainWrapper>
-  );
+  return <BoardTemplate boardCategory="half-time" />;
 };
 
 export default HalfTime;
