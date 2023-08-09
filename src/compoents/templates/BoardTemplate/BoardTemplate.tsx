@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { MainWrapper } from "../../../App";
 import BoardCard from "../../../ui/BoardCard/BoardCard";
 import BoardHeader from "../../organisms/BoardHeader/BoardHeader";
 import BoardList from "../../organisms/BoardList/BoardList";
@@ -15,7 +14,11 @@ const BoardTemplate = ({ boardCategory }: { boardCategory: string }) => {
 
   const [league, setLeague] = useState("");
 
-  const data = useAppSelector((state) => state.playBoard.boardArray);
+  const data = useAppSelector((state) =>
+    boardCategory === "play"
+      ? state.playBoard.boardArray
+      : state.halfTimeBoard.boardArray
+  );
 
   const boardByleague =
     league === "해외 축구"
@@ -58,16 +61,14 @@ const BoardTemplate = ({ boardCategory }: { boardCategory: string }) => {
   };
 
   return (
-    <MainWrapper>
-      <BoardCard>
-        <BoardHeader
-          leagueCategory={leagueCategory}
-          league={setLeague}
-          sortList={setSortList}
-        />
-        <BoardList boardByleague={getListByOption()} />
-      </BoardCard>
-    </MainWrapper>
+    <BoardCard>
+      <BoardHeader
+        leagueCategory={leagueCategory}
+        league={setLeague}
+        sortList={setSortList}
+      />
+      <BoardList boardByleague={getListByOption()} />
+    </BoardCard>
   );
 };
 

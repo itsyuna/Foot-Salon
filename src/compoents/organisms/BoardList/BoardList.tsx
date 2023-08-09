@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { BoardListItems } from "../../../store/playBoard";
 
-const BoardListWrapper = styled.div`
+const BoardListWrapper = styled.article`
   background-color: #e4e3e3;
   border: 1px solid #848181;
   height: 40vh;

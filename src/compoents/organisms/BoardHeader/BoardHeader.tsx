@@ -5,7 +5,7 @@ import { useAppSelector } from "../../../store";
 import Button from "../../atoms/Button/Button";
 import Select from "../../atoms/Select/Select";
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
   width: 90%;
   height: 15vh;
   margin: 0 auto;
