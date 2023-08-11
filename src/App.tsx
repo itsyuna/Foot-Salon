@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 
 import Header from "./compoents/organisms/Header";
 import Navigation from "./compoents/organisms/Navigation";
@@ -10,12 +10,6 @@ const Wrapper = styled.div`
   width: 80vw;
   height: 97vh;
   margin: 15px auto;
-`;
-
-export const MainWrapper = styled.main`
-  width: 100%;
-  height: 65vh;
-  border: 2px solid yellow;
 `;
 
 function App() {
