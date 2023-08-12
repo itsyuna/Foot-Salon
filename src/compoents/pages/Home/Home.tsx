@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import { MainWrapper } from "../../../App";
 
 import Carousel from "../../organisms/Carousel";
 import KoreaFixture from "../../organisms/KoreaFixture";
 import TableTemplate from "../../organisms/TableTemplate";
+
+const MainWrapper = styled.main`
+  width: 100%;
+  height: 65vh;
+`;
 
 const HomeTopSection = styled.section`
   width: 100%;
