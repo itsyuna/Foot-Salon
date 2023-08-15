@@ -22,6 +22,7 @@ import Button from "../../atoms/Button";
 import { ErrorText } from "../../pages/SignUp/SignUp";
 import PostFooter from "../PostFooter";
 import { getDate } from "../../../utils/date";
+import NoPostMessage from "../../molecules/NoPostMessage/NoPostMessage";
 
 export const CategoryBox = styled.div`
   width: 70%;
@@ -210,8 +211,6 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
     }
   };
 
-  console.log(attachment);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -221,14 +220,10 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
   let { no } = useParams() as { no: string };
 
   let targetPost = location.state;
-  if (isEdit && !targetPost) {
-    alert("없는 게시글입니다.");
-    navigate(boardCategory === `/play/${no}` ? "/play" : "/half-time", {
-      replace: true,
-    });
-  }
 
-  return (
+  return isEdit && !targetPost ? (
+    <NoPostMessage category={boardCategory} />
+  ) : (
     <BoardCard>
       <form onSubmit={handleSubmit(onSubmit)}>
         <section>
