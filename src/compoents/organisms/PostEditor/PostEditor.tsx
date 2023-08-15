@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import BoardCard from "../../../ui/BoardCard/BoardCard";
-import Select from "../../atoms/Select/Select";
-import { useAppDispatch, useAppSelector } from "../../../store";
-import Input from "../../atoms/Input/Input";
-import { Controller, useForm } from "react-hook-form";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { dbService, storageService } from "../../../firebase/config";
+import { fetchPlayBoard } from "../../../store/playBoard";
+import { v4 as uuidv4 } from "uuid";
 import {
   collection,
   addDoc,
@@ -12,14 +14,14 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { v4 as uuidv4 } from "uuid";
-import { getDate } from "../../../utils/date";
+
+import BoardCard from "../../../ui/BoardCard";
+import Select from "../../atoms/Select";
+import Input from "../../atoms/Input";
+import Button from "../../atoms/Button";
 import { ErrorText } from "../../pages/SignUp/SignUp";
-import React, { useEffect, useRef, useState } from "react";
-import { dbService, storageService } from "../../../firebase/config";
-import { BoardList, fetchPlayBoard } from "../../../store/playBoard";
-import PostFooter from "../../molecules/PostFooter/PostFooter";
+import PostFooter from "../PostFooter";
+import { getDate } from "../../../utils/date";
 
 export const CategoryBox = styled.div`
   width: 70%;
@@ -80,12 +82,10 @@ const FileWrapper = styled.div`
 
 const UploadImageBox = styled.div`
   width: 70%;
-  margin: 0 auto;
-  border: 1px solid red;
-`;
-const UploadImage = styled.img`
-  width: 20%;
-  height: 50%;
+  margin: 0.5rem auto 0;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 `;
 
 export interface BoardFormData {
@@ -97,13 +97,13 @@ export interface BoardFormData {
 type UploadFile = string | ArrayBuffer | null | undefined;
 
 const optionList = [
-  "리그를 선택해 주세요.",
-  "K LEAGUE",
-  "EPL",
-  "LALIGA",
-  "SERIE A",
-  "LIGUE 1",
-  "BUNDESRIGA",
+  { value: "choose-league", name: "리그를 선택해 주세요." },
+  { value: "K LEAGUE", name: "K LEAGUE" },
+  { value: "EPL", name: "EPL" },
+  { value: "LA LIGA", name: "LA LIGA" },
+  { value: "SERIE A", name: "SERIE A" },
+  { value: "LIGUE 1", name: "LIGUE 1" },
+  { value: "BUNDESRIGA", name: "BUNDESRIGA" },
 ];
 
 const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
@@ -125,6 +125,11 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
   } = useForm<BoardFormData>();
 
   const onSubmit = async (data: BoardFormData) => {
+    if (data.league === "choose-league") {
+      alert("리그를 선택해 주세요 :)");
+      return;
+    }
+
     if (window.confirm("제출하시겠습니까?")) {
       let fileURL = "";
       if (attachment !== "") {
@@ -169,9 +174,10 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
           );
         }
 
-        // setAttachment("");
         alert("작성 완료!");
-        navigate(-1);
+        boardCategory.includes("play" || "updatePlay")
+          ? navigate("/play")
+          : navigate("/half-time");
       } catch (error) {
         console.log(error);
       }
@@ -179,18 +185,14 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
   };
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.files);
     const {
       target: { files },
     } = e;
     if (files !== null) {
       const theFile = files[0];
       const reader = new FileReader();
-      console.log(reader);
 
       reader.onloadend = (finishedEvent) => {
-        console.log(finishedEvent);
-
         const uploadFile: UploadFile = finishedEvent.target?.result;
 
         if (uploadFile) {
@@ -201,14 +203,14 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
     }
   };
 
-  console.log(attachment);
-
   const clearAttachmentHandler = () => {
     setAttachment("");
     if (fileInput.current) {
       fileInput.current.value = "";
     }
   };
+
+  console.log(attachment);
 
   const dispatch = useAppDispatch();
 
@@ -217,31 +219,14 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
   }, [dispatch]);
 
   let { no } = useParams() as { no: string };
-  // console.log(no);
 
-  let data = useAppSelector((state) =>
-    boardCategory === `/updatePlay/${no}`
-      ? state.playBoard.boardArray
-      : state.halfTimeBoard.boardArray
-  );
-  // console.log(data);
-
-  let targetPost: BoardList | undefined;
-  if (isEdit) {
-    if (data.length >= 1) {
-      targetPost = data.find((item, idx) => +data.length - idx === +no);
-
-      if (!targetPost) {
-        alert("없는 게시글입니다.");
-        navigate(boardCategory === `/play/${no}` ? "/play" : "/half-time", {
-          replace: true,
-        });
-      }
-    }
+  let targetPost = location.state;
+  if (isEdit && !targetPost) {
+    alert("없는 게시글입니다.");
+    navigate(boardCategory === `/play/${no}` ? "/play" : "/half-time", {
+      replace: true,
+    });
   }
-
-  console.log(isEdit);
-  console.log(targetPost);
 
   return (
     <BoardCard>
@@ -256,20 +241,21 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
             <CategoryData>
               <Controller
                 control={control}
-                defaultValue=""
+                defaultValue={targetPost?.board.league}
                 name="league"
                 rules={{
-                  required: "필수 입력사항입니다.",
+                  ...(!isEdit && {
+                    required: "필수 입력사항입니다.",
+                  }),
                 }}
                 render={({ field }) => (
                   <Select
                     option={optionList}
+                    onChange={field.onChange}
+                    defaultValue={targetPost?.board.league}
                     backgroundColor="#f6edd9"
                     color="#379237"
                     border="#7a9972"
-                    onChange={field.onChange}
-                    defaultValue={targetPost?.board.league}
-                    key={targetPost?.board.league}
                   ></Select>
                 )}
               />
@@ -281,20 +267,21 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
             <CategoryData>
               <Controller
                 control={control}
-                defaultValue=""
+                defaultValue={targetPost?.board.title}
                 name="title"
                 rules={{
-                  required: "필수 입력사항입니다.",
+                  ...(!isEdit && {
+                    required: "필수 입력사항입니다.",
+                  }),
                 }}
                 render={({ field }) => (
                   <Input
                     type="text"
                     placeholder="글의 제목을 입력해주세요."
-                    width="100%"
-                    height="3.5vh"
                     onChange={field.onChange}
                     defaultValue={targetPost?.board.title}
-                    key={targetPost?.board.title}
+                    width="100%"
+                    height="3.5vh"
                   />
                 )}
               />
@@ -310,10 +297,12 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
             </ContentBox>
             <Controller
               control={control}
-              defaultValue=""
+              defaultValue={targetPost?.board.contents}
               name="contents"
               rules={{
-                required: "필수 입력사항입니다.",
+                ...(!isEdit && {
+                  required: "필수 입력사항입니다.",
+                }),
               }}
               render={({ field }) => (
                 <TextArea
@@ -333,8 +322,14 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
           </FileWrapper>
           {attachment && (
             <UploadImageBox>
-              <UploadImage src={attachment} alt="attachment"></UploadImage>
-              <button onClick={clearAttachmentHandler}>Clear</button>
+              <img src={attachment} alt="attachment" width="20%" />
+              <Button
+                type="button"
+                onClick={clearAttachmentHandler}
+                border="#76BA99"
+              >
+                Clear
+              </Button>
             </UploadImageBox>
           )}
         </section>

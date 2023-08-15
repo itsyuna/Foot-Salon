@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useAppSelector } from "../../../store";
 
 import BoardCard from "../../../ui/BoardCard/";
@@ -12,7 +12,7 @@ import {
   ContentBox,
 } from "../PostEditor/PostEditor";
 import ReadPostFooter from "../ReadPostFooter";
-import Button from "../../atoms/Button";
+import NoPostMessage from "../../molecules/NoPostMessage";
 
 const ArticleBox = styled.article`
   &:nth-child(1) div:nth-child(-n + 2) span:nth-child(2) {
@@ -44,16 +44,8 @@ const ContentsImageBox = styled.div`
   text-align: center;
 `;
 
-const ErrorMessage = styled.section`
-  width: 20%;
-  height: 20vh;
-  margin: 15rem auto;
-  text-align: center;
-`;
-
 const ReadPost = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const user = useAppSelector((state) => state.user.uid);
 
@@ -62,11 +54,6 @@ const ReadPost = () => {
   let targetPost = location.state;
 
   let isOwner = targetPost?.board.creatorId === user;
-
-  const errorTargetPostHandler = () => {
-    if (category.includes("play")) navigate("/play");
-    else navigate("/half-time");
-  };
 
   return targetPost ? (
     <BoardCard>
@@ -109,18 +96,7 @@ const ReadPost = () => {
       />
     </BoardCard>
   ) : (
-    <BoardCard>
-      <ErrorMessage>
-        <span>해당하는 게시글이 없습니다 :( </span>
-        <Button
-          type="button"
-          backgroundColor="#75C2F6"
-          onClick={errorTargetPostHandler}
-        >
-          뒤로가기
-        </Button>
-      </ErrorMessage>
-    </BoardCard>
+    <NoPostMessage category={category} />
   );
 };
 
