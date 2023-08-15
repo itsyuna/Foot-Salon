@@ -12,7 +12,7 @@ import {
   ContentBox,
 } from "../PostEditor/PostEditor";
 import ReadPostFooter from "../ReadPostFooter";
-import NoPostMessage from "../../molecules/NoPostMessage";
+import Button from "../../atoms/Button";
 
 const ArticleBox = styled.article`
   &:nth-child(1) div:nth-child(-n + 2) span:nth-child(2) {
@@ -44,6 +44,13 @@ const ContentsImageBox = styled.div`
   text-align: center;
 `;
 
+const ErrorMessage = styled.section`
+  width: 20%;
+  height: 20vh;
+  margin: 15rem auto;
+  text-align: center;
+`;
+
 const ReadPost = () => {
   const location = useLocation();
 
@@ -54,6 +61,13 @@ const ReadPost = () => {
   let targetPost = location.state;
 
   let isOwner = targetPost?.board.creatorId === user;
+
+  const navigate = useNavigate();
+
+  const errorTargetPostHandler = () => {
+    if (category.includes("play")) navigate("/play");
+    else navigate("/half-time");
+  };
 
   return targetPost ? (
     <BoardCard>
@@ -96,7 +110,18 @@ const ReadPost = () => {
       />
     </BoardCard>
   ) : (
-    <NoPostMessage category={category} />
+    <BoardCard>
+      <ErrorMessage>
+        <span>해당하는 게시글이 없습니다 :( </span>
+        <Button
+          type="button"
+          backgroundColor="#75C2F6"
+          onClick={errorTargetPostHandler}
+        >
+          뒤로가기
+        </Button>
+      </ErrorMessage>
+    </BoardCard>
   );
 };
 
