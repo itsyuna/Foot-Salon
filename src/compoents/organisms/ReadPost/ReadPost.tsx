@@ -1,0 +1,127 @@
+import styled from "styled-components";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../store";
+
+import BoardCard from "../../../ui/BoardCard/";
+import {
+  BoardContents,
+  CategoryBox,
+  CategoryContent,
+  CategoryData,
+  CategoryName,
+  ContentBox,
+} from "../PostEditor/PostEditor";
+import ReadPostFooter from "../ReadPostFooter";
+import Button from "../../atoms/Button";
+
+const ArticleBox = styled.article`
+  &:nth-child(1) div:nth-child(-n + 2) span:nth-child(2) {
+    width: 30%;
+  }
+`;
+
+const ShowData = styled(CategoryData)`
+  background-color: #c2ded1;
+  border-radius: 10px;
+  padding-left: 3rem;
+`;
+
+const ContentsBox = styled.span`
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  white-space: normal;
+  margin-left: 2rem;
+  background-color: white;
+  border: 3px solid #c2ded1;
+`;
+
+const ContentsTextBox = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const ContentsImageBox = styled.div`
+  text-align: center;
+`;
+
+const ErrorMessage = styled.section`
+  width: 20%;
+  height: 20vh;
+  margin: 15rem auto;
+  text-align: center;
+`;
+
+const ReadPost = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const user = useAppSelector((state) => state.user.uid);
+
+  const category = location.pathname;
+
+  let targetPost = location.state;
+
+  let isOwner = targetPost?.board.creatorId === user;
+
+  const errorTargetPostHandler = () => {
+    if (category.includes("play")) navigate("/play");
+    else navigate("/half-time");
+  };
+
+  return targetPost ? (
+    <BoardCard>
+      <ArticleBox>
+        <CategoryBox>
+          <CategoryName>작성자</CategoryName>
+          <ShowData>{targetPost?.board.userNickname}</ShowData>
+        </CategoryBox>
+        <CategoryBox>
+          <CategoryName>리그</CategoryName>
+          <ShowData>{targetPost?.board.league}</ShowData>
+        </CategoryBox>
+        <CategoryBox>
+          <CategoryName>제목</CategoryName>
+          <ShowData>{targetPost?.board.title}</ShowData>
+        </CategoryBox>
+        <BoardContents>
+          <ContentBox>
+            <CategoryContent>내용</CategoryContent>
+          </ContentBox>
+          <ContentsBox>
+            <ContentsTextBox>{targetPost?.board.contents}</ContentsTextBox>
+            {targetPost?.board.fileURL && (
+              <ContentsImageBox>
+                <img
+                  src={targetPost?.board.fileURL}
+                  alt="attachment"
+                  width="60%"
+                  height="80%"
+                />
+              </ContentsImageBox>
+            )}
+          </ContentsBox>
+        </BoardContents>
+      </ArticleBox>
+      <ReadPostFooter
+        isOwner={isOwner}
+        category={category}
+        targetPost={targetPost}
+      />
+    </BoardCard>
+  ) : (
+    <BoardCard>
+      <ErrorMessage>
+        <span>해당하는 게시글이 없습니다 :( </span>
+        <Button
+          type="button"
+          backgroundColor="#75C2F6"
+          onClick={errorTargetPostHandler}
+        >
+          뒤로가기
+        </Button>
+      </ErrorMessage>
+    </BoardCard>
+  );
+};
+
+export default ReadPost;
