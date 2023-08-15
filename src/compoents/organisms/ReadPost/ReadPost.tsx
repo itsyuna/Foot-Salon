@@ -96,9 +96,7 @@ const ReadPost = () => {
       />
     </BoardCard>
   ) : (
-    <BoardCard>
-      <NoPostMessage category={category} />
-    </BoardCard>
+    <NoPostMessage category={category} />
   );
 };
 
