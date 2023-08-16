@@ -6,5 +6,5 @@ export const getDate = () => {
   let day = String(date.getDate()).padStart(2, "0");
   let time = String(date.toString().slice(16, 21)).padStart(2, "0");
 
-  return `${year}.${month}.${day} ${time}`;
+  return `${year}-${month}-${day} ${time}`;
 };
