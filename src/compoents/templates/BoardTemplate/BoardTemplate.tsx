@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import BoardCard from "../../../ui/BoardCard/BoardCard";
-import BoardHeader from "../../organisms/BoardHeader/BoardHeader";
+import BoardCard from "../../../ui/BoardCard";
+import BoardHeader from "../../organisms/BoardHeader";
 import BoardList from "../../organisms/BoardList/BoardList";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { BoardListItems, fetchPlayBoard } from "../../../store/playBoard";
