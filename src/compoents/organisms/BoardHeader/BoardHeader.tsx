@@ -43,13 +43,14 @@ const BoardHeader = ({
 }: BoardHeaderProps) => {
   const navigate = useNavigate();
 
-  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const userNickname = useAppSelector((state) => state.user.nickname);
+
   const location = useLocation();
   const boardCategory = location.pathname;
 
   const newBoardHandler = () => {
-    if (isLoggedIn && boardCategory === "/play") navigate("/play/new");
-    else if (isLoggedIn && boardCategory === "/half-time")
+    if (userNickname && boardCategory === "/play") navigate("/play/new");
+    else if (userNickname && boardCategory === "/half-time")
       navigate("/half-time/new");
     else {
       alert("로그인 후 작성 가능합니다.");
