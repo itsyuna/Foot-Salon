@@ -92,7 +92,7 @@ export interface TableProps {
 }
 
 const kLeagueCaption = "2023 K리그 1";
-const europeLeagueCaption = "2022-2023";
+const europeLeagueCaption = "2023-2024";
 
 const TableTemplate = ({ category, tableMenu }: TableContent) => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -154,7 +154,7 @@ const TableTemplate = ({ category, tableMenu }: TableContent) => {
         method: "GET",
         url: url,
         params: {
-          season: "2022",
+          season: "2023",
           league: leagueNo ? leagueNo : 292,
         },
         headers: {
