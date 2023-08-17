@@ -1,8 +1,8 @@
+import styled from "styled-components";
+import { SyntheticEvent, useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 
-import { SyntheticEvent, useEffect, useState } from "react";
-import styled from "styled-components";
-import ErrorMessage from "../../molecules/Message/ErrorMessage/ErrorMessage";
+import ErrorMessage from "../../molecules/ErrorMessage";
 
 interface LeagueName {
   name: string;
@@ -17,7 +17,7 @@ interface TableProps {
   competition: LeagueName;
 }
 
-const VideoItemWrapper = styled.section`
+const VideoItemWrapper = styled.article`
   margin-top: 30px;
   text-align: center;
   display: grid;

@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { MainWrapper } from "../../../App";
+import { useState } from "react";
+
 import Card from "../../../ui/Card";
 import FootballVideo from "../../organisms/FootballVideo";
 import Input from "../../atoms/Input";
-import { useState } from "react";
 
 const Title = styled.h2`
   margin: 20px;
@@ -35,30 +35,28 @@ const LineUp = () => {
   };
 
   return (
-    <MainWrapper>
-      <Card>
-        <header>
-          <Title>
-            All Football matches <span>Line-up</span>
-          </Title>
-          <SearchWrapper>
-            <Input
-              type="text"
-              placeholder="대,소문자 구분 없이 팀을 입력해주세요 :)"
-              value={userInput}
-              onChange={searchHandler}
-              autoComplete="off"
-              width="15vw"
-              height="4vh"
-            />
-            <GuideText>
-              영상 클릭시 해당 링크로 이동합니다!😉 (*경기시간: 한국 시간 기준)
-            </GuideText>
-          </SearchWrapper>
-        </header>
-        <FootballVideo userInput={userInput} />
-      </Card>
-    </MainWrapper>
+    <Card>
+      <header>
+        <Title>
+          All Football matches <span>Line-up</span>
+        </Title>
+        <SearchWrapper>
+          <Input
+            type="text"
+            placeholder="대,소문자 구분 없이 팀을 입력해주세요 :)"
+            value={userInput}
+            onChange={searchHandler}
+            autoComplete="off"
+            width="15vw"
+            height="4vh"
+          />
+          <GuideText>
+            영상 클릭시 해당 링크로 이동합니다!😉 (*경기시간: 한국 시간 기준)
+          </GuideText>
+        </SearchWrapper>
+      </header>
+      <FootballVideo userInput={userInput} />
+    </Card>
   );
 };
 
