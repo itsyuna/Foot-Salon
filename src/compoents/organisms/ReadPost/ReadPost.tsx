@@ -11,12 +11,18 @@ import {
   CategoryName,
   ContentBox,
 } from "../PostEditor/PostEditor";
-import ReadPostFooter from "../ReadPostFooter";
+import ReadPostButton from "../ReadPostButton";
 import NoPostMessage from "../../molecules/NoPostMessage";
+import Comments from "../Comments";
+import { useEffect } from "react";
 
 const ArticleBox = styled.article`
   &:nth-child(1) div:nth-child(-n + 2) span:nth-child(2) {
     width: 30%;
+  }
+
+  section:nth-child(1) {
+    margin-top: 0;
   }
 `;
 
@@ -57,6 +63,11 @@ const ReadPost = () => {
 
   return targetPost ? (
     <BoardCard>
+      <ReadPostButton
+        isOwner={isOwner}
+        category={category}
+        targetPost={targetPost}
+      />
       <ArticleBox>
         <CategoryBox>
           <CategoryName>작성자</CategoryName>
@@ -89,11 +100,7 @@ const ReadPost = () => {
           </ContentsBox>
         </BoardContents>
       </ArticleBox>
-      <ReadPostFooter
-        isOwner={isOwner}
-        category={category}
-        targetPost={targetPost}
-      />
+      <Comments category={category} boardId={targetPost.id} />
     </BoardCard>
   ) : (
     <NoPostMessage />
