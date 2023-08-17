@@ -69,16 +69,16 @@ const Navigation = () => {
             <Menu to="/line-up">Line-Up</Menu>
           </li>
           <li>
-            <Menu to="play">Play</Menu>
+            <Menu to="/play">Play</Menu>
           </li>
           <li>
-            <Menu to="half-time">Half-Time</Menu>
+            <Menu to="/half-time">Half-Time</Menu>
           </li>
           <li>
-            <Menu to="stats">Stats</Menu>
+            <Menu to="/stats">Stats</Menu>
           </li>
           <li>
-            <Menu to="photos">Photos</Menu>
+            <Menu to="/photos">Photos</Menu>
           </li>
         </ul>
       </Nav>
