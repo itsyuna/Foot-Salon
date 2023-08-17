@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import KoreaFixtureList from "../../molecules/KoreaFixtureList";
+import KoreaFixtureList from "../KoreaFixtureList";
 
 const KoreaFixtureWrapper = styled.article`
   font-family: "Do Hyeon", sans-serif;
@@ -49,7 +49,7 @@ const warmupMatchList = [
     date: "2023.06.16",
     time: "20:00",
     match: "대한민국 vs 페루",
-    place: "부산 아시아드주경기장",
+    place: "부산 아시아드 주경기장",
     isFinish: checkMatchFinish("2023-06-16 22:00:00"),
   },
   {
@@ -60,11 +60,25 @@ const warmupMatchList = [
     isFinish: checkMatchFinish("2023-06-20 22:00:00"),
   },
   {
-    date: "2023.09.07",
-    time: "시간 미정",
+    date: "2023.09.08",
+    time: "03:45",
     match: "대한민국 vs 웨일즈",
-    place: "웨일즈 카디프시티 경기장",
-    isFinish: checkMatchFinish("2023-09-08 00:00:00"),
+    place: "웨일즈 카디프 시티 스타디움",
+    isFinish: checkMatchFinish("2023-09-08 06:00:00"),
+  },
+  {
+    date: "2023.09.13",
+    time: "01:30",
+    match: "대한민국 vs 사우디아라비아",
+    place: "잉글랜드 세인트 제임스 파크",
+    isFinish: checkMatchFinish("2023-09-13 04:00:00"),
+  },
+  {
+    date: "2023.10.13",
+    time: "미정",
+    match: "대한민국 vs 튀니지",
+    place: "미정",
+    isFinish: checkMatchFinish("2023-10-14 00:00:00"),
   },
 ];
 
