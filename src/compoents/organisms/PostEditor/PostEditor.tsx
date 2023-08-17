@@ -22,9 +22,9 @@ import Button from "../../atoms/Button";
 import { ErrorText } from "../../pages/SignUp/SignUp";
 import PostFooter from "../PostFooter";
 import { getDate } from "../../../utils/date";
-import NoPostMessage from "../../molecules/NoPostMessage/NoPostMessage";
+import NoPostMessage from "../../molecules/NoPostMessage";
 
-export const CategoryBox = styled.div`
+export const CategoryBox = styled.section`
   width: 70%;
   margin: 0 auto;
   display: grid;
@@ -47,7 +47,7 @@ export const CategoryData = styled.span`
   line-height: 4vh;
 `;
 
-export const BoardContents = styled.div`
+export const BoardContents = styled.section`
   width: 70%;
   height: 30vh;
   margin: 0 auto;
@@ -136,7 +136,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
       if (attachment !== "") {
         const fileRef = ref(
           storageService,
-          boardCategory === "/play/new"
+          boardCategory === "/play/new" || boardCategory === `/updatePlay/${no}`
             ? `play/${uuidv4()}`
             : `half-time/${uuidv4()}`
         );
@@ -176,7 +176,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
         }
 
         alert("작성 완료!");
-        boardCategory.includes("play" || "updatePlay")
+        boardCategory === "/play/new" || boardCategory === `/updatePlay/${no}`
           ? navigate("/play")
           : navigate("/half-time");
       } catch (error) {
@@ -222,7 +222,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
   let targetPost = location.state;
 
   return isEdit && !targetPost ? (
-    <NoPostMessage category={boardCategory} />
+    <NoPostMessage />
   ) : (
     <BoardCard>
       <form onSubmit={handleSubmit(onSubmit)}>
