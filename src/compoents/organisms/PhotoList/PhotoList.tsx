@@ -1,17 +1,18 @@
 import styled, { css } from "styled-components";
-import { PhotoListItems } from "../../../store/photos";
 import { Dispatch, SetStateAction, useState } from "react";
-import Button from "../../atoms/Button/Button";
-import { deleteDoc, doc } from "firebase/firestore";
-import { dbService, storageService } from "../../../firebase/config";
-import { deleteObject, ref } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store";
+import { PhotoListItems } from "../../../store/photos";
+import { deleteDoc, doc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
+import { dbService, storageService } from "../../../firebase/config";
+
+import Button from "../../atoms/Button";
 
 const PhotoItemWrapper = styled.section<{ isModal: boolean }>`
   font-family: "Do Hyeon", sans-serif;
   width: 90%;
-  height: auto%;
+  height: auto;
   margin: 0 auto;
 
   display: grid;
@@ -48,7 +49,6 @@ const KeywordBox = styled.div`
 `;
 
 const ImageBox = styled.div`
-  border: 1px solid blue;
   width: 100%;
   height: 30vh;
   margin: 1rem 0;
@@ -103,36 +103,37 @@ const UserNicknameBox = styled.div`
 interface PhotoItemProps {
   data: PhotoListItems[];
   isModal: boolean;
-  openEditorModal: Dispatch<SetStateAction<boolean>>;
-  openPhotoModal: Dispatch<SetStateAction<boolean>>;
-  isEdit: Dispatch<SetStateAction<boolean>>;
-  targetPhoto: Dispatch<SetStateAction<PhotoListItems>>;
+  setOpenEditorModal: Dispatch<SetStateAction<boolean>>;
+  setOpenPhotoModal: Dispatch<SetStateAction<boolean>>;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  setTargetPhoto: Dispatch<SetStateAction<PhotoListItems>>;
 }
+
+const defaultPhotlist = {
+  id: "",
+  photo: {
+    creatorId: "",
+    userNickname: "",
+    createdAt: "",
+    keyword1: "",
+    keyword2: "",
+    keyword3: "",
+    dateTime: 0,
+    fileURL: "",
+  },
+};
 
 const PhotoList = ({
   data,
   isModal,
-  openEditorModal,
-  openPhotoModal,
-  isEdit,
-  targetPhoto,
+  setOpenEditorModal,
+  setOpenPhotoModal,
+  setIsEdit,
+  setTargetPhoto,
 }: PhotoItemProps) => {
-  const defaultPhotlist = {
-    id: "",
-    photo: {
-      creatorId: "",
-      userNickname: "",
-      createdAt: "",
-      keyword1: "",
-      keyword2: "",
-      keyword3: "",
-      dateTime: 0,
-      fileURL: "",
-    },
-  };
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
 
   const [targetPost, setTargetPost] = useState<PhotoListItems>(defaultPhotlist);
-  // const [openPhotoModal, setOpenPhotoModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -140,17 +141,17 @@ const PhotoList = ({
 
   const isOwner = targetPost?.photo.creatorId === user;
 
-  console.log(targetPost);
-
   const updatePhotoHandler = () => {
-    isEdit(true);
-    openEditorModal(true);
-    targetPost && targetPhoto(targetPost);
+    setIsEdit(true);
+    setOpenEditorModal(true);
+    targetPost && setTargetPhoto(targetPost);
   };
 
   const viewPhotoHandler = () => {
-    openPhotoModal(true);
-    targetPost && targetPhoto(targetPost);
+    if (isLoggedIn) {
+      setOpenPhotoModal(true);
+      targetPost && setTargetPhoto(targetPost);
+    } else navigate("/login");
   };
 
   const deletePhotoHandler = async () => {
@@ -158,12 +159,13 @@ const PhotoList = ({
       await deleteDoc(doc(dbService, "photos", `${targetPost?.id}`));
 
       await deleteObject(ref(storageService, targetPost?.photo.fileURL));
+
+      targetPost && setTargetPhoto(targetPost);
+
       navigate("/photos");
+      alert("삭제가 완료되었습니다.");
     }
   };
-
-  console.log(isModal);
-  console.log(targetPost.photo.fileURL);
 
   return (
     <PhotoItemWrapper isModal={isModal}>
@@ -177,6 +179,9 @@ const PhotoList = ({
           <ImageBox
             onMouseEnter={() => setTargetPost(item)}
             onMouseLeave={() => setTargetPost(defaultPhotlist)}
+            onContextMenu={(e) => {
+              e.preventDefault();
+            }}
           >
             <img
               src={item.photo.fileURL}
@@ -220,12 +225,6 @@ const PhotoList = ({
           </UserNicknameBox>
         </ItemList>
       ))}
-      {/* {openPhotoModal && (
-        <ViewPhotoModal
-          openPhotoModal={setOpenPhotoModal}
-          targetPhoto={targetPost.photo.fileURL}
-        />
-      )} */}
     </PhotoItemWrapper>
   );
 };
