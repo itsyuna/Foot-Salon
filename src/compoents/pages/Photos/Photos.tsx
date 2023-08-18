@@ -1,15 +1,16 @@
 import styled, { css } from "styled-components";
-
-import Card from "../../../ui/Card/Card";
-
 import { useEffect, useState } from "react";
-import { PhotoListItems, fetchPhotos } from "../../../store/photos";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import Input from "../../atoms/Input/Input";
-import Button from "../../atoms/Button/Button";
-import Modal from "../../../ui/PhotoEditorModal/Modal";
-import ViewPhotoModal from "../../../ui/ViewPhotoModal/ViewPhotoModal";
-import PhotoList from "../../organisms/PhotoList/PhotoList";
+import { PhotoListItems, fetchPhotos } from "../../../store/photos";
+import { FcStackOfPhotos } from "react-icons/fc";
+
+import Card from "../../../ui/Card";
+import Input from "../../atoms/Input";
+import Button from "../../atoms/Button";
+import ViewPhotoModal from "../../../ui/ViewPhotoModal";
+import PhotoList from "../../organisms/PhotoList";
+import PhotoEditorModal from "../../../ui/PhotoEditorModal";
 
 const PhotoHeader = styled.header<{ openEditorModal: boolean }>`
   width: 90%;
@@ -53,7 +54,14 @@ const ButtonBox = styled.div<{ isModal: boolean }>`
     `}
 `;
 
-const defaultPhotlist = {
+const NoPhotoMessage = styled.section`
+  width: 90%;
+  height: 30vh;
+  margin: 2rem auto;
+  text-align: center;
+`;
+
+const defaultPhotolist = {
   id: "",
   photo: {
     creatorId: "",
@@ -68,21 +76,26 @@ const defaultPhotlist = {
 };
 
 const Photos = () => {
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const navigate = useNavigate();
+
   const [searchKeyword, setSearchKeyword] = useState("");
   const [photoFilter, setPhotoFilter] = useState("all");
 
   const [openEditorModal, setOpenEditorModal] = useState(false);
   const [openPhotoModal, setOpenPhotoModal] = useState(false);
 
-  const [isEdit, setIsEdit] = useState(false);
   const [targetPhoto, setTargetPhoto] =
-    useState<PhotoListItems>(defaultPhotlist);
+    useState<PhotoListItems>(defaultPhotolist);
+  const [isEdit, setIsEdit] = useState(false);
 
   const user = useAppSelector((state) => state.user.uid);
 
   const showModalHandler = () => {
-    setIsEdit(false);
-    setOpenEditorModal(true);
+    if (isLoggedIn) {
+      setIsEdit(false);
+      setOpenEditorModal(true);
+    } else navigate("/login");
   };
 
   const filterSearchKeyword = (item: PhotoListItems) => {
@@ -92,6 +105,12 @@ const Photos = () => {
       item.photo.keyword3.includes(searchKeyword);
     return getKeyword;
   };
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPhotos());
+  }, [dispatch, openEditorModal, targetPhoto]);
 
   const data = useAppSelector((state) => state.photos.photoArray);
 
@@ -108,15 +127,13 @@ const Photos = () => {
     return getPhotos;
   };
 
-  const dispatch = useAppDispatch();
-
   useEffect(() => {
-    dispatch(fetchPhotos());
-  }, [dispatch]);
-
-  useEffect(() => {
-    !isEdit && setTargetPhoto(() => defaultPhotlist);
+    !isEdit && setTargetPhoto(defaultPhotolist);
   }, [isEdit]);
+
+  useEffect(() => {
+    !openPhotoModal && setTargetPhoto(defaultPhotolist);
+  }, [openPhotoModal]);
 
   return (
     <Card>
@@ -167,7 +184,7 @@ const Photos = () => {
           </Button>
         </ButtonBox>
         {openEditorModal && (
-          <Modal
+          <PhotoEditorModal
             openEditorModal={setOpenEditorModal}
             isEdit={setIsEdit}
             targetPhoto={targetPhoto}
@@ -180,14 +197,21 @@ const Photos = () => {
           />
         )}
       </PhotoHeader>
-      <PhotoList
-        data={getPhotoFilter()}
-        isModal={openEditorModal}
-        openEditorModal={setOpenEditorModal}
-        openPhotoModal={setOpenPhotoModal}
-        isEdit={setIsEdit}
-        targetPhoto={setTargetPhoto}
-      />
+      {data.length !== 0 ? (
+        <PhotoList
+          data={getPhotoFilter()}
+          isModal={openEditorModal}
+          setOpenEditorModal={setOpenEditorModal}
+          setOpenPhotoModal={setOpenPhotoModal}
+          setIsEdit={setIsEdit}
+          setTargetPhoto={setTargetPhoto}
+        />
+      ) : (
+        <NoPhotoMessage>
+          <h4>아직 공유된 사진이 없습니다 :(</h4>
+          <FcStackOfPhotos size="100" />
+        </NoPhotoMessage>
+      )}
     </Card>
   );
 };
