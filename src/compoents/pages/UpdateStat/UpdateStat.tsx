@@ -1,12 +1,7 @@
-import { MainWrapper } from "../../../App";
-import DiaryEditor from "../../organisms/DiaryEditor/DiaryEditor";
+import DiaryEditor from "../../organisms/StatEditor/StatEditor";
 
 const UpdateStat = () => {
-  return (
-    <MainWrapper>
-      <DiaryEditor headText="Stat 수정하기" isEdit={true} />
-    </MainWrapper>
-  );
+  return <DiaryEditor headText="Stat 수정하기" isEdit={true} />;
 };
 
 export default UpdateStat;
