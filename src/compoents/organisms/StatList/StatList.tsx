@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../store";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { StatListItems, fetchStats } from "../../../store/stats";
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
 
@@ -72,6 +72,8 @@ const StatList = ({
   rightButton,
   myStat,
 }: StatListProps) => {
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+
   const [sortList, setSortList] = useState("latest");
 
   const [emotionFilter, setEmotionFilter] = useState("all");
@@ -80,8 +82,8 @@ const StatList = ({
 
   const navigate = useNavigate();
 
-  const newDiaryHandler = () => {
-    navigate("/stats/new");
+  const newsHandler = () => {
+    isLoggedIn ? navigate("/stats/new") : navigate("/login");
   };
 
   const dispatch = useAppDispatch();
@@ -194,7 +196,7 @@ const StatList = ({
               margin="0"
               backgroundColor="#FFF56D"
               border="#FBCB0A"
-              onClick={newDiaryHandler}
+              onClick={newsHandler}
             >
               Add Stat 🖍
             </Button>
