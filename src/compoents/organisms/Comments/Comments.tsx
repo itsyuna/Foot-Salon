@@ -21,7 +21,6 @@ import CommentItem from "../CommentItem";
 const CommentsWrapper = styled.article`
   width: 60vw;
   margin: 2rem 17rem;
-  border: 1px solid red;
 `;
 
 const CommentHeader = styled.header`
