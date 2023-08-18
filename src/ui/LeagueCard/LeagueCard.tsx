@@ -51,7 +51,6 @@ const LeagueCard = ({
 }: LeagueProps) => {
   const LeagueTabHandler = (idx: number, leagueNo: number) => {
     selectTabHandler(idx, leagueNo);
-    console.log(leagueNo);
   };
 
   return (
