@@ -14,7 +14,6 @@ import {
 import ReadPostButton from "../ReadPostButton";
 import NoPostMessage from "../../molecules/NoPostMessage";
 import Comments from "../Comments";
-import { useEffect } from "react";
 
 const ArticleBox = styled.article`
   &:nth-child(1) div:nth-child(-n + 2) span:nth-child(2) {
