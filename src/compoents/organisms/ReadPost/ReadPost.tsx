@@ -16,7 +16,7 @@ import NoPostMessage from "../../molecules/NoPostMessage";
 import Comments from "../Comments";
 
 const ArticleBox = styled.article`
-  &:nth-child(1) div:nth-child(-n + 2) span:nth-child(2) {
+  section:nth-child(-n + 2) span:nth-child(2) {
     width: 30%;
   }
 
