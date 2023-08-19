@@ -8,6 +8,7 @@ import { CommentListItems } from "../Comments/Comments";
 import { getDate } from "../../../utils/date";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
+import { toast } from "react-toastify";
 
 const CommentBox = styled.ul`
   width: 100%;
@@ -117,7 +118,7 @@ const CommentItem = ({
       await updateDoc(editCommentRef, editCommentItems);
 
       setIsEdit(true);
-      alert("수정 완료!");
+      toast.success("수정 완료!");
     } catch (error) {
       console.log(error);
     } finally {
@@ -140,8 +141,9 @@ const CommentItem = ({
 
       try {
         await deleteDoc(deleteRef);
+        toast.success("삭제 완료!");
       } catch (error) {
-        console.log(error);
+        toast.error("오류가 발생했습니다 :(");
       } finally {
         fetchComments();
       }

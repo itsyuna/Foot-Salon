@@ -9,6 +9,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Card from "../../../ui/Card";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
+import { toast } from "react-toastify";
 
 const SingUpWrapper = styled.article`
   width: 50%;
@@ -85,10 +86,10 @@ const SignUp = () => {
         })
       );
 
-      alert("회원가입 성공!");
+      toast.success("Welcome to Foot Salon! ⚽️🙌🏻");
       navigate("/");
     } catch (error: any) {
-      alert("오류가 발생했습니다 :(");
+      toast.error("오류가 발생했습니다 :(");
     }
   };
 

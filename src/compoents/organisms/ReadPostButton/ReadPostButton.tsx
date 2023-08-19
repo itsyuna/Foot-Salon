@@ -7,6 +7,7 @@ import { BoardListItems } from "../../../store/playBoard";
 import { StatListItems } from "../../../store/stats";
 
 import Button from "../../atoms/Button";
+import { toast } from "react-toastify";
 
 const FooterWrapper = styled.section`
   width: 70%;
@@ -67,7 +68,7 @@ const ReadPostButton = ({
           await deleteDoc(doc(dbService, "stats", `${targetStat?.id}`));
           break;
       }
-      alert("삭제가 완료되었습니다.");
+      toast.success("삭제 완료!");
       navigate(-1);
     }
   };

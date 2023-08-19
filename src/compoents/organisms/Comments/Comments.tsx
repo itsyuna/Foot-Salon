@@ -17,6 +17,7 @@ import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import { getDate } from "../../../utils/date";
 import CommentItem from "../CommentItem";
+import { toast } from "react-toastify";
 
 const CommentsWrapper = styled.article`
   width: 60vw;
@@ -90,9 +91,9 @@ const Comments = ({ category, boardId }: CommentsProps) => {
         )
       );
       await setDoc(commentRef, commentItems);
-      alert("댓글 작성 완료!");
+      toast.success("댓글 작성 완료!");
     } catch (error) {
-      console.log(error);
+      toast.error("오류가 발생했습니다 :(");
     } finally {
       setCommentInput("");
       fetchComments();

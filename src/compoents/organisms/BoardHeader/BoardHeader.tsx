@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store";
 import Button from "../../atoms/Button/Button";
 import Select from "../../atoms/Select/Select";
+import { toast } from "react-toastify";
 
 const Wrapper = styled.header`
   width: 90%;
@@ -53,7 +54,7 @@ const BoardHeader = ({
     else if (userNickname && boardCategory === "/half-time")
       navigate("/half-time/new");
     else {
-      alert("로그인 후 작성 가능합니다.");
+      toast.warn("로그인 후 작성 가능합니다.");
       navigate("/login");
     }
   };

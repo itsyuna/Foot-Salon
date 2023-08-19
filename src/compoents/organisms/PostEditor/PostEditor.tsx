@@ -23,6 +23,7 @@ import { ErrorText } from "../../pages/SignUp/SignUp";
 import PostFooter from "../PostFooter";
 import { getDate } from "../../../utils/date";
 import NoPostMessage from "../../molecules/NoPostMessage";
+import { toast } from "react-toastify";
 
 export const CategoryBox = styled.section`
   width: 70%;
@@ -127,7 +128,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
 
   const onSubmit = async (data: BoardFormData) => {
     if (data.league === "choose-league") {
-      alert("리그를 선택해 주세요 :)");
+      toast.warn("리그를 선택해 주세요 :)");
       return;
     }
 
@@ -175,12 +176,13 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
           );
         }
 
-        alert("작성 완료!");
+        !isEdit ? toast.success("작성 완료!") : toast.success("수정 완료!");
+      } catch (error) {
+        !isEdit ? toast.success("작성 오류 :(") : toast.success("수정 오류 :(");
+      } finally {
         boardCategory === "/play/new" || boardCategory === `/updatePlay/${no}`
           ? navigate("/play")
           : navigate("/half-time");
-      } catch (error) {
-        console.log(error);
       }
     }
   };

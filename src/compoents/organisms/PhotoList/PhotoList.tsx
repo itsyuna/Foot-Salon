@@ -8,6 +8,7 @@ import { deleteObject, ref } from "firebase/storage";
 import { dbService, storageService } from "../../../firebase/config";
 
 import Button from "../../atoms/Button";
+import { toast } from "react-toastify";
 
 const PhotoItemWrapper = styled.section<{ isModal: boolean }>`
   font-family: "Do Hyeon", sans-serif;
@@ -163,7 +164,7 @@ const PhotoList = ({
       targetPost && setTargetPhoto(targetPost);
 
       navigate("/photos");
-      alert("삭제가 완료되었습니다.");
+      toast.success("삭제 완료!");
     }
   };
 

@@ -7,6 +7,7 @@ import { auth } from "../../../firebase/config";
 import { Comment } from "react-loader-spinner";
 
 import Button from "../../atoms/Button/Button";
+import { toast } from "react-toastify";
 
 const HeaderWrapper = styled.header`
   width: 100%;
@@ -56,6 +57,7 @@ const Header = () => {
     if (isLoggedIn) {
       if (window.confirm("정말 로그아웃 하시겠습니까?")) {
         auth.signOut();
+        toast.success("See ya! ✋🏻");
       }
     } else navigate("/login");
   };

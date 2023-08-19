@@ -19,6 +19,7 @@ import {
 import Button from "../../compoents/atoms/Button";
 import Input from "../../compoents/atoms/Input";
 import { ErrorText } from "../../compoents/pages/SignUp/SignUp";
+import { toast } from "react-toastify";
 
 const ModalWrapper = styled.section`
   font-family: "Bebas Neue", sans-serif;
@@ -150,7 +151,7 @@ const PhotoEditorModal = ({
 
   async function onSubmit(data: PhotoFormData) {
     if (attachment === "") {
-      alert("사진을 첨부해주세요 :) ");
+      toast.warn("사진을 첨부해주세요 :) ");
       return;
     }
 
@@ -184,10 +185,12 @@ const PhotoEditorModal = ({
         }
 
         openEditorModal(false);
-        alert("작성 완료!");
+        !isEdit
+          ? toast.success("사진이 기록되었습니다 📸✨")
+          : toast.success("사진이 수정되었습니다 📸✨");
         navigate("/photos");
       } catch (error) {
-        console.log(error);
+        toast.error("오류가 발생했습니다 :(");
       }
     }
   }

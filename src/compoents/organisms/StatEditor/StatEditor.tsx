@@ -23,6 +23,7 @@ import EmotionItem from "../../molecules/EmotionItem/EmotionItem";
 import Input from "../../atoms/Input";
 import { ErrorText } from "../../pages/SignUp/SignUp";
 import NoPostMessage from "../../molecules/NoPostMessage/NoPostMessage";
+import { toast } from "react-toastify";
 
 const StatEditorBox = styled.div`
   font-family: "Do Hyeon", sans-serif;
@@ -139,6 +140,14 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
   } = useForm<StatFormData>();
 
   const onSubmit = async (data: StatFormData) => {
+    if (data.league === "choose-league") {
+      toast.warn("리그를 선택해 주세요 :)");
+      return;
+    } else if (data.watchOption === "choose-watchOption") {
+      toast.warn("응원 장소를 선택해 주세요 :)");
+      return;
+    }
+
     if (window.confirm("제출하시겠습니까?")) {
       const statsItems = {
         creatorId: userId,
@@ -166,11 +175,13 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
           await addDoc(collection(dbService, "stats"), statsItems);
         }
 
-        alert("작성 완료!");
+        !isEdit
+          ? toast.success("스탯이 추가되었습니다 😀")
+          : toast.success("스탯이 수정되었습니다 🖍");
         navigate("/stats");
       } catch (error) {
         console.log(error);
-        alert("오류가 발생했습니다 :(");
+        toast.error("오류가 발생했습니다 :(");
       }
     }
   };
