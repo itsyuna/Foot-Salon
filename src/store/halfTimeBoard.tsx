@@ -7,12 +7,7 @@ import {
   query,
 } from "firebase/firestore";
 import { dbService } from "../firebase/config";
-import { BoardContents } from "./playBoard";
-
-interface BoardList {
-  id: string;
-  board: BoardContents;
-}
+import { BoardContents, BoardListItems } from "./playBoard";
 
 export const fetchHalfTimeBoard = createAsyncThunk(
   "board/fetchHalfTimeBoard",
@@ -35,7 +30,7 @@ export const fetchHalfTimeBoard = createAsyncThunk(
   }
 );
 
-const initialBoardState: BoardList[] = [];
+const initialBoardState: BoardListItems[] = [];
 
 const boardSlice = createSlice({
   name: "halfTimeBoard",
