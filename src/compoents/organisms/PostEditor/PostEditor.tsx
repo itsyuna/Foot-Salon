@@ -27,10 +27,9 @@ import { toast } from "react-toastify";
 
 export const CategoryBox = styled.section`
   width: 70%;
-  margin: 0 auto 1.5rem auto;
+  margin: 0 auto 1.5rem;
   display: grid;
   grid-template-columns: 1fr 5fr;
-  margin-bottom: 1.5rem;
 `;
 
 export const CategoryName = styled.span`
