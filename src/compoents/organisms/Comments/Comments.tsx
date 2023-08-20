@@ -20,8 +20,8 @@ import CommentItem from "../CommentItem";
 import { toast } from "react-toastify";
 
 const CommentsWrapper = styled.article`
-  width: 60vw;
-  margin: 2rem 17rem;
+  width: 70%;
+  margin: 0px auto;
 `;
 
 const CommentHeader = styled.header`
