@@ -19,9 +19,23 @@ const ArticleBox = styled.article`
   section:nth-child(-n + 2) span:nth-child(2) {
     width: 30%;
   }
+`;
 
-  section:nth-child(1) {
-    margin-top: 0;
+const LastEditTimeBox = styled.section`
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+
+  h5 {
+    margin: 0 1rem 0 0;
+  }
+
+  h5:nth-child(1) {
+    color: #0096ff;
+  }
+
+  h5:nth-child(2) {
+    color: #4d77ff;
   }
 `;
 
@@ -68,6 +82,12 @@ const ReadPost = () => {
         targetPost={targetPost}
       />
       <ArticleBox>
+        {targetPost?.board.lastEditTime && (
+          <LastEditTimeBox>
+            <h5>수정됨</h5>
+            <h5>{targetPost?.board.lastEditTime}</h5>
+          </LastEditTimeBox>
+        )}
         <CategoryBox>
           <CategoryName>작성자</CategoryName>
           <ShowData>{targetPost?.board.userNickname}</ShowData>

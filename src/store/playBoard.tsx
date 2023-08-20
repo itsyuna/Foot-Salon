@@ -15,6 +15,7 @@ export interface BoardContents {
   title: string;
   contents: string;
   createdAt: string;
+  lastEditTime: string;
   dateTime: number;
   fileURL: string;
 }

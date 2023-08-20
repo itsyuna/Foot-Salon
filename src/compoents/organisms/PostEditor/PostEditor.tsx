@@ -27,10 +27,10 @@ import { toast } from "react-toastify";
 
 export const CategoryBox = styled.section`
   width: 70%;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem auto;
   display: grid;
   grid-template-columns: 1fr 5fr;
-  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const CategoryName = styled.span`
@@ -51,8 +51,7 @@ export const CategoryData = styled.span`
 export const BoardContents = styled.section`
   width: 70%;
   height: 30vh;
-  margin: 0 auto;
-  margin-top: 2rem;
+  margin: 0 auto 2rem;
   display: grid;
   grid-template-columns: 1fr 5fr;
 `;
@@ -151,8 +150,9 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
         league: data.league,
         title: data.title,
         contents: data.contents,
-        createdAt: getDate(),
-        dateTime: Timestamp.now().seconds,
+        createdAt: isEdit ? targetPost?.board.createdAt : getDate(),
+        lastEditTime: isEdit ? getDate() : "",
+        dateTime: isEdit ? targetPost?.board.dateTime : Timestamp.now().seconds,
         fileURL,
       };
 
