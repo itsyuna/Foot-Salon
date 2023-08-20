@@ -57,18 +57,15 @@ const ContentBox = styled.section`
   display: flex;
   justify-content: left;
   align-items: center;
-
-  li {
-    background-color: #dbdfea;
-    width: 90%;
-    height: 4.5vh;
-    line-height: 4.5vh;
-  }
 `;
 
 const Comment = styled.li`
+  background-color: #dbdfea;
+  width: 90%;
+  height: 4.5vh;
+  line-height: 4.5vh;
   overflow: auto;
-  height: auto;
+  white-space: normal;
 `;
 
 interface ItemProps {
