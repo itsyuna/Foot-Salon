@@ -49,7 +49,7 @@ const ContentsBox = styled.span`
   width: 100%;
   height: 100%;
   overflow: auto;
-  white-space: normal;
+  white-space: pre-wrap;
   margin-left: 2rem;
   background-color: white;
   border: 3px solid #c2ded1;

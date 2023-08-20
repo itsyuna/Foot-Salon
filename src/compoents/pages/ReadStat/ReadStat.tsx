@@ -105,7 +105,7 @@ const StatContent = styled.div`
   width: 100%;
   height: 13vh;
   overflow: auto;
-  white-space: normal;
+  white-space: pre-wrap;
   border: 2px solid #7a9d54;
 `;
 
