@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React, { useState } from "react";
 import { useAppSelector } from "../../../store";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
@@ -6,66 +6,87 @@ import { dbService } from "../../../firebase/config";
 
 import { CommentListItems } from "../Comments/Comments";
 import { getDate } from "../../../utils/date";
-import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import { toast } from "react-toastify";
 
-const CommentBox = styled.ul`
+const CommentBox = styled.section`
   width: 100%;
   height: 8vh;
   display: block;
+  margin-bottom: 1.5rem;
 `;
 
-const NicknameDate = styled.section`
+const NicknameDate = styled.section<{ editComment: boolean }>`
   width: 100%;
+  height: 40%;
   display: flex;
   jutify-content: left;
   align-items: center;
-  height: 40%;
+  margin-bottom: 0.3rem;
 
-  li {
+  ${({ editComment }) =>
+    editComment &&
+    css`
+      margin-bottom: 0.3rem;
+    `}
+
+  h3,
+  h4 {
     width: auto;
     height: 2vh;
     line-height: 2vh;
     padding: 0.3rem;
     border-radius: 10px;
+    margin: 0;
   }
 
-  li:nth-child(1) {
+  h3 {
     background-color: #ffd4b2;
     margin-right: 1rem;
     font-size: 1.2rem;
   }
-  li:nth-child(2) {
+  h4 {
     background-color: #f3e9dd;
   }
 `;
 
-const FirstComment = styled.li`
-  margin-left: 0.2rem;
+const FirstComment = styled.h5`
+  margin: 0;
+  margin-left: 0.5rem;
   color: #fc2947;
 `;
 
-const EditText = styled.li`
-  margin-left: 0.2rem;
+const EditText = styled.h5`
+  margin: 0;
+  margin-left: 0.5rem;
   color: #30aadd;
 `;
 
 const ContentBox = styled.section`
   width: 100%;
-  height: 60%;
+  height: 5vh;
   display: flex;
   justify-content: left;
   align-items: center;
 `;
 
-const Comment = styled.li`
+const Textarea = styled.textarea`
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 1.1rem;
+  padding: 0.2rem;
+  width: 50vw;
+  height: 4.8vh;
+`;
+
+const Comment = styled.section`
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 1.1rem;
+  padding: 0.3rem;
   background-color: #dbdfea;
   width: 90%;
-  height: 4.5vh;
-  line-height: 4.5vh;
+  height: 4.8vh;
   overflow: auto;
-  white-space: normal;
+  white-space: pre-wrap;
 `;
 
 interface ItemProps {
@@ -150,70 +171,66 @@ const CommentItem = ({
   return (
     <>
       <CommentBox>
-        <NicknameDate>
-          <li>{list.comment.userNickname}</li>
-          <li>{list.comment.createdAt}</li>
+        <NicknameDate editComment={editComment}>
+          <h3>{list.comment.userNickname}</h3>
+          <h4>{list.comment.createdAt}</h4>
           {idx === 0 && <FirstComment>첫 댓글</FirstComment>}
           {isEdit && <EditText>수정됨</EditText>}
         </NicknameDate>
-        <ContentBox>
-          {editComment ? (
-            <form onSubmit={editCommentSubmitHandler}>
-              <Input
-                type="text"
-                width="50vw"
-                height="4vh"
+
+        {editComment ? (
+          <form onSubmit={editCommentSubmitHandler}>
+            <ContentBox>
+              <Textarea
                 value={commentInput}
                 onChange={(e) => setCommentInput(e.target.value)}
               />
+              <Button
+                type="submit"
+                backgroundColor="#B5DEFF"
+                border="#B5DEFF"
+                margin="0 0.5rem 0"
+              >
+                수정 완료
+              </Button>
+              <Button
+                type="button"
+                onClick={() => setEditComment(false)}
+                backgroundColor="#FFC7C7"
+                border="#FFC7C7"
+                margin="0"
+              >
+                취소
+              </Button>
+            </ContentBox>
+          </form>
+        ) : (
+          <ContentBox>
+            <Comment>{list.comment.contents}</Comment>
+            {userId === list.comment.creatorId && (
               <>
                 <Button
                   type="submit"
+                  onClick={() => setEditComment(true)}
                   backgroundColor="#B5DEFF"
                   border="#B5DEFF"
                   margin="0 0.5rem 0"
                 >
-                  수정 완료
+                  수정
                 </Button>
                 <Button
                   type="button"
-                  onClick={() => setEditComment(false)}
+                  onClick={() => deleteCommentHandler(list.id)}
                   backgroundColor="#FFC7C7"
                   border="#FFC7C7"
                   margin="0"
                 >
-                  취소
+                  삭제
                 </Button>
               </>
-            </form>
-          ) : (
-            <>
-              <Comment>{list.comment.contents}</Comment>
-              {userId === list.comment.creatorId && (
-                <>
-                  <Button
-                    type="submit"
-                    onClick={() => setEditComment(true)}
-                    backgroundColor="#B5DEFF"
-                    border="#B5DEFF"
-                    margin="0 0.5rem 0"
-                  >
-                    수정
-                  </Button>
-                  <Button
-                    type="button"
-                    onClick={() => deleteCommentHandler(list.id)}
-                    backgroundColor="#FFC7C7"
-                    border="#FFC7C7"
-                    margin="0"
-                  >
-                    삭제
-                  </Button>
-                </>
-              )}
-            </>
-          )}
-        </ContentBox>
+            )}
+          </ContentBox>
+        )}
       </CommentBox>
     </>
   );

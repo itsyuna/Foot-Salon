@@ -13,7 +13,6 @@ import {
   getDocs,
 } from "firebase/firestore";
 
-import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import { getDate } from "../../../utils/date";
 import CommentItem from "../CommentItem";
@@ -43,6 +42,13 @@ const WriteCommentBox = styled.section`
   button {
     margin-left: 1rem;
   }
+`;
+
+export const Textarea = styled.textarea`
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 1.1rem;
+  width: 50vw;
+  height: 6vh;
 `;
 
 export interface CommentsProps {
@@ -134,12 +140,9 @@ const Comments = ({ category, boardId }: CommentsProps) => {
       </CommentHeader>
       <form onSubmit={commentSubmitHandler}>
         <WriteCommentBox>
-          <Input
-            type="text"
+          <Textarea
             value={commentInput}
             onChange={(e) => setCommentInput(e.target.value)}
-            width="90%"
-            height="4vh"
           />
           <Button
             type="submit"
