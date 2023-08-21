@@ -80,7 +80,6 @@ const NoticeSmallBox = styled.div`
     top: 0;
     left: 40%;
     transform: translate(-40%, -50%);
-
     font-family: "Bebas Neue", sans-serif;
     color: white;
   }
