@@ -161,8 +161,6 @@ const PhotoList = ({
 
       await deleteObject(ref(storageService, targetPost?.photo.fileURL));
 
-      targetPost && setTargetPhoto(targetPost);
-
       navigate("/photos");
       toast.success("삭제 완료!");
     }
