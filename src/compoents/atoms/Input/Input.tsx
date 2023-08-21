@@ -31,7 +31,6 @@ interface InputProps {
   defaultValue?: string;
   ref?: React.MutableRefObject<string>;
   accept?: string;
-  minLength?: number;
 }
 
 const Input = ({
