@@ -107,6 +107,7 @@ interface PhotoItemProps {
   setOpenEditorModal: Dispatch<SetStateAction<boolean>>;
   setOpenPhotoModal: Dispatch<SetStateAction<boolean>>;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
+  setIsDelete: Dispatch<SetStateAction<boolean>>;
   setTargetPhoto: Dispatch<SetStateAction<PhotoListItems>>;
 }
 
@@ -130,6 +131,7 @@ const PhotoList = ({
   setOpenEditorModal,
   setOpenPhotoModal,
   setIsEdit,
+  setIsDelete,
   setTargetPhoto,
 }: PhotoItemProps) => {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
@@ -163,6 +165,8 @@ const PhotoList = ({
 
       navigate("/photos");
       toast.success("삭제 완료!");
+
+      setIsDelete(true);
     }
   };
 

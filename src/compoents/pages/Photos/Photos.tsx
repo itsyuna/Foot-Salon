@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
+import { FcStackOfPhotos } from "react-icons/fc";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { PhotoListItems, fetchPhotos } from "../../../store/photos";
-import { FcStackOfPhotos } from "react-icons/fc";
 
 import Card from "../../../ui/Card";
 import Input from "../../atoms/Input";
@@ -87,7 +87,9 @@ const Photos = () => {
 
   const [targetPhoto, setTargetPhoto] =
     useState<PhotoListItems>(defaultPhotolist);
+
   const [isEdit, setIsEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   const user = useAppSelector((state) => state.user.uid);
 
@@ -109,7 +111,8 @@ const Photos = () => {
 
   useEffect(() => {
     dispatch(fetchPhotos());
-  }, [dispatch, openEditorModal, targetPhoto]);
+    setIsDelete(false);
+  }, [dispatch, openEditorModal, targetPhoto, isDelete]);
 
   const data = useAppSelector((state) => state.photos.photoArray);
 
@@ -203,6 +206,7 @@ const Photos = () => {
           setOpenEditorModal={setOpenEditorModal}
           setOpenPhotoModal={setOpenPhotoModal}
           setIsEdit={setIsEdit}
+          setIsDelete={setIsDelete}
           setTargetPhoto={setTargetPhoto}
         />
       ) : (
