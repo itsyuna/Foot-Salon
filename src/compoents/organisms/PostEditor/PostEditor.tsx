@@ -69,8 +69,11 @@ export const CategoryContent = styled.p`
 `;
 
 const TextArea = styled.textarea`
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 1rem;
   width: 95%;
   height: 100%;
+  padding: 0.5rem;
   margin-left: 2rem;
 `;
 

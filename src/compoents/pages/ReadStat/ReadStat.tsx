@@ -102,7 +102,9 @@ const StyledEmotion = styled.img`
 `;
 
 const StatContent = styled.div`
+  font-family: "IBM Plex Sans KR", sans-serif;
   width: 100%;
+  padding: 0.3rem;
   height: 13vh;
   overflow: auto;
   white-space: pre-wrap;

@@ -56,6 +56,8 @@ const ContentsBox = styled.span`
 `;
 
 const ContentsTextBox = styled.div`
+  font-family: "IBM Plex Sans KR", sans-serif;
+  padding: 0.5rem;
   margin-bottom: 1rem;
 `;
 
