@@ -155,6 +155,15 @@ const PhotoEditorModal = ({
       return;
     }
 
+    if (
+      !data.keyword1.trim().length ||
+      !data.keyword2.trim().length ||
+      !data.keyword3.trim().length
+    ) {
+      toast.warn("비어있는 글자는 입력할 수 없습니다.");
+      return;
+    }
+
     if (window.confirm("제출하시겠습니까?")) {
       let fileURL = "";
       if (attachment !== "") {

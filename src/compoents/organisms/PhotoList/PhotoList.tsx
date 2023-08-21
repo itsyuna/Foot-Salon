@@ -46,6 +46,7 @@ const KeywordBox = styled.div`
     text-align: center;
     border-radius: 15px;
     margin-right: 1rem;
+    overflow: auto;
   }
 `;
 
