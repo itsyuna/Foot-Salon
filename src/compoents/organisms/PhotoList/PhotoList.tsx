@@ -10,7 +10,7 @@ import { dbService, storageService } from "../../../firebase/config";
 import Button from "../../atoms/Button";
 import { toast } from "react-toastify";
 
-const PhotoItemWrapper = styled.section<{ isModal: boolean }>`
+const PhotoItemWrapper = styled.section<{ openEditorModal: boolean }>`
   font-family: "Do Hyeon", sans-serif;
   width: 90%;
   height: auto;
@@ -20,8 +20,8 @@ const PhotoItemWrapper = styled.section<{ isModal: boolean }>`
   grid-template-columns: repeat(4, 1fr);
   column-gap: 1rem;
 
-  ${({ isModal }) =>
-    isModal &&
+  ${({ openEditorModal }) =>
+    openEditorModal &&
     css`
       opacity: 0;
     `}
@@ -103,7 +103,7 @@ const UserNicknameBox = styled.div`
 
 interface PhotoItemProps {
   data: PhotoListItems[];
-  isModal: boolean;
+  openEditorModal: boolean;
   setOpenEditorModal: Dispatch<SetStateAction<boolean>>;
   setOpenPhotoModal: Dispatch<SetStateAction<boolean>>;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
@@ -126,7 +126,7 @@ const defaultPhotlist = {
 
 const PhotoList = ({
   data,
-  isModal,
+  openEditorModal,
   setOpenEditorModal,
   setOpenPhotoModal,
   setIsEdit,
@@ -169,7 +169,7 @@ const PhotoList = ({
   };
 
   return (
-    <PhotoItemWrapper isModal={isModal}>
+    <PhotoItemWrapper openEditorModal={openEditorModal}>
       {data.map((item, idx) => (
         <ItemList key={idx}>
           <KeywordBox>

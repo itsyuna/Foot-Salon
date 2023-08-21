@@ -94,8 +94,8 @@ const ButtonBox = styled.div`
 `;
 
 interface ModalProps {
-  openEditorModal: Dispatch<SetStateAction<boolean>>;
-  isEdit: Dispatch<SetStateAction<boolean>>;
+  setOpenEditorModal: Dispatch<SetStateAction<boolean>>;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
   targetPhoto: PhotoListItems;
 }
 
@@ -108,9 +108,9 @@ interface PhotoFormData {
 type UploadFile = string | ArrayBuffer | null | undefined;
 
 const PhotoEditorModal = ({
-  openEditorModal,
+  setOpenEditorModal,
   targetPhoto,
-  isEdit,
+  setIsEdit,
 }: ModalProps) => {
   const [attachment, setAttachment] = useState("");
 
@@ -126,8 +126,8 @@ const PhotoEditorModal = ({
   } = useForm<PhotoFormData>();
 
   const closeModal = () => {
-    openEditorModal(false);
-    isEdit(false);
+    setOpenEditorModal(false);
+    setIsEdit(false);
   };
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,10 +184,12 @@ const PhotoEditorModal = ({
           await addDoc(collection(dbService, "photos"), photoItems);
         }
 
-        openEditorModal(false);
-        !isEdit
-          ? toast.success("사진이 기록되었습니다 📸✨")
-          : toast.success("사진이 수정되었습니다 📸✨");
+        setOpenEditorModal(false);
+        setIsEdit(false);
+        targetPhoto.id
+          ? toast.success("사진이 수정되었습니다 📸✨")
+          : toast.success("사진이 기록되었습니다 📸✨");
+
         navigate("/photos");
       } catch (error) {
         toast.error("오류가 발생했습니다 :(");

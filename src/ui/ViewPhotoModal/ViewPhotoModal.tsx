@@ -39,18 +39,18 @@ const Photo = styled.img`
 `;
 
 interface ViewPhotoProps {
-  openPhotoModal: Dispatch<SetStateAction<boolean>>;
+  setOpenPhotoModal: Dispatch<SetStateAction<boolean>>;
   targetPhoto: PhotoListItems;
 }
 
-const ViewPhotoModal = ({ openPhotoModal, targetPhoto }: ViewPhotoProps) => {
+const ViewPhotoModal = ({ setOpenPhotoModal, targetPhoto }: ViewPhotoProps) => {
   return (
     <ModalWrapper>
       <CloseButtonBox>
         작성일: <CreatedDate>{targetPhoto.photo.createdAt}</CreatedDate>
         <Button
           type="button"
-          onClick={() => openPhotoModal(false)}
+          onClick={() => setOpenPhotoModal(false)}
           backgroundColor="pink"
           margin="0"
         >

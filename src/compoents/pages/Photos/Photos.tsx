@@ -93,7 +93,6 @@ const Photos = () => {
 
   const showModalHandler = () => {
     if (isLoggedIn) {
-      setIsEdit(false);
       setOpenEditorModal(true);
     } else navigate("/login");
   };
@@ -185,14 +184,14 @@ const Photos = () => {
         </ButtonBox>
         {openEditorModal && (
           <PhotoEditorModal
-            openEditorModal={setOpenEditorModal}
-            isEdit={setIsEdit}
+            setOpenEditorModal={setOpenEditorModal}
+            setIsEdit={setIsEdit}
             targetPhoto={targetPhoto}
           />
         )}
         {openPhotoModal && (
           <ViewPhotoModal
-            openPhotoModal={setOpenPhotoModal}
+            setOpenPhotoModal={setOpenPhotoModal}
             targetPhoto={targetPhoto}
           />
         )}
@@ -200,7 +199,7 @@ const Photos = () => {
       {data.length !== 0 ? (
         <PhotoList
           data={getPhotoFilter()}
-          isModal={openEditorModal}
+          openEditorModal={openEditorModal}
           setOpenEditorModal={setOpenEditorModal}
           setOpenPhotoModal={setOpenPhotoModal}
           setIsEdit={setIsEdit}
