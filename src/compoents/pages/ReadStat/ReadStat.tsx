@@ -55,11 +55,15 @@ const CreatedDateBox = styled.div`
 `;
 
 const StatSection = styled.section`
-  margin: 2rem auto;
+  margin-top: 2rem;
 `;
 
 const MatchScoreDate = styled.div`
   display: flex;
+
+  section:nth-child(1) {
+    margin-right: 2rem;
+  }
 `;
 
 export const MatchScore = styled.div`
@@ -102,7 +106,9 @@ const StyledEmotion = styled.img`
 `;
 
 const StatContent = styled.div`
+  font-family: "IBM Plex Sans KR", sans-serif;
   width: 100%;
+  padding: 0.3rem;
   height: 13vh;
   overflow: auto;
   white-space: pre-wrap;

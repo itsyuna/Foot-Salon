@@ -35,7 +35,7 @@ const StatEditorBox = styled.div`
   form section select {
     margin-right: 1rem;
   }
-  form section:nth-child(-n + 4) {
+  form section:nth-child(-n + 3) {
     margin-bottom: 2rem;
   }
 `;
@@ -81,6 +81,9 @@ const ContentsBox = styled.div`
 `;
 
 const TextArea = styled.textarea`
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 1rem;
+  padding: 0.3rem;
   width: 99%;
   height: 12vh;
 `;

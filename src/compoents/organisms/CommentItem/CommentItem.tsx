@@ -22,12 +22,12 @@ const NicknameDate = styled.section<{ editComment: boolean }>`
   display: flex;
   jutify-content: left;
   align-items: center;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
 
   ${({ editComment }) =>
     editComment &&
     css`
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
     `}
 
   h3,
@@ -71,20 +71,20 @@ const ContentBox = styled.section`
 `;
 
 const Textarea = styled.textarea`
-  font-family: "Gowun Dodum", sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 1.1rem;
   padding: 0.2rem;
   width: 50vw;
-  height: 4.8vh;
+  height: 5vh;
 `;
 
 const Comment = styled.section`
-  font-family: "Gowun Dodum", sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 1.1rem;
   padding: 0.3rem;
   background-color: #dbdfea;
   width: 90%;
-  height: 4.8vh;
+  height: 5vh;
   overflow: auto;
   white-space: pre-wrap;
 `;
