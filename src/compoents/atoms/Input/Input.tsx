@@ -31,30 +31,31 @@ interface InputProps {
   defaultValue?: string;
   ref?: React.MutableRefObject<string>;
   accept?: string;
+  minLength?: number;
 }
 
 const Input = ({
   type,
-  placeholder,
+  defaultValue,
   value,
   onChange,
+  placeholder,
   autoComplete,
   width,
   height,
   marginTop,
-  defaultValue,
 }: InputProps) => {
   return (
     <InputBar
       type={type}
-      placeholder={placeholder}
+      defaultValue={defaultValue}
       value={value}
+      placeholder={placeholder}
       onChange={onChange}
       autoComplete={autoComplete}
       width={width}
       height={height}
       marginTop={marginTop}
-      defaultValue={defaultValue}
     />
   );
 };
