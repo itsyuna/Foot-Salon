@@ -3,6 +3,7 @@ import React from "react";
 
 const InputBar = styled.input<InputProps>`
   text-align: center;
+  font-size: 0.9rem;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   margin-top: ${({ marginTop }) => marginTop};
