@@ -178,13 +178,12 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
           );
         }
 
-        !isEdit ? toast.success("작성 완료!") : toast.success("수정 완료!");
-      } catch (error) {
-        !isEdit ? toast.success("작성 오류 :(") : toast.success("수정 오류 :(");
-      } finally {
+        isEdit ? toast.success("수정 완료!") : toast.success("작성 완료!");
         boardCategory === "/play/new" || boardCategory === `/updatePlay/${no}`
           ? navigate("/play")
           : navigate("/half-time");
+      } catch (error) {
+        isEdit ? toast.error("수정 오류 :(") : toast.error("작성 오류 :(");
       }
     }
   };

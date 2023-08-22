@@ -136,11 +136,10 @@ const CommentItem = ({
       await updateDoc(editCommentRef, editCommentItems);
 
       toast.success("수정 완료!");
-    } catch (error) {
-      console.log(error);
-    } finally {
       setEditComment(false);
       fetchComments();
+    } catch (error) {
+      toast.error("오류가 발생했습니다 :(");
     }
   };
 
@@ -161,8 +160,6 @@ const CommentItem = ({
         toast.success("삭제 완료!");
       } catch (error) {
         toast.error("오류가 발생했습니다 :(");
-      } finally {
-        fetchComments();
       }
     }
   };

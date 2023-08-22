@@ -183,7 +183,6 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
           : toast.success("스탯이 수정되었습니다 🖍");
         navigate("/stats");
       } catch (error) {
-        console.log(error);
         toast.error("오류가 발생했습니다 :(");
       }
     }

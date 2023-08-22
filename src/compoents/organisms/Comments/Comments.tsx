@@ -97,13 +97,14 @@ const Comments = ({ category, boardId }: CommentsProps) => {
           "comments"
         )
       );
+
       await setDoc(commentRef, commentItems);
+
       toast.success("댓글 작성 완료!");
-    } catch (error) {
-      toast.error("오류가 발생했습니다 :(");
-    } finally {
       setCommentInput("");
       fetchComments();
+    } catch (error) {
+      toast.error("오류가 발생했습니다 :(");
     }
   };
 

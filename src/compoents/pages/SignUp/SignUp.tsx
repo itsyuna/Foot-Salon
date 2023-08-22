@@ -113,10 +113,10 @@ const SignUp = () => {
             defaultValue=""
             name="nickname"
             rules={{
-              required: "필수 입력사항입니다.",
+              required: "필수 입력 사항입니다.",
               pattern: {
                 value: /^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/,
-                message: "특수문자 or 공백을 제거해주세요.",
+                message: "특수문자 or 공백을 제거해 주세요.",
               },
             }}
             render={({ field }) => (
@@ -140,10 +140,10 @@ const SignUp = () => {
             defaultValue=""
             name="email"
             rules={{
-              required: "필수 입력사항입니다.",
+              required: "필수 입력 사항입니다.",
               pattern: {
                 value: /^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$/,
-                message: "올바른 이메일 형식인지 다시 확인해주세요.",
+                message: "올바른 이메일 형식인지 다시 확인해 주세요.",
               },
             }}
             render={({ field }) => (
@@ -151,7 +151,7 @@ const SignUp = () => {
                 <Label>이메일</Label>
                 <Input
                   type="email"
-                  placeholder="이메일에 오타가 없는지 확인해주세요."
+                  placeholder="이메일에 오타가 없는지 확인해 주세요."
                   value={field.value}
                   onChange={field.onChange}
                   autoComplete="off"
@@ -167,11 +167,11 @@ const SignUp = () => {
             defaultValue=""
             name="password"
             rules={{
-              required: "필수 입력사항입니다.",
+              required: "필수 입력 사항입니다.",
               pattern: {
                 value: /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,15}$/,
                 message:
-                  "8-15자 or 최소 1개의 숫자 혹은 특수문자를 포함했는지 확인해주세요.",
+                  "8-15자 or 최소 1개의 숫자 혹은 특수문자를 포함했는지 확인해 주세요.",
               },
             }}
             render={({ field }) => (
@@ -195,14 +195,14 @@ const SignUp = () => {
             defaultValue=""
             name="passwordCheck"
             rules={{
-              required: "필수 입력사항입니다.",
+              required: "필수 입력 사항입니다.",
             }}
             render={({ field }) => (
               <InputWrapper>
                 <Label>비밀번호 확인</Label>
                 <Input
                   type="password"
-                  placeholder="비밀번호를 한번 더 입력해주세요."
+                  placeholder="비밀번호를 한번 더 입력해 주세요."
                   value={field.value}
                   onChange={field.onChange}
                   autoComplete="off"
