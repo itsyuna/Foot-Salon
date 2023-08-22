@@ -57,16 +57,16 @@ export interface CommentsProps {
 }
 
 export interface CommentItemProps {
-  commentId: string;
+  creatorId: string;
+  userNickname: string;
   contents: string;
   createdAt: string;
-  creatorId: string;
   dateTime: number;
-  userNickname: string;
+  isEdit: boolean;
 }
 
 export interface CommentListItems {
-  id: string;
+  commentId: string;
   comment: CommentItemProps;
 }
 
@@ -82,6 +82,7 @@ const Comments = ({ category, boardId }: CommentsProps) => {
     contents: commentInput,
     createdAt: getDate(),
     dateTime: Timestamp.now().seconds,
+    isEdit: false,
   };
 
   const commentSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -121,7 +122,7 @@ const Comments = ({ category, boardId }: CommentsProps) => {
     const querySnapshot = await getDocs(collectData);
 
     let commentData = querySnapshot.docs.map((list) => ({
-      id: list.id,
+      commentId: list.id,
       comment: list.data(),
     }));
 
@@ -131,7 +132,7 @@ const Comments = ({ category, boardId }: CommentsProps) => {
   useEffect(() => {
     fetchComments();
   }, [fetchComments]);
-
+  console.log(showComments);
   return (
     <CommentsWrapper>
       <CommentHeader>
@@ -157,7 +158,7 @@ const Comments = ({ category, boardId }: CommentsProps) => {
       <section>
         {showComments.map((list, idx) => (
           <CommentItem
-            key={list.id}
+            key={list.commentId}
             idx={idx}
             list={list}
             fetchComments={fetchComments}

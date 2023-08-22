@@ -106,7 +106,6 @@ const CommentItem = ({
 }: ItemProps) => {
   const [commentInput, setCommentInput] = useState(list.comment.contents);
   const [editComment, setEditComment] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
 
   const userId = useAppSelector((state) => state.user.uid);
   const userNickname = useAppSelector((state) => state.user.nickname);
@@ -117,6 +116,7 @@ const CommentItem = ({
     contents: commentInput,
     createdAt: getDate(),
     dateTime: list.comment.dateTime,
+    isEdit: true,
   };
 
   const editCommentSubmitHandler = async (
@@ -130,12 +130,11 @@ const CommentItem = ({
         category.includes("play") ? "play" : "half-time",
         boardId,
         "comments",
-        list.id
+        list.commentId
       );
 
       await updateDoc(editCommentRef, editCommentItems);
 
-      setIsEdit(true);
       toast.success("수정 완료!");
     } catch (error) {
       console.log(error);
@@ -175,7 +174,7 @@ const CommentItem = ({
           <h3>{list.comment.userNickname}</h3>
           <h4>{list.comment.createdAt}</h4>
           {idx === 0 && <FirstComment>첫 댓글</FirstComment>}
-          {isEdit && <EditText>수정됨</EditText>}
+          {list.comment.isEdit && <EditText>수정됨</EditText>}
         </NicknameDate>
 
         {editComment ? (
@@ -220,7 +219,7 @@ const CommentItem = ({
                 </Button>
                 <Button
                   type="button"
-                  onClick={() => deleteCommentHandler(list.id)}
+                  onClick={() => deleteCommentHandler(list.commentId)}
                   backgroundColor="#FFC7C7"
                   border="#FFC7C7"
                   margin="0"
