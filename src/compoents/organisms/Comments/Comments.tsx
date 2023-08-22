@@ -33,7 +33,7 @@ const CommentHeader = styled.header`
   }
 `;
 
-const WriteCommentBox = styled.section`
+const Form = styled.form`
   display: flex;
   justify-content: left;
   align-items: center;
@@ -140,22 +140,20 @@ const Comments = ({ category, boardId }: CommentsProps) => {
         <h3>🔻Comments</h3>
         <h3>({showComments.length})</h3>
       </CommentHeader>
-      <form onSubmit={commentSubmitHandler}>
-        <WriteCommentBox>
-          <Textarea
-            value={commentInput}
-            onChange={(e) => setCommentInput(e.target.value)}
-          />
-          <Button
-            type="submit"
-            margin="0"
-            backgroundColor="#D9D7F1"
-            border="#D9D7F1"
-          >
-            Write
-          </Button>
-        </WriteCommentBox>
-      </form>
+      <Form onSubmit={commentSubmitHandler}>
+        <Textarea
+          value={commentInput}
+          onChange={(e) => setCommentInput(e.target.value)}
+        />
+        <Button
+          type="submit"
+          margin="0"
+          backgroundColor="#D9D7F1"
+          border="#D9D7F1"
+        >
+          Write
+        </Button>
+      </Form>
       <section>
         {showComments.map((list, idx) => (
           <CommentItem

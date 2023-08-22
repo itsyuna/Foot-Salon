@@ -25,6 +25,10 @@ import { getDate } from "../../../utils/date";
 import NoPostMessage from "../../molecules/NoPostMessage";
 import { toast } from "react-toastify";
 
+const Form = styled.form`
+  margin-top: 1rem;
+`;
+
 export const CategoryBox = styled.section`
   width: 70%;
   margin: 0 auto 1.5rem;
@@ -41,6 +45,7 @@ export const CategoryName = styled.span`
 `;
 
 export const CategoryData = styled.span`
+  font-size: 1.1rem;
   margin-left: 2rem;
   width: 95%;
   height: 4vh;
@@ -77,7 +82,7 @@ const TextArea = styled.textarea`
   margin-left: 2rem;
 `;
 
-const FileWrapper = styled.div`
+const FileWrapper = styled.section`
   width: 70%;
   margin: 0 auto;
   margin-top: 1rem;
@@ -228,7 +233,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
     <NoPostMessage />
   ) : (
     <BoardCard>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <section>
           <CategoryBox>
             <CategoryName>작성자</CategoryName>
@@ -332,7 +337,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
           )}
         </section>
         <PostFooter />
-      </form>
+      </Form>
     </BoardCard>
   );
 };

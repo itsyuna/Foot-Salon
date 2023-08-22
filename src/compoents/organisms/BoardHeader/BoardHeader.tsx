@@ -12,11 +12,11 @@ const Wrapper = styled.header`
   margin: 0 auto;
 `;
 
-const LeagueCategory = styled.div`
+const LeagueCategory = styled.section`
   text-align: center;
 `;
 
-const BoardListUp = styled.div`
+const BoardListUp = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;

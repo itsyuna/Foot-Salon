@@ -16,7 +16,7 @@ const CommentBox = styled.section`
   margin-bottom: 1.5rem;
 `;
 
-const NicknameDate = styled.section<{ editComment: boolean }>`
+const NicknameDate = styled.header<{ editComment: boolean }>`
   width: 100%;
   height: 40%;
   display: flex;

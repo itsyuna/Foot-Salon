@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "../../atoms/Button/Button";
 import { useNavigate } from "react-router-dom";
 
-const ButtonWrapper = styled.div`
+const Section = styled.section`
   width: 72%;
   margin: 0 auto;
   margin-top: 1rem;
@@ -18,26 +18,24 @@ const PostFooter = () => {
   };
 
   return (
-    <section>
-      <ButtonWrapper>
-        <Button
-          type="button"
-          backgroundColor="#f9ec79"
-          border="#ffb978"
-          onClick={cancelHandler}
-        >
-          Cancel
-        </Button>
-        <Button
-          type="submit"
-          backgroundColor="#f95d8a"
-          color="white"
-          border="#f00f96"
-        >
-          Write
-        </Button>
-      </ButtonWrapper>
-    </section>
+    <Section>
+      <Button
+        type="button"
+        backgroundColor="#f9ec79"
+        border="#ffb978"
+        onClick={cancelHandler}
+      >
+        Cancel
+      </Button>
+      <Button
+        type="submit"
+        backgroundColor="#f95d8a"
+        color="white"
+        border="#f00f96"
+      >
+        Write
+      </Button>
+    </Section>
   );
 };
 
