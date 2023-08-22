@@ -26,9 +26,7 @@ const VideoItemWrapper = styled.article`
   row-gap: 20px;
 `;
 
-const MatchTeams = styled.p`
-  font-weight: 600;
-  font-size: 1.2rem;
+const MatchTeams = styled.h3`
   margin-bottom: 0;
 `;
 
@@ -98,7 +96,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
   return error === null ? (
     <VideoItemWrapper>
       {filteredList.map((list, idx) => (
-        <div key={idx}>
+        <section key={idx}>
           <MatchTeams>{list.title}</MatchTeams>
           <div>
             <a href={list.url} target="_blank" rel="noreferrer">
@@ -106,7 +104,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
             </a>
           </div>
           <MatchDate>{dateHandler(list.date)}</MatchDate>
-        </div>
+        </section>
       ))}
     </VideoItemWrapper>
   ) : (

@@ -12,13 +12,12 @@ const KoreaFixtureWrapper = styled.article`
   margin-right: 15px;
 `;
 
-const ContentsTitle = styled.p`
-  font-size: 1.2rem;
+const ContentsTitle = styled.h3`
   color: #16213e;
   margin-top: 10px;
 `;
 
-const FixtureInfo = styled.div`
+const FixtureInfo = styled.section`
   display: flex;
   height: auto;
 `;
