@@ -9,6 +9,7 @@ import { dbService, storageService } from "../../../firebase/config";
 
 import Button from "../../atoms/Button";
 import { toast } from "react-toastify";
+import { defaultPhotolist } from "../../pages/Photos/Photos";
 
 const PhotoItemWrapper = styled.section<{ openEditorModal: boolean }>`
   font-family: "Do Hyeon", sans-serif;
@@ -112,20 +113,6 @@ interface PhotoItemProps {
   setTargetPhoto: Dispatch<SetStateAction<PhotoListItems>>;
 }
 
-const defaultPhotlist = {
-  id: "",
-  photo: {
-    creatorId: "",
-    userNickname: "",
-    createdAt: "",
-    keyword1: "",
-    keyword2: "",
-    keyword3: "",
-    dateTime: 0,
-    fileURL: "",
-  },
-};
-
 const PhotoList = ({
   data,
   openEditorModal,
@@ -137,7 +124,8 @@ const PhotoList = ({
 }: PhotoItemProps) => {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
 
-  const [targetPost, setTargetPost] = useState<PhotoListItems>(defaultPhotlist);
+  const [targetPost, setTargetPost] =
+    useState<PhotoListItems>(defaultPhotolist);
 
   const navigate = useNavigate();
 
@@ -186,7 +174,7 @@ const PhotoList = ({
           </KeywordBox>
           <ImageBox
             onMouseEnter={() => setTargetPost(item)}
-            onMouseLeave={() => setTargetPost(defaultPhotlist)}
+            onMouseLeave={() => setTargetPost(defaultPhotolist)}
             onContextMenu={(e) => {
               e.preventDefault();
             }}

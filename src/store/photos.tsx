@@ -16,6 +16,7 @@ export interface PhotoContents {
   keyword2: string;
   keyword3: string;
   dateTime: number;
+  isEdit: boolean;
   fileURL: string;
 }
 

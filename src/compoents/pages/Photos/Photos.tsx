@@ -61,7 +61,7 @@ const NoPhotoMessage = styled.section`
   text-align: center;
 `;
 
-const defaultPhotolist = {
+export const defaultPhotolist = {
   id: "",
   photo: {
     creatorId: "",
@@ -71,6 +71,7 @@ const defaultPhotolist = {
     keyword2: "",
     keyword3: "",
     dateTime: 0,
+    isEdit: false,
     fileURL: "",
   },
 };

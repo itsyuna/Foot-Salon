@@ -37,6 +37,7 @@ const ModalWrapper = styled.section`
 `;
 
 export const CloseButtonBox = styled.div`
+  font-family: "Do Hyeon", sans-serif;
   text-align: right;
 `;
 
@@ -94,9 +95,9 @@ const ButtonBox = styled.div`
 `;
 
 interface ModalProps {
+  targetPhoto: PhotoListItems;
   setOpenEditorModal: Dispatch<SetStateAction<boolean>>;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
-  targetPhoto: PhotoListItems;
 }
 
 interface PhotoFormData {
@@ -108,8 +109,8 @@ interface PhotoFormData {
 type UploadFile = string | ArrayBuffer | null | undefined;
 
 const PhotoEditorModal = ({
-  setOpenEditorModal,
   targetPhoto,
+  setOpenEditorModal,
   setIsEdit,
 }: ModalProps) => {
   const [attachment, setAttachment] = useState("");
@@ -175,18 +176,22 @@ const PhotoEditorModal = ({
         keyword1: data.keyword1,
         keyword2: data.keyword2,
         keyword3: data.keyword3,
-        dateTime: Timestamp.now().seconds,
+        dateTime:
+          targetPhoto.id === ""
+            ? Timestamp.now().seconds
+            : targetPhoto.photo.dateTime,
+        isEdit: targetPhoto.id === "" ? false : true,
         fileURL,
       };
 
       try {
-        if (targetPhoto.id !== "") {
+        if (targetPhoto.id === "") {
+          await addDoc(collection(dbService, "photos"), photoItems);
+        } else {
           await updateDoc(
             doc(dbService, "photos", `${targetPhoto.id}`),
             photoItems
           );
-        } else {
-          await addDoc(collection(dbService, "photos"), photoItems);
         }
 
         setOpenEditorModal(false);

@@ -23,7 +23,11 @@ const ModalWrapper = styled.section`
 
 const CreatedDate = styled.span`
   color: #3a98b9;
-  font-weight: 900;
+  margin-right: 1rem;
+`;
+
+const EditText = styled.span`
+  color: #ff55bb;
 `;
 
 const PhotoBox = styled.div`
@@ -44,10 +48,12 @@ interface ViewPhotoProps {
 }
 
 const ViewPhotoModal = ({ setOpenPhotoModal, targetPhoto }: ViewPhotoProps) => {
+  console.log(targetPhoto);
   return (
     <ModalWrapper>
       <CloseButtonBox>
         작성일: <CreatedDate>{targetPhoto.photo.createdAt}</CreatedDate>
+        {targetPhoto.photo.isEdit && <EditText>수정됨</EditText>}
         <Button
           type="button"
           onClick={() => setOpenPhotoModal(false)}
