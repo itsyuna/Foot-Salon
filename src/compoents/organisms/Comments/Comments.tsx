@@ -132,7 +132,7 @@ const Comments = ({ category, boardId }: CommentsProps) => {
   useEffect(() => {
     fetchComments();
   }, [fetchComments]);
-  console.log(showComments);
+
   return (
     <CommentsWrapper>
       <CommentHeader>

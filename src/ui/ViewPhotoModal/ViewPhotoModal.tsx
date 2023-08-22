@@ -48,7 +48,6 @@ interface ViewPhotoProps {
 }
 
 const ViewPhotoModal = ({ setOpenPhotoModal, targetPhoto }: ViewPhotoProps) => {
-  console.log(targetPhoto);
   return (
     <ModalWrapper>
       <CloseButtonBox>
