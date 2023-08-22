@@ -177,8 +177,12 @@ const PhotoList = ({
         <ItemList key={idx}>
           <KeywordBox>
             <div>{item.photo.keyword1}</div>
-            {item.photo.keyword2 && <div>{item.photo.keyword2}</div>}
-            {item.photo.keyword3 && <div>{item.photo.keyword3}</div>}
+            {item.photo.keyword2.trim().length > 0 && (
+              <div>{item.photo.keyword2}</div>
+            )}
+            {item.photo.keyword3.trim().length > 0 && (
+              <div>{item.photo.keyword3}</div>
+            )}
           </KeywordBox>
           <ImageBox
             onMouseEnter={() => setTargetPost(item)}
