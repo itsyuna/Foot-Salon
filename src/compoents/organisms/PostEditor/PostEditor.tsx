@@ -52,6 +52,10 @@ export const CategoryData = styled.span`
   line-height: 4vh;
 `;
 
+const UserNickname = styled(CategoryData)`
+  color: #5800ff;
+`;
+
 export const BoardContents = styled.section`
   width: 70%;
   height: 30vh;
@@ -237,7 +241,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
         <section>
           <CategoryBox>
             <CategoryName>작성자</CategoryName>
-            <CategoryData>{userNickname}</CategoryData>
+            <UserNickname>{userNickname}</UserNickname>
           </CategoryBox>
           <CategoryBox>
             <CategoryName>리그</CategoryName>

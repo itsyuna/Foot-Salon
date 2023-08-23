@@ -15,13 +15,7 @@ import ReadPostButton from "../ReadPostButton";
 import NoPostMessage from "../../molecules/NoPostMessage";
 import Comments from "../Comments";
 
-const ArticleBox = styled.article`
-  section:nth-child(-n + 2) span:nth-child(2) {
-    width: 30%;
-  }
-`;
-
-const LastEditTimeBox = styled.section`
+const LastEditTimeBox = styled.div`
   width: 70%;
   margin: 0 auto;
   display: flex;
@@ -43,6 +37,16 @@ const ShowData = styled(CategoryData)`
   background-color: #c2ded1;
   border-radius: 10px;
   padding-left: 3rem;
+`;
+
+const ColouredUserName = styled(ShowData)`
+  width: 30%;
+  color: #5800ff;
+`;
+
+const ColouredLeague = styled(ShowData)`
+  width: 30%;
+  color: #069a8e;
 `;
 
 const ContentsBox = styled.span`
@@ -83,7 +87,7 @@ const ReadPost = () => {
         category={category}
         targetPost={targetPost}
       />
-      <ArticleBox>
+      <article>
         {targetPost?.board.lastEditTime && (
           <LastEditTimeBox>
             <h5>수정됨</h5>
@@ -92,11 +96,11 @@ const ReadPost = () => {
         )}
         <CategoryBox>
           <CategoryName>작성자</CategoryName>
-          <ShowData>{targetPost?.board.userNickname}</ShowData>
+          <ColouredUserName>{targetPost?.board.userNickname}</ColouredUserName>
         </CategoryBox>
         <CategoryBox>
           <CategoryName>리그</CategoryName>
-          <ShowData>{targetPost?.board.league}</ShowData>
+          <ColouredLeague>{targetPost?.board.league}</ColouredLeague>
         </CategoryBox>
         <CategoryBox>
           <CategoryName>제목</CategoryName>
@@ -120,7 +124,7 @@ const ReadPost = () => {
             )}
           </ContentsBox>
         </BoardContents>
-      </ArticleBox>
+      </article>
       <Comments category={category} boardId={targetPost.id} />
     </BoardCard>
   ) : (
