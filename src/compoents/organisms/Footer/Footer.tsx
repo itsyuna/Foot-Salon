@@ -7,7 +7,7 @@ const FooterWrapper = styled.footer`
   height: 15%;
 `;
 
-const FooterTop = styled.div`
+const FooterTop = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,21 +18,15 @@ const LineImg = styled.img`
   text-align: center;
 `;
 
-const FooterBottom = styled.div`
+const FooterBottom = styled.section`
   width: 100%;
   height: 30%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  h3 {
-    font-family: "Fontdiner Swanky", cursive;
-    color: #def8d6;
-    text-shadow: #def8d6 1px 0 10px;
-  }
 `;
 
-const NoticeBox = styled.div`
+const NoticeBox = styled.section`
   width: 18%;
   height: 7vh;
   display: flex;
@@ -73,16 +67,23 @@ const NoticeSmallBox = styled.div`
     transform: translate(-50%, -50%);
   }
 
-  h4 {
+  p {
     width: 100%;
     text-align: center;
     position: absolute;
-    top: 0;
+    top: 12%;
     left: 40%;
     transform: translate(-40%, -50%);
     font-family: "Bebas Neue", sans-serif;
     color: white;
   }
+`;
+
+const FamousFootballQuotes = styled.p`
+  font-family: "Fontdiner Swanky", cursive;
+  font-size: 1.2rem;
+  color: #def8d6;
+  text-shadow: #def8d6 1px 0 10px;
 `;
 
 const Footer = () => {
@@ -122,10 +123,12 @@ const Footer = () => {
               width="100%"
               height="100%"
             />
-            <h4>© COPYRIGHT 2023 Yuna Lee. ALL RIGHTS RESERVED.</h4>
+            <p>© COPYRIGHT 2023 Yuna Lee. ALL RIGHTS RESERVED.</p>
           </NoticeSmallBox>
         </NoticeBox>
-        <h3>Form is temporary, Class is permanant. - Bill Shankly</h3>
+        <FamousFootballQuotes>
+          Form is temporary, Class is permanant. - Bill Shankly
+        </FamousFootballQuotes>
       </FooterBottom>
     </FooterWrapper>
   );

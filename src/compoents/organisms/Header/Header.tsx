@@ -15,7 +15,7 @@ const HeaderWrapper = styled.header`
   position: relative;
 `;
 
-const LoginUserInfoBox = styled.div`
+const LoginUserInfoBox = styled.section`
   width: auto;
   display: flex;
   justify-content: center;
@@ -26,7 +26,7 @@ const LoginUserInfoBox = styled.div`
   right: 0;
 `;
 
-const UserInfoBox = styled.div`
+const UserInfoBox = styled.section`
   font-family: "Do Hyeon", sans-serif;
   background-color: #f9f5f6;
   width: auto;

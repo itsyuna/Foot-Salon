@@ -27,7 +27,7 @@ const SonnyCelebrationIcon = styled.img`
   margin-right: 40px;
 `;
 
-const Nav = styled.nav`
+const Ul = styled.ul`
   position: absolute;
   width: 95%;
   top: 10%;
@@ -60,28 +60,26 @@ const Navigation = () => {
           alt="Sonny's celebration icon"
         />
       </IconBox>
-      <Nav>
-        <ul>
-          <li>
-            <HomeMenu to="/">Home</HomeMenu>
-          </li>
-          <li>
-            <Menu to="/line-up">Line-Up</Menu>
-          </li>
-          <li>
-            <Menu to="/play">Play</Menu>
-          </li>
-          <li>
-            <Menu to="/half-time">Half-Time</Menu>
-          </li>
-          <li>
-            <Menu to="/stats">Stats</Menu>
-          </li>
-          <li>
-            <Menu to="/photos">Photos</Menu>
-          </li>
-        </ul>
-      </Nav>
+      <Ul>
+        <li>
+          <HomeMenu to="/">Home</HomeMenu>
+        </li>
+        <li>
+          <Menu to="/line-up">Line-Up</Menu>
+        </li>
+        <li>
+          <Menu to="/play">Play</Menu>
+        </li>
+        <li>
+          <Menu to="/half-time">Half-Time</Menu>
+        </li>
+        <li>
+          <Menu to="/stats">Stats</Menu>
+        </li>
+        <li>
+          <Menu to="/photos">Photos</Menu>
+        </li>
+      </Ul>
     </NavWrapper>
   );
 };
