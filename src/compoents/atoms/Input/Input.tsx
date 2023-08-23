@@ -22,6 +22,7 @@ const InputBar = styled.input<InputProps>`
 
 interface InputProps {
   type: "text" | "number" | "email" | "password" | "file" | "date";
+  name?: string;
   placeholder?: string;
   value?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
