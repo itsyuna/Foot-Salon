@@ -7,11 +7,11 @@ import { StatItemName } from "../../organisms/StatEditor/StatEditor";
 import NoPostMessage from "../../molecules/NoPostMessage";
 import ReadPostButton from "../../organisms/ReadPostButton";
 
-const SectionWrapper = styled.div`
+const ReadStatWrapper = styled.article`
   font-family: "Do Hyeon", sans-serif;
   width: 60%;
-  height: 85%;
-  margin: 2rem auto;
+  height: 55vh;
+  margin: 4rem auto;
 `;
 
 const TopSection = styled.section`
@@ -21,7 +21,7 @@ const TopSection = styled.section`
   justify-content: space-between;
 `;
 
-const SelectWrapper = styled.div`
+const SelectWrapper = styled.section`
   display: flex;
   font-size: 1.2rem;
 `;
@@ -45,7 +45,7 @@ const SelectBox = styled.div`
   }
 `;
 
-const CreatedDateBox = styled.div`
+const CreatedDateBox = styled.section`
   width: 10vw;
   height: 3.5vh;
   line-height: 3.5vh;
@@ -58,7 +58,7 @@ const StatSection = styled.section`
   margin-top: 2rem;
 `;
 
-const MatchScoreDate = styled.div`
+const MatchScoreDate = styled.section`
   display: flex;
 
   section:nth-child(1) {
@@ -107,7 +107,7 @@ const StyledEmotion = styled.img`
 
 const StatContent = styled.div`
   font-family: "IBM Plex Sans KR", sans-serif;
-  width: 100%;
+  width: 99%;
   padding: 0.3rem;
   height: 13vh;
   overflow: auto;
@@ -130,7 +130,7 @@ const StatDiary = () => {
 
   return targetPost ? (
     <Card>
-      <SectionWrapper>
+      <ReadStatWrapper>
         <TopSection>
           <SelectWrapper>
             <SelectBox>{targetPost?.stat.league}</SelectBox>
@@ -174,7 +174,7 @@ const StatDiary = () => {
           category={category}
           targetStat={targetPost}
         />
-      </SectionWrapper>
+      </ReadStatWrapper>
     </Card>
   ) : (
     <NoPostMessage />

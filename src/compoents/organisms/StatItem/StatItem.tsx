@@ -12,10 +12,11 @@ const StatItemWrapper = styled.article<{ isStatItems: boolean }>`
   overflow: ${({ isStatItems }) => isStatItems && "auto"};
 `;
 
-const StatsList = styled.ul`
+const StatsList = styled.section`
   border-bottom: 2px solid lightGray;
   width: 100%;
   height: 8vh;
+  display: flex;
   cursor: pointer;
   &:hover {
     background-color: #ffd966;
@@ -23,7 +24,7 @@ const StatsList = styled.ul`
   margin: 0;
 `;
 
-const ListBox = styled.div`
+const ListBox = styled.section`
   height: 90%;
   padding: 0.5rem;
   display: flex;
@@ -36,7 +37,7 @@ const ListBox = styled.div`
   }
 `;
 
-const LeagueList = styled.li`
+const LeagueList = styled.div`
   border-radius: 10px;
   width: 5rem;
   height: 3vh;
@@ -53,7 +54,7 @@ const LeagueList = styled.li`
   }
 `;
 
-const ContentList = styled.li`
+const ContentList = styled.div`
   &:nth-child(1) {
     height: 3vh;
     line-height: 3vh;

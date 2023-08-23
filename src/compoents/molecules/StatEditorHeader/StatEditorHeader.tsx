@@ -13,7 +13,7 @@ const HeaderWrapper = styled.header`
   border-bottom: 1px solid lightgray;
 `;
 
-const HeadtextBox = styled.div`
+const HeadtextBox = styled.h4`
   margin: 1rem auto;
   padding: 0.7rem;
 `;

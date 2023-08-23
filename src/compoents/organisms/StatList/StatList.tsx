@@ -10,7 +10,7 @@ import Select from "../../atoms/Select/Select";
 import { StatSectionBox } from "../../pages/Stats/Stats";
 import StatItem from "../StatItem/StatItem";
 
-const StatDateBox = styled.div`
+const StatDateBox = styled.section`
   font-family: "Bebas Neue", sans-serif;
   font-size: 1.2rem;
   width: 50%;
@@ -20,7 +20,7 @@ const StatDateBox = styled.div`
   justify-content: space-around;
 `;
 
-const StatOptionBox = styled.div`
+const StatOptionBox = styled.section`
   display: flex;
   height: 10%;
 `;

@@ -25,7 +25,7 @@ import { ErrorText } from "../../pages/SignUp/SignUp";
 import NoPostMessage from "../../molecules/NoPostMessage/NoPostMessage";
 import { toast } from "react-toastify";
 
-const StatEditorBox = styled.div`
+const StatEditorBox = styled.section`
   font-family: "Do Hyeon", sans-serif;
   font-size: 1.1rem;
   width: 60%;
@@ -35,11 +35,11 @@ const StatEditorBox = styled.div`
   form section select {
     margin-right: 1rem;
   }
-  form section:nth-child(-n + 3) {
-    margin-bottom: 2rem;
-  }
 `;
 
+// form section:nth-child(-n + 3) {
+//   margin-bottom: 2rem;
+// }
 export const StatItemName = styled.div`
   width: 11rem;
   height: 1.5rem;
@@ -54,6 +54,7 @@ export const StatItemName = styled.div`
 
 export const SelectWrapper = styled.section`
   display: flex;
+  margin-bottom: 1rem;
   p {
     margin: 0;
     padding-top: 1rem;
@@ -63,6 +64,7 @@ export const SelectWrapper = styled.section`
 const TeamMatchDate = styled.section`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2rem;
 `;
 
 const EmotionItemWrapper = styled.div`
@@ -73,6 +75,8 @@ const EmotionItemWrapper = styled.div`
 
 const ContentsBox = styled.div`
   display: flex;
+  margin-top: 1rem;
+
   p {
     margin: 0;
     margin-left: 1rem;
@@ -262,7 +266,7 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
             )}
           </SelectWrapper>
           <TeamMatchDate>
-            <div>
+            <section>
               <StatItemName>
                 <h4>경기팀을 적어주세요 ⚽️</h4>
               </StatItemName>
@@ -318,8 +322,8 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
               ) : (
                 ""
               )}
-            </div>
-            <div>
+            </section>
+            <section>
               <StatItemName>
                 <h4>경기 결과를 적어주세요.</h4>
               </StatItemName>
@@ -375,8 +379,8 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
               ) : (
                 ""
               )}
-            </div>
-            <div>
+            </section>
+            <section>
               <StatItemName>
                 <h4>경기 날짜를 선택해주세요.</h4>
               </StatItemName>
@@ -392,7 +396,7 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
                   />
                 )}
               />
-            </div>
+            </section>
           </TeamMatchDate>
           <section>
             <StatItemName>

@@ -26,7 +26,7 @@ export const StatSectionBox = styled.section`
     width: 70%;
     margin: 15rem 0 1rem 3rem;
   }
-  span {
+  p {
     color: #fc2947;
     font-size: 0.9rem;
   }
@@ -86,7 +86,7 @@ const Stats = () => {
     <StatWrapper>
       <StatSectionBox>
         <h4>응원 경기를 기록하고, 나의 축덕 Stat을 쌓아보세요 :) ⚽️⚽️</h4>
-        <span>*나의 Stat은 다른 사람이 볼 수 없습니다.</span>
+        <p>*나의 Stat은 다른 사람이 볼 수 없습니다.</p>
       </StatSectionBox>
       <StatList
         headText={headText}
