@@ -11,7 +11,7 @@ import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import { toast } from "react-toastify";
 
-const SingUpWrapper = styled.article`
+const SingUpWrapper = styled.section`
   width: 50%;
   height: 55vh;
   margin: 3rem auto 0;
@@ -34,14 +34,14 @@ export const ErrorText = styled.p`
   font-size: 0.8rem;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.section`
   font-family: "Do Hyeon", sans-serif;
   display: grid;
   grid-template-columns: 1fr 3fr;
   margin-top: 1.5rem;
 `;
 
-const Label = styled.label`
+const Label = styled.label<{ for: string }>`
   line-height: 4vh;
 `;
 
@@ -121,9 +121,10 @@ const SignUp = () => {
             }}
             render={({ field }) => (
               <InputWrapper>
-                <Label>닉네임</Label>
+                <Label for="nickname">닉네임</Label>
                 <Input
                   type="text"
+                  name="nickname"
                   placeholder="한글,영문 사용 가능 / 띄어쓰기,특수문자 사용 불가"
                   value={field.value}
                   onChange={field.onChange}
@@ -148,9 +149,10 @@ const SignUp = () => {
             }}
             render={({ field }) => (
               <InputWrapper>
-                <Label>이메일</Label>
+                <Label for="email">이메일</Label>
                 <Input
                   type="email"
+                  name="email"
                   placeholder="이메일에 오타가 없는지 확인해 주세요."
                   value={field.value}
                   onChange={field.onChange}
@@ -176,9 +178,10 @@ const SignUp = () => {
             }}
             render={({ field }) => (
               <InputWrapper>
-                <Label>비밀번호</Label>
+                <Label for="password">비밀번호</Label>
                 <Input
                   type="password"
+                  name="password"
                   placeholder="8-15자 대/소문자 + 최소 1개의 숫자 혹은 특수문자 포함"
                   value={field.value}
                   onChange={field.onChange}
@@ -199,9 +202,10 @@ const SignUp = () => {
             }}
             render={({ field }) => (
               <InputWrapper>
-                <Label>비밀번호 확인</Label>
+                <Label for="password-check">비밀번호 확인</Label>
                 <Input
                   type="password"
+                  name="password-check"
                   placeholder="비밀번호를 한번 더 입력해 주세요."
                   value={field.value}
                   onChange={field.onChange}

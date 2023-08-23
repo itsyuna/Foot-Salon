@@ -10,7 +10,7 @@ import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import { ErrorText, FormData } from "../SignUp/SignUp";
 
-const LoginWrapper = styled.div`
+const LoginWrapper = styled.section`
   width: 50%;
   height: 50%;
   margin: 0 auto;
@@ -36,7 +36,7 @@ const Title = styled.h1`
   margin: 0 5px;
 `;
 
-const Label = styled.label`
+const SignUpText = styled.p`
   color: gray;
   margin-top: 2rem;
   margin-right: 2rem;
@@ -139,13 +139,9 @@ const Login = () => {
         </form>
       </LoginWrapper>
       <SingUpWrapper>
-        <Label>Foot Salon 멤버가 되어보세요!</Label>
-        <Link to="sign-up">
-          <Button
-            type="submit"
-            onClick={() => <Link to="login/sign-up" />}
-            backgroundColor="#f2e678"
-          >
+        <SignUpText>Foot Salon 멤버가 되어보세요!</SignUpText>
+        <Link to="/login/sign-up">
+          <Button type="button" backgroundColor="#f2e678">
             Sign Up
           </Button>
         </Link>
