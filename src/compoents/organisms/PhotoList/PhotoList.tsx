@@ -11,7 +11,7 @@ import Button from "../../atoms/Button";
 import { toast } from "react-toastify";
 import { defaultPhotolist } from "../../pages/Photos/Photos";
 
-const PhotoItemWrapper = styled.section<{ openEditorModal: boolean }>`
+const PhotoItemWrapper = styled.article<{ openEditorModal: boolean }>`
   font-family: "Do Hyeon", sans-serif;
   width: 90%;
   height: auto;
@@ -28,13 +28,13 @@ const PhotoItemWrapper = styled.section<{ openEditorModal: boolean }>`
     `}
 `;
 
-const ItemList = styled.div`
+const ItemList = styled.section`
   border: 2px solid lightBlue;
   width: 100%;
   margin-bottom: 1rem;
 `;
 
-const KeywordBox = styled.div`
+const KeywordBox = styled.header`
   width: 100%;
   height: 2.5vh;
   display: flex;
@@ -51,7 +51,7 @@ const KeywordBox = styled.div`
   }
 `;
 
-const ImageBox = styled.div`
+const ImageBox = styled.section`
   width: 100%;
   height: 30vh;
   margin: 1rem 0;
@@ -93,7 +93,7 @@ const ButtonBox = styled.div`
   opacity: 0;
 `;
 
-const UserNicknameBox = styled.div`
+const UserNicknameBox = styled.footer`
   width: 100%;
   height: 2vh;
   margin-top: 0.5rem;

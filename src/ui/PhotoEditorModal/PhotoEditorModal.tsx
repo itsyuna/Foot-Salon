@@ -36,12 +36,12 @@ const ModalWrapper = styled.section`
   transform: translate(-50%, -50%);
 `;
 
-export const CloseButtonBox = styled.div`
+export const CloseButtonBox = styled.section`
   font-family: "Do Hyeon", sans-serif;
   text-align: right;
 `;
 
-const KeywordBox = styled.div`
+const KeywordBox = styled.section`
   margin: 1rem 0;
   width: 100%;
   height: 4vh;
@@ -49,9 +49,9 @@ const KeywordBox = styled.div`
   justify-content: space-between;
 `;
 
-const KeywordText = styled.div<{ errorCheck: boolean }>`
-  line-height: 4vh;
+const KeywordText = styled.p<{ errorCheck: boolean }>`
   font-size: 0.8rem;
+  margin-right: 0.5rem;
 
   ${({ errorCheck }) =>
     errorCheck &&
@@ -60,21 +60,25 @@ const KeywordText = styled.div<{ errorCheck: boolean }>`
     `}
 `;
 
-const AttachmentBox = styled.div`
+const AttachmentBox = styled.section`
   display: flex;
   p {
     margin: 0.2rem 0;
   }
 `;
 
-const PreviewPhoto = styled.div`
+const PreviewPhoto = styled.section`
   width: 100%;
   height: 30vh;
   margin-top: 1rem;
   text-align: center;
+
+  h4 {
+    margin: 0 0 0.5rem 0;
+  }
 `;
 
-const UploadImageBox = styled.div`
+const UploadImageBox = styled.section`
   width: 100%;
   height: 100%;
 `;
@@ -84,7 +88,7 @@ const UploadImage = styled.img`
   height: 25vh;
 `;
 
-const ButtonBox = styled.div`
+const ButtonBox = styled.section`
   width: 100%;
   height: 5vh;
   text-align: center;
@@ -152,7 +156,7 @@ const PhotoEditorModal = ({
 
   async function onSubmit(data: PhotoFormData) {
     if (attachment === "") {
-      toast.warn("사진을 첨부해주세요 :) ");
+      toast.warn("사진을 첨부해 주세요 :) ");
       return;
     }
 
@@ -227,7 +231,7 @@ const PhotoEditorModal = ({
             name="keyword1"
             rules={{
               ...(targetPhoto.id === "" && {
-                required: "필수 입력사항입니다.",
+                required: "필수 입력 사항입니다.",
               }),
             }}
             render={({ field }) => (
@@ -272,15 +276,15 @@ const PhotoEditorModal = ({
             )}
           />
           <KeywordText errorCheck={errors.keyword1 ? true : false}>
-            *키워드를 1가지 이상 입력해주세요.
+            *키워드를 1가지 이상 입력해 주세요.
           </KeywordText>
         </KeywordBox>
         <AttachmentBox>
           <input type="file" accept="image/*" onChange={fileChangeHandler} />
-          {attachment === "" && <ErrorText>파일을 선택해주세요 :)</ErrorText>}
+          {attachment === "" && <ErrorText>파일을 선택해 주세요 :)</ErrorText>}
         </AttachmentBox>
         <PreviewPhoto>
-          <div>🔻 썸네일 미리보기</div>
+          <h4>🔻 썸네일 미리보기</h4>
           {attachment && (
             <UploadImageBox>
               <UploadImage src={attachment} alt="attachment"></UploadImage>

@@ -31,9 +31,9 @@ const PhotoHeader = styled.header<{ openEditorModal: boolean }>`
     `}
 `;
 
-const ButtonBox = styled.div<{ isModal: boolean }>`
+const ButtonBox = styled.section<{ isModal: boolean }>`
   width: 100%;
-  height: 6%;
+  height: 6vh;
   display: flex;
   justify-content: right;
   text-align: center;

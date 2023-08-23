@@ -30,7 +30,7 @@ const EditText = styled.span`
   color: #ff55bb;
 `;
 
-const PhotoBox = styled.div`
+const PhotoBox = styled.section`
   width: 100%;
   height: 70vh;
   margin-top: 0.5rem;
