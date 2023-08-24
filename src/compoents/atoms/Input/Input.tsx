@@ -3,7 +3,7 @@ import React from "react";
 
 const InputBar = styled.input<InputProps>`
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1rem;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   margin-top: ${({ marginTop }) => marginTop};
@@ -22,10 +22,10 @@ const InputBar = styled.input<InputProps>`
 
 interface InputProps {
   type: "text" | "number" | "email" | "password" | "file" | "date";
-  name?: string;
+  id?: string;
   placeholder?: string;
   value?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autoComplete?: string;
   width?: string;
   height?: string;

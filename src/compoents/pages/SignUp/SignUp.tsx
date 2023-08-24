@@ -124,7 +124,7 @@ const SignUp = () => {
                 <Label for="nickname">닉네임</Label>
                 <Input
                   type="text"
-                  name="nickname"
+                  id="nickname"
                   placeholder="한글,영문 사용 가능 / 띄어쓰기,특수문자 사용 불가"
                   value={field.value}
                   onChange={field.onChange}
@@ -152,7 +152,7 @@ const SignUp = () => {
                 <Label for="email">이메일</Label>
                 <Input
                   type="email"
-                  name="email"
+                  id="email"
                   placeholder="이메일에 오타가 없는지 확인해 주세요."
                   value={field.value}
                   onChange={field.onChange}
@@ -181,7 +181,7 @@ const SignUp = () => {
                 <Label for="password">비밀번호</Label>
                 <Input
                   type="password"
-                  name="password"
+                  id="password"
                   placeholder="8-15자 대/소문자 + 최소 1개의 숫자 혹은 특수문자 포함"
                   value={field.value}
                   onChange={field.onChange}
@@ -205,7 +205,7 @@ const SignUp = () => {
                 <Label for="password-check">비밀번호 확인</Label>
                 <Input
                   type="password"
-                  name="password-check"
+                  id="password-check"
                   placeholder="비밀번호를 한번 더 입력해 주세요."
                   value={field.value}
                   onChange={field.onChange}
