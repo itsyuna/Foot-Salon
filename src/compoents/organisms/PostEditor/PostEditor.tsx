@@ -315,6 +315,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
                 <TextArea
                   defaultValue={targetPost?.board.contents}
                   onChange={field.onChange}
+                  placeholder="내용을 입력해 주세요."
                 />
               )}
             />
