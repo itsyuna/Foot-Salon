@@ -78,12 +78,8 @@ const Email = () => {
     e.preventDefault();
 
     const currentForm = form.current;
-    console.log(currentForm);
 
-    if (currentForm === null) {
-      // toast.warn("메시지를 작성해 주세요!");
-      return;
-    }
+    if (currentForm === null) return;
 
     emailjs
       .sendForm(
@@ -94,12 +90,10 @@ const Email = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
           currentForm.reset();
           toast.success("이메일이 전송되었습니다 :)");
         },
         (error) => {
-          console.log(error.text);
           toast.error("오류가 발생했습니다 :(");
         }
       );

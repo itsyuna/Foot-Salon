@@ -23,6 +23,7 @@ const LineImg = styled.img`
 const FooterBottom = styled.section`
   width: 100%;
   height: 30%;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,9 +32,10 @@ const FooterBottom = styled.section`
 const NoticeBox = styled.section`
   width: 18%;
   height: 7vh;
+  margin-top: 2rem;
+
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
 `;
 
 const NoticeSmallBox = styled.div`
@@ -58,6 +60,7 @@ const DeveloperInfo = styled.div`
 
   a {
     color: white;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,13 +80,13 @@ const DeveloperInfo = styled.div`
 `;
 
 const CopyrightText = styled.p`
+  font-family: "Bebas Neue", sans-serif;
   width: 100%;
   text-align: center;
   position: absolute;
   top: 12%;
   left: 40%;
   transform: translate(-40%, -50%);
-  font-family: "Bebas Neue", sans-serif;
   color: white;
 `;
 
