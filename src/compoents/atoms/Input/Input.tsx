@@ -37,6 +37,7 @@ interface InputProps {
 
 const Input = ({
   type,
+  id,
   defaultValue,
   value,
   onChange,
@@ -49,6 +50,7 @@ const Input = ({
   return (
     <InputBar
       type={type}
+      id={id}
       defaultValue={defaultValue}
       value={value}
       placeholder={placeholder}
