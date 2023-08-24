@@ -15,6 +15,7 @@ import NewStat from "../compoents/pages/NewStat";
 import ReadStat from "../compoents/pages/ReadStat";
 import UpdateStat from "../compoents/pages/UpdateStat";
 import ReadPost from "../compoents/organisms/ReadPost";
+import Email from "../compoents/pages/Email";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
       { path: "/stats/new", element: <NewStat /> },
       { path: "/stats/:no", element: <ReadStat /> },
       { path: "/updateStat/:no", element: <UpdateStat /> },
+      { path: "/email", element: <Email /> },
     ],
   },
 ]);

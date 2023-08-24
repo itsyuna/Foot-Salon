@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { GiSpray } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const FooterWrapper = styled.footer`
   width: 100%;
@@ -31,52 +33,58 @@ const NoticeBox = styled.section`
   height: 7vh;
   display: flex;
   flex-direction: column;
-
   margin-top: 2rem;
 `;
 
 const NoticeSmallBox = styled.div`
   height: 50%;
   position: relative;
+`;
 
-  div {
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+const DeveloperInfo = styled.div`
+  color: white;
+  width: 75%;
+  height: 100%;
+  cursor: pointer;
 
-      svg {
-        margin-right: 0.2rem;
-      }
-    }
-    a:visited {
-      color: inherit;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  a {
     color: white;
-    width: 75%;
-    height: 100%;
-
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    svg {
+      margin-right: 0.2rem;
+    }
+  }
+
+  a:visited {
+    color: inherit;
   }
 
   p {
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    top: 12%;
-    left: 40%;
-    transform: translate(-40%, -50%);
-    font-family: "Bebas Neue", sans-serif;
-    color: white;
+    margin: 0;
   }
+`;
+
+const CopyrightText = styled.p`
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 12%;
+  left: 40%;
+  transform: translate(-40%, -50%);
+  font-family: "Bebas Neue", sans-serif;
+  color: white;
 `;
 
 const FamousFootballQuotes = styled.p`
@@ -105,16 +113,20 @@ const Footer = () => {
               width="100%"
               height="100%"
             />
-            <div>
+            <DeveloperInfo>
               <a
                 href="https://github.com/itsyuna"
                 target="_blank"
                 rel="noreferrer"
               >
                 <FaGithub size="30" color="white" />
-                github
+                <p>Github</p>
               </a>
-            </div>
+              <Link to="/email">
+                <MdEmail size="25" />
+                <p>Email</p>
+              </Link>
+            </DeveloperInfo>
           </NoticeSmallBox>
           <NoticeSmallBox>
             <img
@@ -123,7 +135,9 @@ const Footer = () => {
               width="100%"
               height="100%"
             />
-            <p>© COPYRIGHT 2023 Yuna Lee. ALL RIGHTS RESERVED.</p>
+            <CopyrightText>
+              © COPYRIGHT 2023 Yuna Lee. ALL RIGHTS RESERVED.
+            </CopyrightText>
           </NoticeSmallBox>
         </NoticeBox>
         <FamousFootballQuotes>
