@@ -41,7 +41,7 @@ const InputWrapper = styled.section`
   margin-top: 1.5rem;
 `;
 
-const Label = styled.label<{ for: string }>`
+const Label = styled.label`
   line-height: 4vh;
 `;
 
@@ -121,7 +121,7 @@ const SignUp = () => {
             }}
             render={({ field }) => (
               <InputWrapper>
-                <Label for="nickname">닉네임</Label>
+                <Label htmlFor="nickname">닉네임</Label>
                 <Input
                   type="text"
                   id="nickname"
@@ -149,7 +149,7 @@ const SignUp = () => {
             }}
             render={({ field }) => (
               <InputWrapper>
-                <Label for="email">이메일</Label>
+                <Label htmlFor="email">이메일</Label>
                 <Input
                   type="email"
                   id="email"
@@ -178,7 +178,7 @@ const SignUp = () => {
             }}
             render={({ field }) => (
               <InputWrapper>
-                <Label for="password">비밀번호</Label>
+                <Label htmlFor="password">비밀번호</Label>
                 <Input
                   type="password"
                   id="password"
@@ -202,7 +202,7 @@ const SignUp = () => {
             }}
             render={({ field }) => (
               <InputWrapper>
-                <Label for="password-check">비밀번호 확인</Label>
+                <Label htmlFor="password-check">비밀번호 확인</Label>
                 <Input
                   type="password"
                   id="password-check"
