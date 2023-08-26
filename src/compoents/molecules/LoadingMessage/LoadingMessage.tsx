@@ -10,12 +10,12 @@ const SpinnerWrapper = styled.div<{ size: string }>`
   align-items: center;
 `;
 
-const LoadingContentWrapper = styled.div`
+const LoadingWrapper = styled.div`
   text-align: center;
   width: 20vw;
 `;
 
-const LoadingContentMessage = styled.p`
+const LoadingText = styled.p`
   font-size: 1.5rem;
   color: #f45050;
   font-weight: 900;
@@ -33,17 +33,17 @@ const Message = styled.p`
   margin-top: 10px;
 `;
 
-interface LoadingContent {
-  content: string;
+interface LoadingContents {
+  contents: string;
   size: string;
 }
 
-const LoadingMessage = ({ content, size }: LoadingContent) => {
+const LoadingMessage = ({ contents, size }: LoadingContents) => {
   return (
     <SpinnerWrapper size={size}>
-      <LoadingContentWrapper>
-        <LoadingContentMessage>⚽️{content} 로딩중⚽️</LoadingContentMessage>
-      </LoadingContentWrapper>
+      <LoadingWrapper>
+        <LoadingText>⚽️{contents} 로딩중⚽️</LoadingText>
+      </LoadingWrapper>
       <CirclesWithBar
         height="50"
         width="50"
