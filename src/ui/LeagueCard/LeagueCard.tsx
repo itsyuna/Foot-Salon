@@ -14,7 +14,7 @@ const LeagueTab = styled.ul`
   margin: 0;
 `;
 
-const TabList = styled.li<ActiveTab>`
+const TabList = styled.li<{ isActive: boolean }>`
   width: 100%;
   height: 3vh;
   line-height: 3vh;
@@ -26,14 +26,10 @@ const TabList = styled.li<ActiveTab>`
   font-weight: ${({ isActive }) => (isActive ? "900" : "")};
 `;
 
-interface ActiveTab {
-  isActive: boolean;
-}
-
 interface LeagueListItems {
   name: string;
   leagueNo: number;
-  content: JSX.Element[];
+  contents: JSX.Element[];
 }
 
 interface LeagueProps {

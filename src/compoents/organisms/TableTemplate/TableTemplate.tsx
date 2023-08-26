@@ -30,7 +30,7 @@ export const Th = styled.th`
   padding: 5px;
 `;
 
-export interface TableContent {
+interface TableByLeague {
   category: string;
   tableMenu: string[];
 }
@@ -95,7 +95,7 @@ export interface TableProps {
 const kLeagueCaption = "2023 K리그 1";
 const europeLeagueCaption = "2023-2024";
 
-const TableTemplate = ({ category, tableMenu }: TableContent) => {
+const TableTemplate = ({ category, tableMenu }: TableByLeague) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [table, setTable] = useState<TableProps[]>([]);
   const [currentTab, setCurrentTab] = useState(0);
@@ -113,32 +113,32 @@ const TableTemplate = ({ category, tableMenu }: TableContent) => {
     {
       name: "K League 1",
       leagueNo: 292,
-      content: showTableHandler,
+      contents: showTableHandler,
     },
     {
       name: "EPL",
       leagueNo: 39,
-      content: showTableHandler,
+      contents: showTableHandler,
     },
     {
       name: "Ligue 1",
       leagueNo: 61,
-      content: showTableHandler,
+      contents: showTableHandler,
     },
     {
       name: "Bundesliga",
       leagueNo: 78,
-      content: showTableHandler,
+      contents: showTableHandler,
     },
     {
       name: "La Liga",
       leagueNo: 140,
-      content: showTableHandler,
+      contents: showTableHandler,
     },
     {
       name: "Serie A",
       leagueNo: 135,
-      content: showTableHandler,
+      contents: showTableHandler,
     },
   ];
 
@@ -201,8 +201,8 @@ const TableTemplate = ({ category, tableMenu }: TableContent) => {
     >
       {loading ? (
         <LoadingMessage
-          content={
-            category === "STANDINGS" ? "리그별 팀 순위" : "리그별 득점자 현황"
+          contents={
+            category === "STANDINGS" ? "리그별 팀 순위" : "리그별 득점자 순위"
           }
           size={category === "STANDINGS" ? "medium" : "small"}
         />
@@ -222,7 +222,7 @@ const TableTemplate = ({ category, tableMenu }: TableContent) => {
               ))}
             </Tr>
           </thead>
-          <tbody>{leagueList[currentTab].content}</tbody>
+          <tbody>{leagueList[currentTab].contents}</tbody>
         </TableWrapper>
       ) : (
         <ErrorMessage category={category} error={error} />
