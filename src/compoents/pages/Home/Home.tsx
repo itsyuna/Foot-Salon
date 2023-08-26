@@ -42,7 +42,7 @@ const standingsMenu = [
   "득실차",
 ];
 
-const topscorersMenu = [
+const topScorersMenu = [
   "순위",
   "선수명",
   "포지션",
@@ -62,7 +62,7 @@ const Home = () => {
       </HomeTopSection>
       <HomeBottomSection>
         <KoreaFixture />
-        <TableTemplate category="TOPSCORERS" tableMenu={topscorersMenu} />
+        <TableTemplate category="TOPSCORERS" tableMenu={topScorersMenu} />
       </HomeBottomSection>
     </MainWrapper>
   );
