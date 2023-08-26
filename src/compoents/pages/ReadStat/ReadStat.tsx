@@ -45,13 +45,25 @@ const SelectBox = styled.div`
   }
 `;
 
-const CreatedDateBox = styled.section`
-  width: 10vw;
+const CreatedDateBox = styled.section<{ isStatEdit: boolean }>`
+  width: ${({ isStatEdit }) => (isStatEdit ? "11vw" : "9vw")};
   height: 3.5vh;
   line-height: 3.5vh;
   background-color: #c3edc0;
   border: 3px solid #aac8a7;
   text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+  p:nth-child(2) {
+    color: #fc2947;
+    margin-left: 1rem;
+  }
 `;
 
 const StatSection = styled.section`
@@ -136,7 +148,10 @@ const StatDiary = () => {
             <SelectBox>{targetPost?.stat.league}</SelectBox>
             <SelectBox>{targetPost?.stat.watchOption}</SelectBox>
           </SelectWrapper>
-          <CreatedDateBox>{`${targetPost?.stat.createdAt} 작성`}</CreatedDateBox>
+          <CreatedDateBox isStatEdit={targetPost?.stat.isStatEdit}>
+            <p>{`${targetPost?.stat.createdAt} 작성`}</p>
+            {targetPost?.stat.isStatEdit && <p>(수정됨)</p>}
+          </CreatedDateBox>
         </TopSection>
         <MatchScoreDate>
           <StatSection>

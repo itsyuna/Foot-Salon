@@ -21,6 +21,7 @@ export interface StatContents {
   contents: string;
   createdAt: string;
   dateTime: number;
+  isStatEdit: boolean;
 }
 
 export interface StatListItems {

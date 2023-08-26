@@ -37,9 +37,6 @@ const StatEditorBox = styled.section`
   }
 `;
 
-// form section:nth-child(-n + 3) {
-//   margin-bottom: 2rem;
-// }
 export const StatItemName = styled.div`
   width: 11rem;
   height: 1.5rem;
@@ -170,6 +167,7 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
         contents: data.contents,
         createdAt: getDate(),
         dateTime: Timestamp.now().seconds,
+        isStatEdit: isEdit ? true : false,
       };
 
       try {
