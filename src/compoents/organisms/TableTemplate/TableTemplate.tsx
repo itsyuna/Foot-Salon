@@ -35,7 +35,7 @@ export interface TableContent {
   tableMenu: string[];
 }
 
-interface allProps {
+interface All {
   draw: number;
   goals: object;
   lose: number;
@@ -43,13 +43,14 @@ interface allProps {
   win: number;
 }
 
-interface TeamProps {
+interface Team {
   id: number;
   logo: string;
   name: string;
 }
 
 interface Player {
+  id: number;
   name: string;
   nationality: string;
 }
@@ -80,8 +81,8 @@ interface Statistics {
 }
 
 export interface TableProps {
-  all: allProps;
-  team: TeamProps;
+  all: All;
+  team: Team;
   rank: string;
   logo: string;
   points: string;
@@ -102,9 +103,9 @@ const TableTemplate = ({ category, tableMenu }: TableContent) => {
 
   const showTableHandler = table.map((list, idx) =>
     category === "STANDINGS" ? (
-      <StandingsList key={idx} {...list} />
+      <StandingsList key={list.team.id} {...list} />
     ) : (
-      <TopscorersList key={idx} {...list} idx={idx} />
+      <TopscorersList key={list.player.id} {...list} idx={idx} />
     )
   );
 

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { TableProps } from "../TableTemplate/TableTemplate";
 
-const TableDataStyle = styled.tr`
+const Tr = styled.tr`
   &:hover {
     background-color: #ecf2ff;
   }
 `;
 
-const TableHeader = styled.th`
+const Th = styled.th`
   padding: 3px;
 
   border: 1px solid lightgray;
@@ -22,7 +22,7 @@ const TableHeader = styled.th`
   }
 `;
 
-const ContentsStyle = styled.td`
+const Td = styled.td`
   border: 1px solid lightgray;
   padding: 3px;
 
@@ -33,23 +33,23 @@ const ContentsStyle = styled.td`
 
 const TopscorersList = ({ idx, player, statistics }: TableProps) => {
   return (
-    <TableDataStyle>
-      <TableHeader scope="row">{idx + 1}</TableHeader>
-      <TableHeader>{player.name}</TableHeader>
-      <ContentsStyle>{statistics[0].games.position} </ContentsStyle>
-      <ContentsStyle>
+    <Tr>
+      <Th scope="row">{idx + 1}</Th>
+      <Th>{player.name}</Th>
+      <Td>{statistics[0].games.position} </Td>
+      <Td>
         {statistics[0].goals.total} /{" "}
         {statistics[0].penalty.scored === null
           ? 0
           : statistics[0].penalty.scored}
-      </ContentsStyle>
-      <ContentsStyle>
+      </Td>
+      <Td>
         {statistics[0].goals.assists === null ? 0 : statistics[0].goals.assists}
-      </ContentsStyle>
-      <ContentsStyle>{statistics[0].games.appearences}</ContentsStyle>
-      <ContentsStyle>{statistics[0].team.name}</ContentsStyle>
-      <ContentsStyle>{player.nationality}</ContentsStyle>
-    </TableDataStyle>
+      </Td>
+      <Td>{statistics[0].games.appearences}</Td>
+      <Td>{statistics[0].team.name}</Td>
+      <Td>{player.nationality}</Td>
+    </Tr>
   );
 };
 
