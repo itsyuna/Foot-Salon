@@ -68,9 +68,9 @@ const Carousel = ({ images }: { images: ImageName }) => {
   return (
     <CarouselWrapper>
       <CustomCarousel {...settings}>
-        {images.map((image, i) => (
+        {images.map((image, idx) => (
           <CarouselItems
-            key={i}
+            key={idx}
             src={`${process.env.PUBLIC_URL}/assets/img/${image}.svg`}
             alt="Carousel"
           />
