@@ -89,7 +89,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
     return item.title.toUpperCase().includes(userInput.toUpperCase());
   });
 
-  const imgHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+  const imageHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src = `${process.env.PUBLIC_URL}/assets/img/football-default-img.svg`;
   };
 
@@ -98,11 +98,9 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
       {filteredList.map((list, idx) => (
         <section key={idx}>
           <MatchTeams>{list.title}</MatchTeams>
-          <div>
-            <a href={list.url} target="_blank" rel="noreferrer">
-              <Img src={list.thumbnail} alt="thumbnail" onError={imgHandler} />
-            </a>
-          </div>
+          <a href={list.url} target="_blank" rel="noreferrer">
+            <Img src={list.thumbnail} alt="thumbnail" onError={imageHandler} />
+          </a>
           <MatchDate>{dateHandler(list.date)}</MatchDate>
         </section>
       ))}

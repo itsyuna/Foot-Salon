@@ -15,7 +15,7 @@ const Title = styled.h2`
   }
 `;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.section`
   height: 4vh;
   margin: 10px auto;
   display: flex;
@@ -46,7 +46,6 @@ const LineUp = () => {
             placeholder="대,소문자 구분 없이 팀을 입력해주세요 :)"
             value={userInput}
             onChange={searchHandler}
-            autoComplete="off"
             width="15vw"
             height="4vh"
           />
