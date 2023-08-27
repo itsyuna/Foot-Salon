@@ -37,7 +37,7 @@ const ErrorMessage = ({ category, error }: ErrorProps) => {
         )}
         <Message>
           {error === null
-            ? "새 시즌을 준비중입니다 :) 다른 리그를 확인해 보세요!"
+            ? "새 시즌을 준비 중입니다 :) 다른 리그를 확인해 보세요!"
             : "예상치 못한 오류가 발생했어요 :( 다시 시도해 주세요."}
         </Message>
       </>
