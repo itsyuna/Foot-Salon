@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Matches = styled.table`
+const Table = styled.table`
   border: 1px solid #116d6e;
   width: 50%;
   height: 100%;
@@ -9,7 +9,7 @@ const Matches = styled.table`
   margin: 5px;
 `;
 
-const ContentsSubtitle = styled.caption`
+const Caption = styled.caption`
   border: 1px solid #1b9c85;
   background-color: #e3f2c1;
   color: #285430;
@@ -17,17 +17,17 @@ const ContentsSubtitle = styled.caption`
   margin-bottom: 10px;
 `;
 
-const TableHeadStyle = styled.tr`
+const Tr = styled.tr`
   color: #2c3333;
   background-color: #ffd4b2;
 `;
 
-const MatchList = styled(TableHeadStyle)<{ isFinish: boolean }>`
+const MatchList = styled(Tr)<{ isFinish: boolean }>`
   background-color: #fffad7;
   opacity: ${({ isFinish }) => isFinish && "0.3"};
 `;
 
-const TableHeadContents = styled.td`
+const Td = styled.td`
   border: 1px solid #fd8a8a;
   &:nth-child(1) {
     width: 30%;
@@ -42,7 +42,7 @@ const TableHeadContents = styled.td`
   line-height: 2vh;
 `;
 
-const Contents = styled(TableHeadContents)`
+const Contents = styled(Td)`
   height: 4vh;
   &:nth-child(4) {
     color: #ff4949;
@@ -66,17 +66,15 @@ interface MatchItems {
 
 const KoreaFixtureList = ({ matchList, category, subtitle }: MatchItems) => {
   return (
-    <Matches>
-      <ContentsSubtitle>{subtitle}</ContentsSubtitle>
+    <Table>
+      <Caption>{subtitle}</Caption>
       <thead>
-        <TableHeadStyle>
-          <TableHeadContents>{category[0]}</TableHeadContents>
-          <TableHeadContents>{category[1]}</TableHeadContents>
-          <TableHeadContents>{category[2]}</TableHeadContents>
-          {category.length === 4 && (
-            <TableHeadContents>{category[3]}</TableHeadContents>
-          )}
-        </TableHeadStyle>
+        <Tr>
+          <Td>{category[0]}</Td>
+          <Td>{category[1]}</Td>
+          <Td>{category[2]}</Td>
+          {category.length === 4 && <Td>{category[3]}</Td>}
+        </Tr>
       </thead>
       <tbody>
         {matchList.map((list, idx) => (
@@ -102,7 +100,7 @@ const KoreaFixtureList = ({ matchList, category, subtitle }: MatchItems) => {
           </MatchList>
         ))}
       </tbody>
-    </Matches>
+    </Table>
   );
 };
 
