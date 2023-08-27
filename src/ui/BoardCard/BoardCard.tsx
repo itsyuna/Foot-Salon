@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ArticleWrapper = styled.section`
+const BoardWrapper = styled.section`
   font-family: "Do Hyeon", sans-serif;
   width: 100%;
   height: 65vh;
@@ -11,12 +11,12 @@ const ArticleWrapper = styled.section`
   border-radius: 10px;
 `;
 
-interface WrapperProps {
+interface BoardCardProps {
   children: React.ReactNode;
 }
 
-const BoardCard = ({ children }: WrapperProps) => {
-  return <ArticleWrapper>{children}</ArticleWrapper>;
+const BoardCard = ({ children }: BoardCardProps) => {
+  return <BoardWrapper>{children}</BoardWrapper>;
 };
 
 export default BoardCard;
