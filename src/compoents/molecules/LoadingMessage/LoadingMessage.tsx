@@ -1,36 +1,27 @@
 import styled from "styled-components";
 import { CirclesWithBar } from "react-loader-spinner";
 
-const SpinnerWrapper = styled.div<{ size: string }>`
+const LoadingWrapper = styled.section<{ size: string }>`
   font-family: "Gowun Dodum", sans-serif;
   margin: ${({ size }) => (size === "medium" ? "20% 40%" : "5% 40%")};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const LoadingWrapper = styled.div`
   text-align: center;
-  width: 20vw;
 `;
 
-const LoadingText = styled.p`
-  font-size: 1.5rem;
+const LoadingText = styled.h2`
+  width: 15vw;
   color: #f45050;
-  font-weight: 900;
-  margin: 10px 0 10px 0;
-`;
-
-const LoadingMessageWrapper = styled.div`
-  text-align: center;
-  width: 20vw;
+  margin: 10px 0;
 `;
 
 const Message = styled.p`
+  width: 13vw;
   font-size: 1.2rem;
   font-weight: 900;
-  margin-top: 10px;
+  margin: 10px 0;
 `;
 
 interface LoadingContents {
@@ -40,10 +31,8 @@ interface LoadingContents {
 
 const LoadingMessage = ({ contents, size }: LoadingContents) => {
   return (
-    <SpinnerWrapper size={size}>
-      <LoadingWrapper>
-        <LoadingText>⚽️{contents} 로딩중⚽️</LoadingText>
-      </LoadingWrapper>
+    <LoadingWrapper size={size}>
+      <LoadingText>⚽️{contents} 로딩중⚽️</LoadingText>
       <CirclesWithBar
         height="50"
         width="50"
@@ -56,10 +45,8 @@ const LoadingMessage = ({ contents, size }: LoadingContents) => {
         barColor=""
         ariaLabel="circles-with-bar-loading"
       />
-      <LoadingMessageWrapper>
-        <Message>잠시만 기다려주세요 :)</Message>
-      </LoadingMessageWrapper>
-    </SpinnerWrapper>
+      <Message>잠시만 기다려주세요 :)</Message>
+    </LoadingWrapper>
   );
 };
 

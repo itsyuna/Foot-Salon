@@ -8,7 +8,7 @@ import TopscorersList from "../TopscorersList";
 import LoadingMessage from "../../molecules/LoadingMessage";
 import ErrorMessage from "../../molecules/ErrorMessage";
 
-export const TableWrapper = styled.table`
+export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   text-align: center;
@@ -206,10 +206,8 @@ const TableTemplate = ({ category, tableMenu }: TableByLeague) => {
           }
           size={category === "STANDINGS" ? "medium" : "small"}
         />
-      ) : error !== null ? (
-        <ErrorMessage category={category} error={error} />
-      ) : error === null && table.length ? (
-        <TableWrapper>
+      ) : table.length ? (
+        <Table>
           <Caption>
             {currentTab === 0 ? kLeagueCaption : europeLeagueCaption}
           </Caption>
@@ -223,7 +221,7 @@ const TableTemplate = ({ category, tableMenu }: TableByLeague) => {
             </Tr>
           </thead>
           <tbody>{leagueList[currentTab].contents}</tbody>
-        </TableWrapper>
+        </Table>
       ) : (
         <ErrorMessage category={category} error={error} />
       )}
