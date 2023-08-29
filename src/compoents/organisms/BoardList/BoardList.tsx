@@ -95,5 +95,8 @@ const BoardList = ({ listByLeague }: { listByLeague: BoardListItems[] }) => {
   );
 };
 
-BoardList.defaultProps = {};
+BoardList.defaultProps = {
+  listByLeague: [],
+};
+
 export default BoardList;
