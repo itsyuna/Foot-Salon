@@ -14,7 +14,7 @@ import UpdatePost from "../compoents/pages/UpdatePost";
 import NewStat from "../compoents/pages/NewStat";
 import ReadStat from "../compoents/pages/ReadStat";
 import UpdateStat from "../compoents/pages/UpdateStat";
-import ReadPost from "../compoents/organisms/ReadPost";
+import ReadPost from "../compoents/pages/ReadPost";
 import Email from "../compoents/pages/Email";
 
 const router = createBrowserRouter([
