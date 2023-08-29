@@ -64,10 +64,10 @@ const BoardTemplate = ({ boardCategory }: { boardCategory: string }) => {
     <BoardCard>
       <BoardHeader
         leagueCategory={leagueCategory}
-        league={setLeague}
-        sortList={setSortList}
+        setLeague={setLeague}
+        setSortList={setSortList}
       />
-      <BoardList boardByleague={getListByOption()} />
+      <BoardList listByLeague={getListByOption()} />
     </BoardCard>
   );
 };

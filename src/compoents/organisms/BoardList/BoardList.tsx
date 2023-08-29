@@ -14,7 +14,7 @@ const BoardListWrapper = styled.article`
   font-family: "Do Hyeon", sans-serif;
 `;
 
-const StyledBoardList = styled.ul<StyledListItems>`
+export const Ul = styled.ul<StyledListItems>`
   margin: 0;
   padding: 1rem;
   border-bottom: 1px solid gray;
@@ -48,9 +48,9 @@ interface StyledListItems {
   hoverEffect?: string;
 }
 
-const category = ["No.", "League", "Title", "Writer", "Date"];
+const listMenu = ["No.", "League", "Title", "Writer", "Date"];
 
-const BoardList = ({ boardByleague }: { boardByleague: BoardListItems[] }) => {
+const BoardList = ({ listByLeague }: { listByLeague: BoardListItems[] }) => {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
 
   const location = useLocation();
@@ -60,33 +60,33 @@ const BoardList = ({ boardByleague }: { boardByleague: BoardListItems[] }) => {
 
   return (
     <BoardListWrapper>
-      <StyledBoardList bgColor="#aec2b6">
-        {category.map((list, idx) => (
+      <Ul bgColor="#aec2b6">
+        {listMenu.map((list, idx) => (
           <li key={idx}>{list}</li>
         ))}
-      </StyledBoardList>
-      {boardByleague.length > 0 ? (
-        boardByleague.map((list, idx) => (
-          <StyledBoardList
+      </Ul>
+      {listByLeague.length > 0 ? (
+        listByLeague.map((list, idx) => (
+          <Ul
             hoverEffect="#dbe4c6"
             onClick={() =>
               isLoggedIn
                 ? navigate(
                     `${boardCategory === "/play" ? "/play" : "/half-time"}/${
-                      boardByleague.length - idx
+                      listByLeague.length - idx
                     }`,
                     { state: list }
                   )
                 : navigate("/login")
             }
-            key={idx}
+            key={list.id}
           >
-            <li>{boardByleague.length - idx}</li>
+            <li>{listByLeague.length - idx}</li>
             <li>{list.board.league}</li>
             <li>{list.board.title}</li>
             <li>{list.board.userNickname}</li>
             <li>{list.board.createdAt}</li>
-          </StyledBoardList>
+          </Ul>
         ))
       ) : (
         <BoardMessage>게시글이 없습니다.</BoardMessage>
@@ -95,4 +95,5 @@ const BoardList = ({ boardByleague }: { boardByleague: BoardListItems[] }) => {
   );
 };
 
+BoardList.defaultProps = {};
 export default BoardList;

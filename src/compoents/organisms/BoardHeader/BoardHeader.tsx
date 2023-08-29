@@ -6,7 +6,7 @@ import Button from "../../atoms/Button/Button";
 import Select from "../../atoms/Select/Select";
 import { toast } from "react-toastify";
 
-const Wrapper = styled.header`
+const Header = styled.header`
   width: 90%;
   height: 15vh;
   margin: 0 auto;
@@ -20,13 +20,12 @@ const BoardListUp = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-align: right;
 `;
 
 interface BoardHeaderProps {
   leagueCategory: string[];
-  league: React.Dispatch<React.SetStateAction<string>>;
-  sortList: React.Dispatch<React.SetStateAction<string>>;
+  setLeague: React.Dispatch<React.SetStateAction<string>>;
+  setSortList: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const optionList = [
@@ -39,8 +38,8 @@ const optionList = [
 
 const BoardHeader = ({
   leagueCategory,
-  league,
-  sortList,
+  setLeague,
+  setSortList,
 }: BoardHeaderProps) => {
   const navigate = useNavigate();
 
@@ -60,11 +59,11 @@ const BoardHeader = ({
   };
 
   const leagueFilterHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    league((e.target as HTMLButtonElement).value);
+    setLeague((e.target as HTMLButtonElement).value);
   };
 
   return (
-    <Wrapper>
+    <Header>
       <LeagueCategory>
         {leagueCategory.map((item, idx) => (
           <Button
@@ -89,7 +88,7 @@ const BoardHeader = ({
         </h4>
         <div>
           <Select
-            onChange={(e) => sortList(e.target.value)}
+            onChange={(e) => setSortList(e.target.value)}
             option={optionList}
             backgroundColor="#f6edd9"
             color="#379237"
@@ -106,7 +105,7 @@ const BoardHeader = ({
           </Button>
         </div>
       </BoardListUp>
-    </Wrapper>
+    </Header>
   );
 };
 
