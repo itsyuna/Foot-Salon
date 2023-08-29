@@ -1,4 +1,4 @@
-import PostEditor from "../../organisms/PostEditor/PostEditor";
+import PostEditor from "../../templates/PostEditor";
 
 const UpdatePost = () => {
   return <PostEditor isEdit={true} />;

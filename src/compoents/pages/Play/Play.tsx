@@ -1,7 +1,7 @@
-import BoardTemplate from "../../templates/BoardTemplate/BoardTemplate";
+import BoardList from "../../templates/BoardList";
 
 const Play = () => {
-  return <BoardTemplate boardCategory="play" />;
+  return <BoardList boardCategory="play" />;
 };
 
 export default Play;

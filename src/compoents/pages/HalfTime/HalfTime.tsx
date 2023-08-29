@@ -1,7 +1,7 @@
-import BoardTemplate from "../../templates/BoardTemplate/BoardTemplate";
+import BoardList from "../../templates/BoardList";
 
 const HalfTime = () => {
-  return <BoardTemplate boardCategory="half-time" />;
+  return <BoardList boardCategory="half-time" />;
 };
 
 export default HalfTime;
