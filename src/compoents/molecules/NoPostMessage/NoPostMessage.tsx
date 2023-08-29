@@ -18,7 +18,7 @@ const NoPostMessage = () => {
   return (
     <Card>
       <ErrorMessage>
-        <span>해당하는 게시글이 없습니다 :( </span>
+        <p>해당하는 게시글이 없습니다 :( </p>
         <Button
           type="button"
           backgroundColor="#75C2F6"
