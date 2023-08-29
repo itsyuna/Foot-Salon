@@ -5,6 +5,7 @@ import { useAppSelector } from "../../../store";
 import Button from "../../atoms/Button/Button";
 import Select from "../../atoms/Select/Select";
 import { toast } from "react-toastify";
+import React from "react";
 
 const Header = styled.header`
   width: 90%;
@@ -109,4 +110,4 @@ const BoardHeader = ({
   );
 };
 
-export default BoardHeader;
+export default React.memo(BoardHeader);

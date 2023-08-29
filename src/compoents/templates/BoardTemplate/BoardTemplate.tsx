@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import BoardCard from "../../../ui/BoardCard";
 import BoardHeader from "../../organisms/BoardHeader";
@@ -38,7 +38,7 @@ const BoardTemplate = ({ boardCategory }: { boardCategory: string }) => {
     }
   }, [dispatch, boardCategory]);
 
-  const getListByOption = () => {
+  const getListByOption = useCallback(() => {
     const compare = (a: BoardListItems, b: BoardListItems) => {
       if (sortList === "latest") {
         return (
@@ -58,7 +58,7 @@ const BoardTemplate = ({ boardCategory }: { boardCategory: string }) => {
 
     const filterList = copyList.sort(compare);
     return filterList;
-  };
+  }, [boardByleague, sortList]);
 
   return (
     <BoardCard>
