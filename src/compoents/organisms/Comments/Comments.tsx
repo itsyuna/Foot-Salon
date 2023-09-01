@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useAppSelector } from "../../../store";
 import { dbService } from "../../../firebase/config";
 import {
@@ -71,23 +71,24 @@ export interface CommentListItems {
 }
 
 const Comments = ({ category, boardId }: CommentsProps) => {
-  const [commentInput, setCommentInput] = useState("");
   const userNickname = useAppSelector((state) => state.user.nickname);
 
   const userId = useAppSelector((state) => state.user.uid);
 
-  const commentItems = {
-    creatorId: userId,
-    userNickname,
-    contents: commentInput,
-    createdAt: getDate(),
-    dateTime: Timestamp.now().seconds,
-    isEdit: false,
-  };
+  const commentInputRef = useRef<HTMLTextAreaElement>(null);
 
   const commentSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const commentValue = commentInputRef.current?.value;
 
+    const commentItems = {
+      creatorId: userId,
+      userNickname,
+      contents: commentValue,
+      createdAt: getDate(),
+      dateTime: Timestamp.now().seconds,
+      isEdit: false,
+    };
     try {
       const commentRef = doc(
         collection(
@@ -101,7 +102,6 @@ const Comments = ({ category, boardId }: CommentsProps) => {
       await setDoc(commentRef, commentItems);
 
       toast.success("댓글 작성 완료!");
-      setCommentInput("");
       fetchComments();
     } catch (error) {
       toast.error("오류가 발생했습니다 :(");
@@ -141,10 +141,7 @@ const Comments = ({ category, boardId }: CommentsProps) => {
         <h3>({showComments.length})</h3>
       </CommentHeader>
       <Form onSubmit={commentSubmitHandler}>
-        <Textarea
-          value={commentInput}
-          onChange={(e) => setCommentInput(e.target.value)}
-        />
+        <Textarea ref={commentInputRef} />
         <Button
           type="submit"
           margin="0"
