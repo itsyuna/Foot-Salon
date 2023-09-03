@@ -129,7 +129,7 @@ const StatContent = styled.div`
 
 let matchResultText = ["lost", "draw", "win"];
 
-const StatDiary = () => {
+const ReadStat = () => {
   const user = useAppSelector((state) => state.user.uid);
 
   let location = useLocation();
@@ -196,4 +196,4 @@ const StatDiary = () => {
   );
 };
 
-export default StatDiary;
+export default ReadStat;
