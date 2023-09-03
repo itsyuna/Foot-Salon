@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../store";
+import { fetchComments } from "../../../store/comments";
 import { dbService } from "../../../firebase/config";
 import { doc, setDoc, Timestamp, collection } from "firebase/firestore";
 
 import Button from "../../atoms/Button";
 import { getDate } from "../../../utils/date";
 import CommentItem from "../CommentItem";
-import { toast } from "react-toastify";
-import { fetchComments } from "../../../store/comments";
-import { useForm } from "react-hook-form";
 
 const CommentsWrapper = styled.article`
   width: 70%;
