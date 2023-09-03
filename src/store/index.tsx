@@ -4,6 +4,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import userReducer from "./user";
 import playBoardReducer from "./playBoard";
 import halfTimeBoardReducer from "./halfTimeBoard";
+import commentsReducer from "./comments";
 import statsReducer from "./stats";
 import photosReducer from "./photos";
 
@@ -12,6 +13,7 @@ const store = configureStore({
     user: userReducer,
     playBoard: playBoardReducer,
     halfTimeBoard: halfTimeBoardReducer,
+    comments: commentsReducer,
     stats: statsReducer,
     photos: photosReducer,
   },
