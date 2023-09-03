@@ -1,13 +1,15 @@
 import styled, { css } from "styled-components";
-import React, { useState } from "react";
-import { useAppSelector } from "../../../store";
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { dbService } from "../../../firebase/config";
 
-import { CommentListItems } from "../Comments/Comments";
+import { CommentFormData } from "../Comments/Comments";
 import { getDate } from "../../../utils/date";
 import Button from "../../atoms/Button";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { CommentListItems, fetchComments } from "../../../store/comments";
 
 const CommentBox = styled.section`
   width: 100%;
@@ -92,37 +94,29 @@ const Comment = styled.section`
 interface ItemProps {
   list: CommentListItems;
   idx: number;
-  fetchComments: () => Promise<void>;
   boardId: string;
   category: string;
 }
 
-const CommentItem = ({
-  list,
-  idx,
-  boardId,
-  category,
-  fetchComments,
-}: ItemProps) => {
-  const [commentInput, setCommentInput] = useState(list.comment.contents);
+const CommentItem = ({ list, idx, boardId, category }: ItemProps) => {
   const [editComment, setEditComment] = useState(false);
 
   const userId = useAppSelector((state) => state.user.uid);
   const userNickname = useAppSelector((state) => state.user.nickname);
 
-  const editCommentItems = {
-    creatorId: userId,
-    userNickname,
-    contents: commentInput,
-    createdAt: getDate(),
-    dateTime: list.comment.dateTime,
-    isEdit: true,
-  };
+  const { register, handleSubmit } = useForm<CommentFormData>();
 
-  const editCommentSubmitHandler = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
-    e.preventDefault();
+  const dispatch = useAppDispatch();
+
+  const editCommentSubmitHandler = async (data: CommentFormData) => {
+    const editCommentItems = {
+      creatorId: userId,
+      userNickname,
+      contents: data.comment,
+      createdAt: getDate(),
+      dateTime: list.comment.dateTime,
+      isEdit: true,
+    };
 
     try {
       const editCommentRef = doc(
@@ -137,7 +131,7 @@ const CommentItem = ({
 
       toast.success("수정 완료!");
       setEditComment(false);
-      fetchComments();
+      dispatch(fetchComments({ category, boardId }));
     } catch (error) {
       toast.error("오류가 발생했습니다 :(");
     }
@@ -158,6 +152,7 @@ const CommentItem = ({
       try {
         await deleteDoc(deleteRef);
         toast.success("삭제 완료!");
+        dispatch(fetchComments({ category, boardId }));
       } catch (error) {
         toast.error("오류가 발생했습니다 :(");
       }
@@ -173,13 +168,11 @@ const CommentItem = ({
           {idx === 0 && <FirstComment>첫 댓글</FirstComment>}
           {list.comment.isEdit && <EditText>수정됨</EditText>}
         </NicknameDate>
-
         {editComment ? (
-          <form onSubmit={editCommentSubmitHandler}>
+          <form onSubmit={handleSubmit(editCommentSubmitHandler)}>
             <ContentBox>
               <Textarea
-                value={commentInput}
-                onChange={(e) => setCommentInput(e.target.value)}
+                {...register("comment", { value: `${list.comment.contents}` })}
               />
               <Button
                 type="submit"
@@ -232,4 +225,4 @@ const CommentItem = ({
   );
 };
 
-export default React.memo(CommentItem);
+export default CommentItem;

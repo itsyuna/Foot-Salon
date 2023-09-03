@@ -1,22 +1,15 @@
 import styled from "styled-components";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useAppSelector } from "../../../store";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { dbService } from "../../../firebase/config";
-import {
-  doc,
-  setDoc,
-  Timestamp,
-  collection,
-  CollectionReference,
-  query,
-  orderBy,
-  getDocs,
-} from "firebase/firestore";
+import { doc, setDoc, Timestamp, collection } from "firebase/firestore";
 
 import Button from "../../atoms/Button";
 import { getDate } from "../../../utils/date";
 import CommentItem from "../CommentItem";
 import { toast } from "react-toastify";
+import { fetchComments } from "../../../store/comments";
+import { useForm } from "react-hook-form";
 
 const CommentsWrapper = styled.article`
   width: 70%;
@@ -56,39 +49,37 @@ export interface CommentsProps {
   boardId: string;
 }
 
-export interface CommentItemProps {
-  creatorId: string;
-  userNickname: string;
-  contents: string;
-  createdAt: string;
-  dateTime: number;
-  isEdit: boolean;
-}
-
-export interface CommentListItems {
-  commentId: string;
-  comment: CommentItemProps;
+export interface CommentFormData {
+  comment: string;
 }
 
 const Comments = ({ category, boardId }: CommentsProps) => {
   const userNickname = useAppSelector((state) => state.user.nickname);
-
   const userId = useAppSelector((state) => state.user.uid);
 
-  const commentInputRef = useRef<HTMLTextAreaElement>(null);
+  const { register, handleSubmit, setFocus, reset } =
+    useForm<CommentFormData>();
 
-  const commentSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const commentValue = commentInputRef.current?.value;
+  const dispatch = useAppDispatch();
+
+  const commentsData = useAppSelector((state) => state.comments.commentsArray);
+
+  const commentSubmitHandler = async (data: CommentFormData) => {
+    if (data.comment.length === 0) {
+      toast.warn("댓글을 입력해 주세요!");
+      setFocus("comment");
+      return;
+    }
 
     const commentItems = {
       creatorId: userId,
       userNickname,
-      contents: commentValue,
+      contents: data.comment,
       createdAt: getDate(),
       dateTime: Timestamp.now().seconds,
       isEdit: false,
     };
+
     try {
       const commentRef = doc(
         collection(
@@ -102,46 +93,25 @@ const Comments = ({ category, boardId }: CommentsProps) => {
       await setDoc(commentRef, commentItems);
 
       toast.success("댓글 작성 완료!");
-      fetchComments();
+      reset();
+      dispatch(fetchComments({ category, boardId }));
     } catch (error) {
       toast.error("오류가 발생했습니다 :(");
     }
   };
 
-  const [showComments, setShowComments] = useState<CommentListItems[]>([]);
-
-  const fetchComments = useCallback(async () => {
-    const collectData = query(
-      collection(
-        dbService,
-        category.includes("play") ? "play" : "half-time",
-        boardId,
-        "comments"
-      ) as CollectionReference<CommentItemProps>,
-      orderBy("dateTime", "asc")
-    );
-    const querySnapshot = await getDocs(collectData);
-
-    let commentData = querySnapshot.docs.map((list) => ({
-      commentId: list.id,
-      comment: list.data(),
-    }));
-
-    setShowComments(commentData);
-  }, [boardId, category]);
-
   useEffect(() => {
-    fetchComments();
-  }, [fetchComments]);
+    dispatch(fetchComments({ category, boardId }));
+  }, [dispatch, category, boardId]);
 
   return (
     <CommentsWrapper>
       <CommentHeader>
         <h3>🔻Comments</h3>
-        <h3>({showComments.length})</h3>
+        <h3>({commentsData.length})</h3>
       </CommentHeader>
-      <Form onSubmit={commentSubmitHandler}>
-        <Textarea ref={commentInputRef} />
+      <Form onSubmit={handleSubmit(commentSubmitHandler)}>
+        <Textarea {...register("comment")} />
         <Button
           type="submit"
           margin="0"
@@ -152,12 +122,11 @@ const Comments = ({ category, boardId }: CommentsProps) => {
         </Button>
       </Form>
       <section>
-        {showComments.map((list, idx) => (
+        {commentsData.map((list, idx) => (
           <CommentItem
             key={list.commentId}
             idx={idx}
             list={list}
-            fetchComments={fetchComments}
             boardId={boardId}
             category={category}
           />

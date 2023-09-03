@@ -8,6 +8,7 @@ import { StatListItems } from "../../../store/stats";
 
 import Button from "../../atoms/Button";
 import { toast } from "react-toastify";
+import React from "react";
 
 const FooterWrapper = styled.section`
   width: 70%;
@@ -109,4 +110,4 @@ const ReadPostButton = ({
   );
 };
 
-export default ReadPostButton;
+export default React.memo(ReadPostButton);
