@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../../store";
+import { toast } from "react-toastify";
+import { useAppSelector } from "../../../store";
 import { dbService } from "../../../firebase/config";
-import { fetchStats } from "../../../store/stats";
 import {
   Timestamp,
   addDoc,
@@ -19,11 +19,10 @@ import Select from "../../atoms/Select";
 import { getDate } from "../../../utils/date";
 import PostFooter from "../PostFooter/PostFooter";
 import { emotionList } from "../../../utils/emotion";
-import EmotionItem from "../../molecules/EmotionItem/EmotionItem";
+import EmotionItem from "../../molecules/EmotionItem";
 import Input from "../../atoms/Input";
 import { ErrorText } from "../../pages/SignUp/SignUp";
-import NoPostMessage from "../../molecules/NoPostMessage/NoPostMessage";
-import { toast } from "react-toastify";
+import NoPostMessage from "../../molecules/NoPostMessage";
 
 const StatEditorBox = styled.section`
   font-family: "Do Hyeon", sans-serif;
@@ -193,12 +192,6 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
   const emotionClickHandler = (emotion: number) => {
     setEmotion(emotion);
   };
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchStats());
-  }, [dispatch]);
 
   useEffect(() => {
     if (isEdit) setEmotion(targetPost?.stat.matchResult);

@@ -100,7 +100,7 @@ const StatItem = ({ statItems }: { statItems: StatListItems[] }) => {
       {statItems.length !== 0 ? (
         statItems.map((item, idx) => (
           <StatsList
-            key={idx}
+            key={item.id}
             onClick={() => navigate(`/stats/${idx}`, { state: item })}
           >
             <ListBox>
@@ -136,7 +136,7 @@ const StatItem = ({ statItems }: { statItems: StatListItems[] }) => {
 };
 
 StatItem.defaultProps = {
-  StatListItems: [],
+  statItems: [],
 };
 
 export default StatItem;

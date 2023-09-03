@@ -5,10 +5,10 @@ import { useAppDispatch, useAppSelector } from "../../../store";
 import { StatListItems, fetchStats } from "../../../store/stats";
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
 
-import Button from "../../atoms/Button/Button";
-import Select from "../../atoms/Select/Select";
+import Button from "../../atoms/Button";
+import Select from "../../atoms/Select";
 import { StatSectionBox } from "../../pages/Stats/Stats";
-import StatItem from "../StatItem/StatItem";
+import StatItem from "../StatItem";
 
 const StatDateBox = styled.section`
   font-family: "Bebas Neue", sans-serif;
