@@ -1,5 +1,7 @@
 import styled from "styled-components";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { deleteDoc, doc } from "firebase/firestore";
 import { dbService, storageService } from "../../../firebase/config";
 import { deleteObject, ref } from "firebase/storage";
@@ -7,8 +9,6 @@ import { BoardListItems } from "../../../store/playBoard";
 import { StatListItems } from "../../../store/stats";
 
 import Button from "../../atoms/Button";
-import { toast } from "react-toastify";
-import React from "react";
 
 const FooterWrapper = styled.section`
   width: 70%;

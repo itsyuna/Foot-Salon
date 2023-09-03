@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { dbService, storageService } from "../../../firebase/config";
@@ -23,7 +24,6 @@ import { ErrorText } from "../../pages/SignUp/SignUp";
 import PostFooter from "../../organisms/PostFooter";
 import { getDate } from "../../../utils/date";
 import NoPostMessage from "../../molecules/NoPostMessage";
-import { toast } from "react-toastify";
 
 const Form = styled.form`
   margin-top: 1rem;
