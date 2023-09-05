@@ -1,17 +1,19 @@
 import styled, { css } from "styled-components";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../store";
-import { PhotoListItems } from "../../../store/photos";
+import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import { PhotoListItems, fetchPhotos } from "../../../store/photos";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { dbService, storageService } from "../../../firebase/config";
 
 import Button from "../../atoms/Button";
-import { toast } from "react-toastify";
 import { defaultPhotolist } from "../../pages/Photos/Photos";
+import ViewPhotoModal from "../../../ui/ViewPhotoModal";
+import PhotoEditorModal from "../../../ui/PhotoEditorModal";
 
-const PhotoItemWrapper = styled.article<{ openEditorModal: boolean }>`
+const PhotoItemWrapper = styled.article<WrapperProps>`
   font-family: "Do Hyeon", sans-serif;
   width: 90%;
   height: auto;
@@ -19,10 +21,10 @@ const PhotoItemWrapper = styled.article<{ openEditorModal: boolean }>`
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 1rem;
+  column-gap: 2rem;
 
-  ${({ openEditorModal }) =>
-    openEditorModal &&
+  ${({ isNewPost }) =>
+    isNewPost &&
     css`
       opacity: 0;
     `}
@@ -103,38 +105,35 @@ const UserNicknameBox = styled.footer`
   }
 `;
 
-interface PhotoItemProps {
-  data: PhotoListItems[];
+interface WrapperProps {
   openEditorModal: boolean;
-  setOpenEditorModal: Dispatch<SetStateAction<boolean>>;
-  setOpenPhotoModal: Dispatch<SetStateAction<boolean>>;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
-  setIsDelete: Dispatch<SetStateAction<boolean>>;
-  setTargetPhoto: Dispatch<SetStateAction<PhotoListItems>>;
+  isNewPost: boolean;
 }
 
-const PhotoList = ({
-  data,
-  openEditorModal,
-  setOpenEditorModal,
-  setOpenPhotoModal,
-  setIsEdit,
-  setIsDelete,
-  setTargetPhoto,
-}: PhotoItemProps) => {
+interface PhotoItemProps {
+  data: PhotoListItems[];
+  isNewPost: boolean;
+}
+
+const PhotoList = ({ data, isNewPost }: PhotoItemProps) => {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
 
+  const [openPhotoModal, setOpenPhotoModal] = useState(false);
+  const [openEditorModal, setOpenEditorModal] = useState(false);
+
+  const [targetPhoto, setTargetPhoto] =
+    useState<PhotoListItems>(defaultPhotolist);
   const [targetPost, setTargetPost] =
     useState<PhotoListItems>(defaultPhotolist);
 
-  const navigate = useNavigate();
-
   const user = useAppSelector((state) => state.user.uid);
-
   const isOwner = targetPost?.photo.creatorId === user;
 
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
   const updatePhotoHandler = () => {
-    setIsEdit(true);
     setOpenEditorModal(true);
     targetPost && setTargetPhoto(targetPost);
   };
@@ -148,80 +147,98 @@ const PhotoList = ({
 
   const deletePhotoHandler = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      await deleteDoc(doc(dbService, "photos", `${targetPost?.id}`));
+      try {
+        await deleteDoc(doc(dbService, "photos", `${targetPost?.id}`));
 
-      await deleteObject(ref(storageService, targetPost?.photo.fileURL));
+        await deleteObject(ref(storageService, targetPost?.photo.fileURL));
 
-      navigate("/photos");
-      toast.success("삭제 완료!");
+        navigate("/photos");
+        toast.success("삭제 완료!");
 
-      setIsDelete(true);
+        dispatch(fetchPhotos());
+      } catch (error) {
+        toast.error("오류가 발생했습니다 :(");
+      }
     }
   };
 
   return (
-    <PhotoItemWrapper openEditorModal={openEditorModal}>
-      {data.map((item, idx) => (
-        <ItemList key={idx}>
-          <KeywordBox>
-            <div>{item.photo.keyword1}</div>
-            {item.photo.keyword2.trim().length > 0 && (
-              <div>{item.photo.keyword2}</div>
-            )}
-            {item.photo.keyword3.trim().length > 0 && (
-              <div>{item.photo.keyword3}</div>
-            )}
-          </KeywordBox>
-          <ImageBox
-            onMouseEnter={() => setTargetPost(item)}
-            onMouseLeave={() => setTargetPost(defaultPhotolist)}
-            onContextMenu={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <img
-              src={item.photo.fileURL}
-              alt="best-shot"
-              width="100%"
-              height="100%"
-            ></img>
-            <ViewPhotoButtonBox>
-              <Button
-                type="button"
-                margin="0"
-                height="2.5vh"
-                onClick={viewPhotoHandler}
-              >
-                크게 보기🔍
-              </Button>
-            </ViewPhotoButtonBox>
-            {isOwner && (
-              <ButtonBox>
+    <>
+      {openEditorModal && (
+        <PhotoEditorModal
+          targetPhoto={targetPhoto}
+          setOpenEditorModal={setOpenEditorModal}
+        />
+      )}
+      <PhotoItemWrapper openEditorModal={openEditorModal} isNewPost={isNewPost}>
+        {data.map((item, idx) => (
+          <ItemList key={idx}>
+            <KeywordBox>
+              <div>{item.photo.keyword1}</div>
+              {item.photo.keyword2.trim().length > 0 && (
+                <div>{item.photo.keyword2}</div>
+              )}
+              {item.photo.keyword3.trim().length > 0 && (
+                <div>{item.photo.keyword3}</div>
+              )}
+            </KeywordBox>
+            <ImageBox
+              onMouseEnter={() => setTargetPost(item)}
+              onMouseLeave={() => setTargetPost(defaultPhotolist)}
+              onContextMenu={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <img
+                src={item.photo.fileURL}
+                alt="best-shot"
+                width="100%"
+                height="100%"
+              ></img>
+              <ViewPhotoButtonBox>
                 <Button
                   type="button"
-                  onClick={updatePhotoHandler}
-                  backgroundColor="#FFF5E4"
-                  border="#FFF5E4"
+                  margin="0"
+                  height="2.5vh"
+                  onClick={viewPhotoHandler}
                 >
-                  수정하기
+                  크게 보기🔍
                 </Button>
-                <Button
-                  type="button"
-                  onClick={deletePhotoHandler}
-                  backgroundColor="#FFD1D1"
-                  border="#FFD1D1"
-                >
-                  삭제하기
-                </Button>
-              </ButtonBox>
-            )}
-          </ImageBox>
-          <UserNicknameBox>
-            By <span>{item.photo.userNickname}</span>
-          </UserNicknameBox>
-        </ItemList>
-      ))}
-    </PhotoItemWrapper>
+              </ViewPhotoButtonBox>
+              {isOwner && (
+                <ButtonBox>
+                  <Button
+                    type="button"
+                    onClick={updatePhotoHandler}
+                    backgroundColor="#FFF5E4"
+                    border="#FFF5E4"
+                  >
+                    수정하기
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={deletePhotoHandler}
+                    backgroundColor="#FFD1D1"
+                    border="#FFD1D1"
+                  >
+                    삭제하기
+                  </Button>
+                </ButtonBox>
+              )}
+            </ImageBox>
+            <UserNicknameBox>
+              By <span>{item.photo.userNickname}</span>
+            </UserNicknameBox>
+          </ItemList>
+        ))}
+        {openPhotoModal && (
+          <ViewPhotoModal
+            targetPhoto={targetPhoto}
+            setOpenPhotoModal={setOpenPhotoModal}
+          />
+        )}
+      </PhotoItemWrapper>
+    </>
   );
 };
 
