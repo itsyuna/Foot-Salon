@@ -4,17 +4,11 @@ import axios, { AxiosError } from "axios";
 
 import ErrorMessage from "../../molecules/ErrorMessage";
 
-interface LeagueName {
-  name: string;
-}
-
 interface TableProps {
   title: string;
-  embed: string;
   url: string;
   thumbnail: string;
   date: string;
-  competition: LeagueName;
 }
 
 const VideoItemWrapper = styled.article`
@@ -95,8 +89,8 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
 
   return error === null ? (
     <VideoItemWrapper>
-      {filteredList.map((list, idx) => (
-        <section key={idx}>
+      {filteredList.map((list) => (
+        <section key={list.url}>
           <MatchTeams>{list.title}</MatchTeams>
           <a href={list.url} target="_blank" rel="noreferrer">
             <Img src={list.thumbnail} alt="thumbnail" onError={imageHandler} />

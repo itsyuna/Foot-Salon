@@ -171,8 +171,8 @@ const PhotoList = ({ data, isNewPost }: PhotoItemProps) => {
         />
       )}
       <PhotoItemWrapper openEditorModal={openEditorModal} isNewPost={isNewPost}>
-        {data.map((item, idx) => (
-          <ItemList key={idx}>
+        {data.map((item) => (
+          <ItemList key={item.id}>
             <KeywordBox>
               <div>{item.photo.keyword1}</div>
               {item.photo.keyword2.trim().length > 0 && (
