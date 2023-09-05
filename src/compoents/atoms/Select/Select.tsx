@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledSelect = styled.select<SelectContents>`
+const StyledSelect = styled.select<SelectProps>`
   width: ${({ width }) => width || "auto"};
   height: 4vh;
   border-radius: 3rem;
@@ -12,14 +12,14 @@ const StyledSelect = styled.select<SelectContents>`
   border: 1px solid ${({ border }) => border || "black"};
 `;
 
-interface optionType {
+interface OptionType {
   [key: string]: string;
 }
 
-interface SelectContents {
+interface SelectProps {
   name?: string;
   value?: string;
-  option?: optionType[];
+  option?: OptionType[];
   editOption?: string;
   defaultValue?: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -38,7 +38,7 @@ const Select = ({
   backgroundColor,
   color,
   border,
-}: SelectContents) => {
+}: SelectProps) => {
   return (
     <StyledSelect
       value={value}

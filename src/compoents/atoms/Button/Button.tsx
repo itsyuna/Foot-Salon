@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledButton = styled.button<ButtonContents>`
+const StyledButton = styled.button<ButtonProps>`
   border-radius: 3rem;
   background-color: ${({ backgroundColor }) => backgroundColor || "white"};
   color: ${({ color }) => color || "black"};
@@ -17,7 +17,7 @@ const StyledButton = styled.button<ButtonContents>`
   margin: ${({ margin }) => margin || "1rem"};
 `;
 
-interface ButtonContents {
+interface ButtonProps {
   type: "button" | "submit" | "reset";
   value?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -33,7 +33,7 @@ interface ButtonContents {
   margin?: string;
 }
 
-const Button = ({ type, onClick, children, ...rest }: ButtonContents) => {
+const Button = ({ type, onClick, children, ...rest }: ButtonProps) => {
   return (
     <StyledButton type={type} onClick={onClick} {...rest}>
       {children}
