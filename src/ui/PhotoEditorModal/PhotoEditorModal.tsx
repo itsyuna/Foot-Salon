@@ -2,11 +2,12 @@ import styled, { css } from "styled-components";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { dbService, storageService } from "../../firebase/config";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-import { useAppSelector } from "../../store";
-import { PhotoListItems } from "../../store/photos";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { PhotoListItems, fetchPhotos } from "../../store/photos";
 import { getDate } from "../../utils/date";
 import {
   Timestamp,
@@ -19,19 +20,38 @@ import {
 import Button from "../../compoents/atoms/Button";
 import Input from "../../compoents/atoms/Input";
 import { ErrorText } from "../../compoents/pages/SignUp/SignUp";
-import { toast } from "react-toastify";
 
-const ModalWrapper = styled.section`
+const ModalBackgroundImage = styled.section<{ targetPhotoId: string }>`
+  ${({ targetPhotoId }) =>
+    targetPhotoId &&
+    css`
+      z-index: 999;
+      position: absolute;
+      background-color: white;
+      width: 80vw;
+      height: 67vh;
+
+      top: 51.5%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      background-image: url("assets/img/ground-3.jpg");
+      background-position: 50% 50%;
+      background-size: 90vw 80vh;
+    `}
+`;
+
+const ModalSection = styled.section`
   font-family: "Bebas Neue", sans-serif;
   font-weight: 700;
-  border: 3px solid #f0edd4;
+  border: 5px solid #f0edd4;
   background-color: #f9fbe7;
   width: 50%;
-  height: 50%;
+  height: 50vh;
   margin: 0 auto;
   z-index: 999;
   position: absolute;
-  top: 52%;
+  top: 51%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
@@ -84,7 +104,7 @@ const UploadImageBox = styled.section`
 `;
 
 const UploadImage = styled.img`
-  width: 20vw;
+  width: 12vw;
   height: 25vh;
 `;
 
@@ -101,7 +121,7 @@ const ButtonBox = styled.section`
 interface ModalProps {
   targetPhoto: PhotoListItems;
   setOpenEditorModal: Dispatch<SetStateAction<boolean>>;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  setIsNewPost?: Dispatch<SetStateAction<boolean>>;
 }
 
 interface PhotoFormData {
@@ -115,12 +135,12 @@ type UploadFile = string | ArrayBuffer | null | undefined;
 const PhotoEditorModal = ({
   targetPhoto,
   setOpenEditorModal,
-  setIsEdit,
+  setIsNewPost,
 }: ModalProps) => {
-  const [attachment, setAttachment] = useState("");
-
   const userId = useAppSelector((state) => state.user.uid);
   const userNickname = useAppSelector((state) => state.user.nickname);
+
+  const [attachment, setAttachment] = useState("");
 
   const navigate = useNavigate();
 
@@ -132,7 +152,7 @@ const PhotoEditorModal = ({
 
   const closeModal = () => {
     setOpenEditorModal(false);
-    setIsEdit(false);
+    setIsNewPost && setIsNewPost(false);
   };
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,6 +173,8 @@ const PhotoEditorModal = ({
       reader.readAsDataURL(theFile);
     }
   };
+
+  const dispatch = useAppDispatch();
 
   async function onSubmit(data: PhotoFormData) {
     if (attachment === "") {
@@ -198,106 +220,113 @@ const PhotoEditorModal = ({
           );
         }
 
-        setOpenEditorModal(false);
-        setIsEdit(false);
         targetPhoto.id
           ? toast.success("사진이 수정되었습니다 📸✨")
           : toast.success("사진이 기록되었습니다 📸✨");
 
         navigate("/photos");
+        dispatch(fetchPhotos());
       } catch (error) {
         toast.error("오류가 발생했습니다 :(");
       }
+
+      setOpenEditorModal(false);
+      setIsNewPost && setIsNewPost(false);
     }
   }
 
   return (
-    <ModalWrapper>
-      <CloseButtonBox>
-        <Button
-          type="button"
-          onClick={closeModal}
-          backgroundColor="pink"
-          margin="0"
-        >
-          Close
-        </Button>
-      </CloseButtonBox>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <KeywordBox>
-          <Controller
-            control={control}
-            defaultValue={targetPhoto.photo.keyword1}
-            name="keyword1"
-            rules={{
-              ...(targetPhoto.id === "" && {
-                required: "필수 입력 사항입니다.",
-              }),
-            }}
-            render={({ field }) => (
-              <Input
-                type="text"
-                placeholder="키워드 1"
-                onChange={field.onChange}
-                defaultValue={targetPhoto.photo.keyword1}
-                width="20%"
-                height="3.5vh"
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            defaultValue={targetPhoto.photo.keyword2}
-            name="keyword2"
-            render={({ field }) => (
-              <Input
-                type="text"
-                placeholder="키워드 2"
-                onChange={field.onChange}
-                defaultValue={targetPhoto.photo.keyword2}
-                width="20%"
-                height="3.5vh"
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            defaultValue={targetPhoto.photo.keyword3}
-            name="keyword3"
-            render={({ field }) => (
-              <Input
-                type="text"
-                placeholder="키워드 3"
-                onChange={field.onChange}
-                defaultValue={targetPhoto.photo.keyword3}
-                width="20%"
-                height="3.5vh"
-              />
-            )}
-          />
-          <KeywordText errorCheck={errors.keyword1 ? true : false}>
-            *키워드를 1가지 이상 입력해 주세요.
-          </KeywordText>
-        </KeywordBox>
-        <AttachmentBox>
-          <input type="file" accept="image/*" onChange={fileChangeHandler} />
-          {attachment === "" && <ErrorText>파일을 선택해 주세요 :)</ErrorText>}
-        </AttachmentBox>
-        <PreviewPhoto>
-          <h4>🔻 썸네일 미리보기</h4>
-          {attachment && (
-            <UploadImageBox>
-              <UploadImage src={attachment} alt="attachment"></UploadImage>
-            </UploadImageBox>
-          )}
-        </PreviewPhoto>
-        <ButtonBox>
-          <Button type="submit" backgroundColor="pink" border="red">
-            업로드
+    <ModalBackgroundImage targetPhotoId={targetPhoto?.id}>
+      <ModalSection>
+        <CloseButtonBox>
+          <Button
+            type="button"
+            onClick={closeModal}
+            backgroundColor="#FF78C4"
+            border="#FF78C4"
+            margin="0"
+          >
+            Close
           </Button>
-        </ButtonBox>
-      </form>
-    </ModalWrapper>
+        </CloseButtonBox>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <KeywordBox>
+            <Controller
+              control={control}
+              defaultValue={targetPhoto.photo.keyword1}
+              name="keyword1"
+              rules={{
+                ...(targetPhoto.id === "" && {
+                  required: "필수 입력 사항입니다.",
+                }),
+              }}
+              render={({ field }) => (
+                <Input
+                  type="text"
+                  placeholder="키워드 1"
+                  onChange={field.onChange}
+                  defaultValue={targetPhoto.photo.keyword1}
+                  width="20%"
+                  height="3.5vh"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              defaultValue={targetPhoto.photo.keyword2}
+              name="keyword2"
+              render={({ field }) => (
+                <Input
+                  type="text"
+                  placeholder="키워드 2"
+                  onChange={field.onChange}
+                  defaultValue={targetPhoto.photo.keyword2}
+                  width="20%"
+                  height="3.5vh"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              defaultValue={targetPhoto.photo.keyword3}
+              name="keyword3"
+              render={({ field }) => (
+                <Input
+                  type="text"
+                  placeholder="키워드 3"
+                  onChange={field.onChange}
+                  defaultValue={targetPhoto.photo.keyword3}
+                  width="20%"
+                  height="3.5vh"
+                />
+              )}
+            />
+            <KeywordText errorCheck={errors.keyword1 ? true : false}>
+              *키워드를 1가지 이상 입력해 주세요.
+            </KeywordText>
+          </KeywordBox>
+          <AttachmentBox>
+            <input type="file" accept="image/*" onChange={fileChangeHandler} />
+            {attachment === "" && (
+              <ErrorText>파일을 선택해 주세요 :)</ErrorText>
+            )}
+          </AttachmentBox>
+          <PreviewPhoto>
+            <h4>🔻 썸네일 미리보기</h4>
+            {attachment && (
+              <UploadImageBox>
+                <UploadImage src={attachment} alt="attachment"></UploadImage>
+              </UploadImageBox>
+            )}
+          </PreviewPhoto>
+          <ButtonBox>
+            <Button type="submit" backgroundColor="#FFFD8C" border="#FBCB0A">
+              업로드
+            </Button>
+          </ButtonBox>
+        </form>
+      </ModalSection>
+    </ModalBackgroundImage>
   );
 };
 

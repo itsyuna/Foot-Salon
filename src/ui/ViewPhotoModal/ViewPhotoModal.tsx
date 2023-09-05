@@ -43,11 +43,11 @@ const Photo = styled.img`
 `;
 
 interface ViewPhotoProps {
-  setOpenPhotoModal: Dispatch<SetStateAction<boolean>>;
   targetPhoto: PhotoListItems;
+  setOpenPhotoModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const ViewPhotoModal = ({ setOpenPhotoModal, targetPhoto }: ViewPhotoProps) => {
+const ViewPhotoModal = ({ targetPhoto, setOpenPhotoModal }: ViewPhotoProps) => {
   return (
     <ModalWrapper>
       <CloseButtonBox>
@@ -56,7 +56,8 @@ const ViewPhotoModal = ({ setOpenPhotoModal, targetPhoto }: ViewPhotoProps) => {
         <Button
           type="button"
           onClick={() => setOpenPhotoModal(false)}
-          backgroundColor="pink"
+          backgroundColor="#FF78C4"
+          border="#FF78C4"
           margin="0"
         >
           Close

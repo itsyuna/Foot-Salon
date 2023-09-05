@@ -8,7 +8,6 @@ import { PhotoListItems, fetchPhotos } from "../../../store/photos";
 import Card from "../../../ui/Card";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
-import ViewPhotoModal from "../../../ui/ViewPhotoModal";
 import PhotoList from "../../organisms/PhotoList";
 import PhotoEditorModal from "../../../ui/PhotoEditorModal";
 
@@ -78,25 +77,20 @@ export const defaultPhotolist = {
 
 const Photos = () => {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
-  const navigate = useNavigate();
+  const user = useAppSelector((state) => state.user.uid);
+
+  const [openEditorModal, setOpenEditorModal] = useState(false);
+  const [isNewPost, setIsNewPost] = useState(false);
 
   const [searchKeyword, setSearchKeyword] = useState("");
   const [photoFilter, setPhotoFilter] = useState("all");
 
-  const [openEditorModal, setOpenEditorModal] = useState(false);
-  const [openPhotoModal, setOpenPhotoModal] = useState(false);
-
-  const [targetPhoto, setTargetPhoto] =
-    useState<PhotoListItems>(defaultPhotolist);
-
-  const [isEdit, setIsEdit] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
-
-  const user = useAppSelector((state) => state.user.uid);
+  const navigate = useNavigate();
 
   const showModalHandler = () => {
     if (isLoggedIn) {
       setOpenEditorModal(true);
+      setIsNewPost(true);
     } else navigate("/login");
   };
 
@@ -112,8 +106,7 @@ const Photos = () => {
 
   useEffect(() => {
     dispatch(fetchPhotos());
-    setIsDelete(false);
-  }, [dispatch, openEditorModal, targetPhoto, isDelete]);
+  }, [dispatch]);
 
   const data = useAppSelector((state) => state.photos.photoArray);
 
@@ -127,16 +120,9 @@ const Photos = () => {
       searchKeyword === ""
         ? photoByButton
         : photoByButton.filter((item) => filterSearchKeyword(item));
+
     return getPhotos;
   };
-
-  useEffect(() => {
-    !isEdit && setTargetPhoto(defaultPhotolist);
-  }, [isEdit]);
-
-  useEffect(() => {
-    !openPhotoModal && setTargetPhoto(defaultPhotolist);
-  }, [openPhotoModal]);
 
   return (
     <Card>
@@ -188,28 +174,14 @@ const Photos = () => {
         </ButtonBox>
         {openEditorModal && (
           <PhotoEditorModal
+            targetPhoto={defaultPhotolist}
             setOpenEditorModal={setOpenEditorModal}
-            setIsEdit={setIsEdit}
-            targetPhoto={targetPhoto}
-          />
-        )}
-        {openPhotoModal && (
-          <ViewPhotoModal
-            setOpenPhotoModal={setOpenPhotoModal}
-            targetPhoto={targetPhoto}
+            setIsNewPost={setIsNewPost}
           />
         )}
       </PhotoHeader>
       {data.length !== 0 ? (
-        <PhotoList
-          data={getPhotoFilter()}
-          openEditorModal={openEditorModal}
-          setOpenEditorModal={setOpenEditorModal}
-          setOpenPhotoModal={setOpenPhotoModal}
-          setIsEdit={setIsEdit}
-          setIsDelete={setIsDelete}
-          setTargetPhoto={setTargetPhoto}
-        />
+        <PhotoList data={getPhotoFilter()} isNewPost={isNewPost} />
       ) : (
         <NoPhotoMessage>
           <h4>아직 공유된 사진이 없습니다 :(</h4>
