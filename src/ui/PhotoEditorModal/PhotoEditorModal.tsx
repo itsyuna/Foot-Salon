@@ -35,7 +35,7 @@ const ModalBackgroundImage = styled.section<{ targetPhotoId: string }>`
       left: 50%;
       transform: translate(-50%, -50%);
 
-      background-image: url("assets/img/ground-3.jpg");
+      background-image: url("assets/img/football-pitch.jpg");
       background-position: 50% 50%;
       background-size: 90vw 80vh;
     `}
