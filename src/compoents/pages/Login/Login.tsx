@@ -26,7 +26,7 @@ const SingUpWrapper = styled(LoginWrapper)`
   justify-content: center;
 `;
 
-const TitleWrapper = styled.div`
+const Header = styled.header`
   display: flex;
   justify-content: center;
 `;
@@ -76,10 +76,10 @@ const Login = () => {
   return (
     <Card>
       <LoginWrapper>
-        <TitleWrapper>
+        <Header>
           <Title>Login</Title>
           <IoIosFootball size="35" />
-        </TitleWrapper>
+        </Header>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
             control={control}

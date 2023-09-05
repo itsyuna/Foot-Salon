@@ -17,7 +17,7 @@ const EmailWrapper = styled.section`
   border-radius: 10px;
 `;
 
-const EmailHeader = styled.header`
+const Header = styled.header`
   width: 30vw;
   height: 5vh;
   line-height: 5vh;
@@ -101,10 +101,10 @@ const Email = () => {
 
   return (
     <EmailWrapper>
-      <EmailHeader>
+      <Header>
         <h2>Send Email</h2>
         <HiOutlineMailOpen size="27" />
-      </EmailHeader>
+      </Header>
       <Form ref={form} onSubmit={sendEmailHandler}>
         <InputSection>
           <label htmlFor="user_name">Name</label>

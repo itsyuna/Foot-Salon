@@ -106,7 +106,9 @@ const SignUp = () => {
         >
           뒤로가기
         </Button>
-        <Title>Sign up</Title>
+        <header>
+          <Title>Sign up</Title>
+        </header>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
             control={control}
