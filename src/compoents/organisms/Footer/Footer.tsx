@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { GiSpray } from "react-icons/gi";
+import { Link } from "react-router-dom";
+import { TfiSpray } from "react-icons/tfi";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { Link } from "react-router-dom";
 
 const FooterWrapper = styled.footer`
   width: 100%;
@@ -13,6 +13,10 @@ const FooterTop = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  svg {
+    transform: rotate(40deg);
+  }
 `;
 
 const LineImg = styled.img`
@@ -21,8 +25,8 @@ const LineImg = styled.img`
 `;
 
 const FooterBottom = styled.section`
-  width: 100%;
-  height: 30%;
+  width: 90%;
+  margin: 0 auto;
 
   display: flex;
   justify-content: space-between;
@@ -30,9 +34,8 @@ const FooterBottom = styled.section`
 `;
 
 const NoticeBox = styled.section`
-  width: 18%;
-  height: 7vh;
-  margin-top: 2rem;
+  width: 12vw;
+  height: 6vh;
 
   display: flex;
   flex-direction: column;
@@ -95,15 +98,17 @@ const FamousFootballQuotes = styled.p`
   font-size: 1.2rem;
   color: #def8d6;
   text-shadow: #def8d6 1px 0 10px;
+  margin: 0;
+  margin-left: 3rem;
 `;
 
 const Footer = () => {
   return (
     <FooterWrapper>
       <FooterTop>
-        <GiSpray size="50" color="white" />
+        <TfiSpray size="45" color="white" />
         <LineImg
-          src={`${process.env.PUBLIC_URL}/assets/icon/line.svg`}
+          src={`${process.env.PUBLIC_URL}/assets/icon/line-2.svg`}
           alt="line"
         />
       </FooterTop>
