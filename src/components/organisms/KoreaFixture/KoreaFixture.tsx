@@ -70,14 +70,21 @@ const warmupMatchList = [
     time: "01:30",
     match: "대한민국 vs 사우디아라비아",
     place: "잉글랜드 세인트 제임스 파크",
-    isFinish: checkMatchFinish("2023-09-13 04:00:00"),
+    isFinish: checkMatchFinish("2023-09-13 03:30:00"),
   },
   {
     date: "2023.10.13",
-    time: "미정",
+    time: "20:00",
     match: "대한민국 vs 튀니지",
-    place: "미정",
-    isFinish: checkMatchFinish("2023-10-14 00:00:00"),
+    place: "서울 월드컵 경기장",
+    isFinish: checkMatchFinish("2023-10-13 22:00:00"),
+  },
+  {
+    date: "2023.10.17",
+    time: "20:00",
+    match: "대한민국 vs 베트남",
+    place: "수원 월드컵 경기장",
+    isFinish: checkMatchFinish("2023-10-17 22:00:00"),
   },
 ];
 
