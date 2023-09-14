@@ -1,14 +1,22 @@
 import styled from "styled-components";
-import "react-toastify/dist/ReactToastify.css";
 import { Outlet } from "react-router-dom";
-
-import Header from "./compoents/organisms/Header";
-import Navigation from "./compoents/organisms/Navigation";
-import Footer from "./compoents/organisms/Footer";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Wrapper = styled.div`
-  border: 5px solid white;
+import Header from "./components/organisms/Header";
+import Navigation from "./components/organisms/Navigation";
+import Footer from "./components/organisms/Footer";
+
+const pitchLine = `${process.env.PUBLIC_URL}/assets/img/pitch-line.png`;
+
+const PitchLineWrapper = styled.div`
+  background-image: url(${pitchLine});
+  background-repeat: no-repeat;
+  background-size: 85vw 102vh;
+  background-position: 46% 65%;
+`;
+
+const ContentWrapper = styled.div`
   width: 80vw;
   height: 97vh;
   margin: 15px auto;
@@ -16,25 +24,27 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    <Wrapper>
-      <Header />
-      <Navigation />
-      <Outlet />
-      <Footer />
-      <ToastContainer
-        position="top-center"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        toastStyle={{ fontFamily: '"Do Hyeon", sans-serif', color: "black" }}
-      />
-    </Wrapper>
+    <PitchLineWrapper>
+      <ContentWrapper>
+        <Header />
+        <Navigation />
+        <Outlet />
+        <Footer />
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          toastStyle={{ fontFamily: '"Do Hyeon", sans-serif', color: "black" }}
+        />
+      </ContentWrapper>
+    </PitchLineWrapper>
   );
 }
 
