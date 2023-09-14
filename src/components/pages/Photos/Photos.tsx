@@ -24,7 +24,7 @@ const PhotoHeader = styled.header<{ openEditorModal: boolean }>`
   ${({ openEditorModal }) =>
     openEditorModal &&
     css`
-      background-image: url("assets/img/play-football.svg");
+      background-image: url("assets/img/play-football.png");
       background-size: 31%;
     `}
 `;
