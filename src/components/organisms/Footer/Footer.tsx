@@ -12,12 +12,12 @@ const FooterWrapper = styled.footer`
   justify-content: space-between;
 `;
 
-const LeftSection = styled.div`
+const LeftSection = styled.section`
   width: 15vw;
   margin: 2rem 0 0 4rem;
 `;
 
-const RightSection = styled.div`
+const RightSection = styled.section`
   width: 30vw;
   margin-top: 2rem;
 
