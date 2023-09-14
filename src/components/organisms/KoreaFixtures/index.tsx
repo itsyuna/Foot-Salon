@@ -1,1 +1,1 @@
-export { default } from "./KoreaFixture";
+export { default } from "./KoreaFixtures";

@@ -119,7 +119,7 @@ const nationalCompetition = [
   },
 ];
 
-const KoreaFixture = () => {
+const KoreaFixtures = () => {
   return (
     <KoreaFixtureWrapper>
       <ContentsTitle>2023-2024 남자축구 국가대표 경기 일정</ContentsTitle>
@@ -138,4 +138,4 @@ const KoreaFixture = () => {
     </KoreaFixtureWrapper>
   );
 };
-export default KoreaFixture;
+export default KoreaFixtures;
