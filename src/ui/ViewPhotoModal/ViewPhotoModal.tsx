@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Dispatch, SetStateAction } from "react";
 
 import { CloseButtonBox } from "../PhotoEditorModal/PhotoEditorModal";
-import Button from "../../compoents/atoms/Button";
+import Button from "../../components/atoms/Button";
 import { PhotoListItems } from "../../store/photos";
 
 const ModalWrapper = styled.section`

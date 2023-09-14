@@ -17,9 +17,9 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-import Button from "../../compoents/atoms/Button";
-import Input from "../../compoents/atoms/Input";
-import { ErrorText } from "../../compoents/pages/SignUp/SignUp";
+import Button from "../../components/atoms/Button";
+import Input from "../../components/atoms/Input";
+import { ErrorText } from "../../components/pages/SignUp/SignUp";
 
 const ModalBackgroundImage = styled.section<{ targetPhotoId: string }>`
   ${({ targetPhotoId }) =>

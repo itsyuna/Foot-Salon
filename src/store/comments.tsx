@@ -7,7 +7,7 @@ import {
   query,
 } from "firebase/firestore";
 import { dbService } from "../firebase/config";
-import { CommentsProps } from "../compoents/organisms/Comments/Comments";
+import { CommentsProps } from "../components/organisms/Comments/Comments";
 
 interface CommentItemProps {
   creatorId: string;

@@ -1,21 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from "../App";
-import HalfTime from "../compoents/pages/HalfTime";
-import Home from "../compoents/pages/Home";
-import LineUp from "../compoents/pages/LineUp";
-import Photos from "../compoents/pages/Photos";
-import Play from "../compoents/pages/Play";
-import Stats from "../compoents/pages/Stats";
-import Login from "../compoents/pages/Login";
-import SignUp from "../compoents/pages/SignUp";
-import NewPost from "../compoents/pages/NewPost";
-import UpdatePost from "../compoents/pages/UpdatePost";
-import NewStat from "../compoents/pages/NewStat";
-import ReadStat from "../compoents/pages/ReadStat";
-import UpdateStat from "../compoents/pages/UpdateStat";
-import ReadPost from "../compoents/pages/ReadPost";
-import Email from "../compoents/pages/Email";
+import HalfTime from "../components/pages/HalfTime";
+import Home from "../components/pages/Home";
+import LineUp from "../components/pages/LineUp";
+import Photos from "../components/pages/Photos";
+import Play from "../components/pages/Play";
+import Stats from "../components/pages/Stats";
+import Login from "../components/pages/Login";
+import SignUp from "../components/pages/SignUp";
+import NewPost from "../components/pages/NewPost";
+import UpdatePost from "../components/pages/UpdatePost";
+import NewStat from "../components/pages/NewStat";
+import ReadStat from "../components/pages/ReadStat";
+import UpdateStat from "../components/pages/UpdateStat";
+import ReadPost from "../components/pages/ReadPost";
+import Email from "../components/pages/Email";
 
 const router = createBrowserRouter([
   {
