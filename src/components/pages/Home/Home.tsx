@@ -22,13 +22,19 @@ const HomeBottomSection = styled(HomeTopSection)`
 `;
 
 const images = [
-  "sonny",
-  "kangin",
+  "captain-sonny",
+  "kangin-1",
   "liverpool",
+  "tottenham",
+  "arsenal",
+  "mancity",
+  "sonny",
+  "guesung",
   "korea",
+  "kangin-2",
   "napoli",
-  "incheon-utd",
   "jeonbuk",
+  "incheon-utd",
 ];
 
 const standingsMenu = [
