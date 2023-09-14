@@ -7,42 +7,46 @@ import { MdEmail } from "react-icons/md";
 const FooterWrapper = styled.footer`
   width: 100%;
   height: 15%;
-`;
 
-const FooterTop = styled.section`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+`;
+
+const LeftSection = styled.div`
+  width: 15vw;
+  margin: 2rem 0 0 4rem;
+`;
+
+const RightSection = styled.div`
+  width: 30vw;
+  margin-top: 2rem;
 
   svg {
     transform: rotate(40deg);
   }
 `;
 
-const LineImg = styled.img`
-  width: 97%;
-  text-align: center;
-`;
-
-const FooterBottom = styled.section`
-  width: 90%;
-  margin: 0 auto;
-
+const SprayLineBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+  svg {
+    transform: rotate(40deg);
+  }
 `;
 
 const NoticeBox = styled.section`
   width: 12vw;
   height: 6vh;
+  margin-left: 0.6rem;
 
   display: flex;
   flex-direction: column;
 `;
 
 const NoticeSmallBox = styled.div`
+  width: 12vw;
   height: 50%;
+  margin-left: 2.5rem;
   position: relative;
 `;
 
@@ -99,25 +103,18 @@ const FamousFootballQuotes = styled.p`
   color: #def8d6;
   text-shadow: #def8d6 1px 0 10px;
   margin: 0;
-  margin-left: 3rem;
+  margin-left: 3.5rem;
 `;
 
 const Footer = () => {
   return (
     <FooterWrapper>
-      <FooterTop>
-        <TfiSpray size="45" color="white" />
-        <LineImg
-          src={`${process.env.PUBLIC_URL}/assets/icon/line-2.svg`}
-          alt="line"
-        />
-      </FooterTop>
-      <FooterBottom>
+      <LeftSection>
         <NoticeBox>
           <NoticeSmallBox>
             <img
-              src={`${process.env.PUBLIC_URL}/assets/img/football-contact.png`}
-              alt="index"
+              src={`${process.env.PUBLIC_URL}/assets/img/contact-info-background.png`}
+              alt="Contact information background"
               width="100%"
               height="100%"
             />
@@ -138,8 +135,8 @@ const Footer = () => {
           </NoticeSmallBox>
           <NoticeSmallBox>
             <img
-              src={`${process.env.PUBLIC_URL}/assets/img/football-notice.png`}
-              alt="index"
+              src={`${process.env.PUBLIC_URL}/assets/img/copyright-background.png`}
+              alt="Copyright background"
               width="100%"
               height="100%"
             />
@@ -148,10 +145,26 @@ const Footer = () => {
             </CopyrightText>
           </NoticeSmallBox>
         </NoticeBox>
+        <SprayLineBox>
+          <TfiSpray size="35" color="white" />
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/img/spray-line.png`}
+            alt="Spray line"
+            width="90%"
+          />
+        </SprayLineBox>
+      </LeftSection>
+      <RightSection>
         <FamousFootballQuotes>
           Form is temporary, Class is permanant. - Bill Shankly
         </FamousFootballQuotes>
-      </FooterBottom>
+        <TfiSpray size="35" color="white" />
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/img/spray-line.png`}
+          alt="Spray line"
+          width="90%"
+        />
+      </RightSection>
     </FooterWrapper>
   );
 };
