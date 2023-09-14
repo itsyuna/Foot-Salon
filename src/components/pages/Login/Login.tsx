@@ -132,6 +132,7 @@ const Login = () => {
             )}
           />
           <ErrorText>{errors.password && errors.password.message}</ErrorText>
+          <ErrorText>{error && error}</ErrorText>
           <Button type="submit" backgroundColor="#f95d8a" color="white">
             Enter
           </Button>
