@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import Carousel from "../../organisms/Carousel";
-import KoreaFixture from "../../organisms/KoreaFixture";
+import KoreaFixture from "../../organisms/KoreaFixtures";
 import TableTemplate from "../../organisms/TableTemplate";
 
 const MainWrapper = styled.main`
