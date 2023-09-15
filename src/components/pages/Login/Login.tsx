@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { IoIosFootball } from "react-icons/io";
 import { Controller, useForm } from "react-hook-form";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -60,8 +61,14 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, data.email, data.password);
 
       navigate(-1);
-    } catch (error) {
-      setError("잘못된 이메일 or 비밀번호입니다.");
+    } catch (error: any) {
+      if (error.message.includes("auth/user-not-found")) {
+        setError("존재하지 않는 이메일입니다.");
+      } else if (error.message.includes("auth/wrong-password")) {
+        setError("비밀번호를 다시 확인해 주세요.");
+      } else {
+        toast.error("오류가 발생했습니다 :(");
+      }
     }
   };
 
