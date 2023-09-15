@@ -1,15 +1,24 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Controller, useForm } from "react-hook-form";
 import { userActions } from "../../../store/user";
 import { useAppDispatch } from "../../../store";
-import { auth } from "../../../firebase/config";
+import { auth, dbService } from "../../../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 
 import Card from "../../../ui/Card";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
-import { toast } from "react-toastify";
 
 const SingUpWrapper = styled.section`
   width: 50%;
@@ -27,6 +36,14 @@ const Title = styled.h1`
   font-size: 2rem;
 `;
 
+const CheckInput = styled.input`
+  width: 20vw;
+  height: 4vh;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+`;
+
 export const ErrorText = styled.p`
   color: red;
   margin: 0 auto;
@@ -37,7 +54,8 @@ export const ErrorText = styled.p`
 const InputWrapper = styled.section`
   font-family: "Do Hyeon", sans-serif;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 2.2fr 1fr;
+  align-items: center;
   margin-top: 1.5rem;
 `;
 
@@ -63,9 +81,31 @@ const SignUp = () => {
     setError,
   } = useForm<FormData>();
 
+  const [nicknameCheckText, setNicknameCheckText] = useState("");
+
+  const checkNickname = (
+    nicknameInput: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const queryNicknameCheck = query(
+      collection(dbService, "userList"),
+      where("userNickname", "==", nicknameInput)
+    );
+
+    onSnapshot(queryNicknameCheck, (querySnapshot) => {
+      if (querySnapshot.empty) {
+        setNicknameCheckText("사용 가능한 닉네임입니다 :)");
+      } else setNicknameCheckText("이미 사용 중인 닉네임입니다 :(");
+    });
+  };
+
   const onSubmit = async (data: FormData) => {
     if (data.password !== data.passwordCheck) {
       setError("passwordCheck", { message: "비밀번호가 일치하지 않습니다." });
+      return;
+    }
+
+    if (nicknameCheckText === "이미 사용 중인 닉네임입니다 :(") {
+      toast.warning("닉네임을 확인해 주세요!");
       return;
     }
 
@@ -78,6 +118,11 @@ const SignUp = () => {
 
       await updateProfile(user, { displayName: data.nickname });
 
+      await setDoc(doc(dbService, "userList", user.uid), {
+        userNickname: user.displayName,
+        userEmail: user.email,
+      });
+
       dispatch(
         userActions.login({
           userNickname: user.displayName,
@@ -88,8 +133,12 @@ const SignUp = () => {
 
       toast.success("Welcome to Foot Salon! ⚽️🙌🏻");
       navigate("/");
-    } catch (error: any) {
-      toast.error("오류가 발생했습니다 :(");
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.message.includes("auth/email-already-in-use")) {
+          toast.warning("이미 사용 중인 이메일입니다 :(");
+        } else toast.error("오류가 발생했습니다 :(");
+      }
     }
   };
 
@@ -120,20 +169,23 @@ const SignUp = () => {
                 value: /^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/,
                 message: "특수문자 or 공백을 제거해 주세요.",
               },
+              onChange(e) {
+                checkNickname(e.target.value);
+              },
             }}
             render={({ field }) => (
               <InputWrapper>
                 <Label htmlFor="nickname">닉네임</Label>
-                <Input
+                <CheckInput
                   type="text"
                   id="nickname"
-                  placeholder="한글,영문 사용 가능 / 띄어쓰기,특수문자 사용 불가"
+                  placeholder="한글,영문 사용 가능(최대 12글자) / 띄어쓰기,특수문자 사용 불가"
+                  autoComplete="off"
                   value={field.value}
                   onChange={field.onChange}
-                  autoComplete="off"
-                  width="20vw"
-                  height="4vh"
+                  maxLength={12}
                 />
+                <ErrorText>{!errors.nickname && nicknameCheckText}</ErrorText>
               </InputWrapper>
             )}
           />
@@ -221,7 +273,7 @@ const SignUp = () => {
           <ErrorText>
             {errors.passwordCheck && errors.passwordCheck.message}
           </ErrorText>
-          <Button type="submit" backgroundColor="#f2e678" margin="1.5rem">
+          <Button type="submit" backgroundColor="#f2e678" margin="2rem">
             Sign up
           </Button>
         </form>
