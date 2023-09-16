@@ -1,14 +1,41 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { CirclesWithBar } from "react-loader-spinner";
 
-const LoadingWrapper = styled.section<{ size: string }>`
+type LoadingSize = "small" | "medium" | "large";
+
+const getLoadingSize = (size: LoadingSize) => {
+  let loadingSize;
+
+  switch (size) {
+    case "small":
+      loadingSize = "5% 40%";
+      break;
+
+    case "medium":
+      loadingSize = "20% 40%";
+      break;
+
+    case "large":
+      loadingSize = "10% 50%";
+      break;
+
+    default:
+      return null;
+  }
+
+  return css`
+    margin: ${loadingSize};
+  `;
+};
+
+const LoadingWrapper = styled.section<{ size: LoadingSize }>`
   font-family: "Gowun Dodum", sans-serif;
-  margin: ${({ size }) => (size === "medium" ? "20% 40%" : "5% 40%")};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  ${({ size }) => getLoadingSize(size)};
 `;
 
 const LoadingText = styled.h2`
@@ -26,13 +53,13 @@ const Message = styled.p`
 
 interface LoadingContents {
   contents: string;
-  size: string;
+  size: LoadingSize;
 }
 
 const LoadingMessage = ({ contents, size }: LoadingContents) => {
   return (
     <LoadingWrapper size={size}>
-      <LoadingText>⚽️{contents} 로딩중⚽️</LoadingText>
+      <LoadingText>⚽️{contents} 로딩 중⚽️</LoadingText>
       <CirclesWithBar
         height="50"
         width="50"
