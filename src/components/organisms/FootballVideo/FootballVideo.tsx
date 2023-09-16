@@ -3,6 +3,7 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 
 import ErrorMessage from "../../molecules/ErrorMessage";
+import LoadingMessage from "../../molecules/LoadingMessage";
 
 interface TableProps {
   title: string;
@@ -38,6 +39,7 @@ const Img = styled.img`
 const FootballVideo = ({ userInput }: { userInput: string }) => {
   let [table, setTable] = useState<TableProps[]>([]);
 
+  const [loading, setLoading] = useState<boolean>(true);
   let [error, setError] = useState(null);
 
   let getAPI = async () => {
@@ -50,13 +52,17 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
       },
     };
 
+    setLoading(true);
+
     try {
       const response = await axios.request(options);
       setTable(response.data);
+      setLoading(false);
     } catch (error) {
       if (error instanceof AxiosError) {
         let errorStatus = error.response?.data.details;
         setError(errorStatus);
+        setLoading(false);
       }
     }
   };
@@ -88,17 +94,25 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
   };
 
   return error === null ? (
-    <VideoItemWrapper>
-      {filteredList.map((list) => (
-        <section key={list.url}>
-          <MatchTeams>{list.title}</MatchTeams>
-          <a href={list.url} target="_blank" rel="noreferrer">
-            <Img src={list.thumbnail} alt="thumbnail" onError={imageHandler} />
-          </a>
-          <MatchDate>{dateHandler(list.date)}</MatchDate>
-        </section>
-      ))}
-    </VideoItemWrapper>
+    loading ? (
+      <LoadingMessage contents="하이라이트 영상" size="large" />
+    ) : (
+      <VideoItemWrapper>
+        {filteredList.map((list) => (
+          <section key={list.url}>
+            <MatchTeams>{list.title}</MatchTeams>
+            <a href={list.url} target="_blank" rel="noreferrer">
+              <Img
+                src={list.thumbnail}
+                alt="thumbnail"
+                onError={imageHandler}
+              />
+            </a>
+            <MatchDate>{dateHandler(list.date)}</MatchDate>
+          </section>
+        ))}
+      </VideoItemWrapper>
+    )
   ) : (
     <ErrorMessage category="VIDEO" error={error} />
   );
