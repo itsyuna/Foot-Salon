@@ -113,7 +113,7 @@ const Footer = () => {
         <NoticeBox>
           <NoticeSmallBox>
             <img
-              src={`${process.env.PUBLIC_URL}/assets/img/contact-info-background.png`}
+              src={`${process.env.PUBLIC_URL}/assets/images/contact-info-background.png`}
               alt="Contact information background"
               width="100%"
               height="100%"
@@ -135,7 +135,7 @@ const Footer = () => {
           </NoticeSmallBox>
           <NoticeSmallBox>
             <img
-              src={`${process.env.PUBLIC_URL}/assets/img/copyright-background.png`}
+              src={`${process.env.PUBLIC_URL}/assets/images/copyright-background.png`}
               alt="Copyright background"
               width="100%"
               height="100%"
@@ -148,7 +148,7 @@ const Footer = () => {
         <SprayLineBox>
           <TfiSpray size="35" color="white" />
           <img
-            src={`${process.env.PUBLIC_URL}/assets/img/spray-line.png`}
+            src={`${process.env.PUBLIC_URL}/assets/images/spray-line.png`}
             alt="Spray line"
             width="90%"
           />
@@ -160,7 +160,7 @@ const Footer = () => {
         </FamousFootballQuotes>
         <TfiSpray size="35" color="white" />
         <img
-          src={`${process.env.PUBLIC_URL}/assets/img/spray-line.png`}
+          src={`${process.env.PUBLIC_URL}/assets/images/spray-line.png`}
           alt="Spray line"
           width="90%"
         />

@@ -47,8 +47,8 @@ const Menu = styled(HomeMenu)`
   color: white;
 `;
 
-const GoalPost = `${process.env.PUBLIC_URL}/assets/icon/goalpost.svg`;
-const SonnyCelebration = `${process.env.PUBLIC_URL}/assets/icon/sonny-celebration.svg`;
+const GoalPost = `${process.env.PUBLIC_URL}/assets/icons/goalpost.svg`;
+const SonnyCelebration = `${process.env.PUBLIC_URL}/assets/icons/sonny-celebration.svg`;
 
 const Navigation = () => {
   return (

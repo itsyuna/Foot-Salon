@@ -71,7 +71,7 @@ const Carousel = ({ images }: { images: ImageName }) => {
         {images.map((image, idx) => (
           <CarouselItems
             key={idx}
-            src={`${process.env.PUBLIC_URL}/assets/img/${image}.jpg`}
+            src={`${process.env.PUBLIC_URL}/assets/images/${image}.jpg`}
             alt={`Carousel - ${image}`}
           />
         ))}

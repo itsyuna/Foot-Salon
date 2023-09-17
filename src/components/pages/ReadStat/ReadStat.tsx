@@ -172,7 +172,7 @@ const ReadStat = () => {
           <StatItemName>승부 결과</StatItemName>
           <MatchResultBox>
             <StyledEmotion
-              src={`${process.env.PUBLIC_URL}/assets/icon/emotion-${targetPost?.stat.matchResult}.svg`}
+              src={`${process.env.PUBLIC_URL}/assets/icons/emotion-${targetPost?.stat.matchResult}.svg`}
               alt="Emotion icon"
             />
             <div>

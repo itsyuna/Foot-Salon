@@ -7,7 +7,7 @@ import Header from "./components/organisms/Header";
 import Navigation from "./components/organisms/Navigation";
 import Footer from "./components/organisms/Footer";
 
-const pitchLine = `${process.env.PUBLIC_URL}/assets/img/pitch-line.png`;
+const pitchLine = `${process.env.PUBLIC_URL}/assets/images/pitch-line.png`;
 
 const PitchLineWrapper = styled.div`
   background-image: url(${pitchLine});

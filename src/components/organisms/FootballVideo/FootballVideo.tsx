@@ -90,7 +90,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
   });
 
   const imageHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.src = `${process.env.PUBLIC_URL}/assets/img/thumbnail-default.jpg`;
+    e.currentTarget.src = `${process.env.PUBLIC_URL}/assets/images/thumbnail-default.jpg`;
   };
 
   return error === null ? (

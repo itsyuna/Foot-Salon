@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const backgroundImg = `${process.env.PUBLIC_URL}/assets/img/football-ground.jpg`;
+const backgroundImg = `${process.env.PUBLIC_URL}/assets/images/football-ground.jpg`;
 
 export default createGlobalStyle` 
   body {
