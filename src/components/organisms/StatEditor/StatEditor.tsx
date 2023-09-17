@@ -377,7 +377,7 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
               </StatItemName>
               <Controller
                 control={control}
-                defaultValue={today}
+                defaultValue={isEdit ? targetPost?.stat.matchDate : today}
                 name="matchDate"
                 render={({ field }) => (
                   <Input
