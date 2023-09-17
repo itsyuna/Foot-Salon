@@ -173,7 +173,7 @@ const ReadStat = () => {
           <MatchResultBox>
             <StyledEmotion
               src={`${process.env.PUBLIC_URL}/assets/icon/emotion-${targetPost?.stat.matchResult}.svg`}
-              alt="emotion"
+              alt="Emotion icon"
             />
             <div>
               {targetPost && matchResultText[targetPost?.stat.matchResult - 1]}

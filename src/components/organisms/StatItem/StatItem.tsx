@@ -121,7 +121,7 @@ const StatItem = ({ statItems }: { statItems: StatListItems[] }) => {
             <ListBox>
               <StyledEmotion
                 src={`${process.env.PUBLIC_URL}/assets/icon/emotion-${item.stat.matchResult}.svg`}
-                alt="emotion"
+                alt="Emotion icon"
               />
             </ListBox>
           </StatsList>

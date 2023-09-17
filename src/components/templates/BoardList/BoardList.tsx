@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-
-import BoardCard from "../../../ui/BoardCard";
-import BoardHeader from "../../organisms/BoardHeader";
-import BoardListItem from "../../organisms/BoardListItem/BoardListItem";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { BoardListItems, fetchPlayBoard } from "../../../store/playBoard";
 import { fetchHalfTimeBoard } from "../../../store/halfTimeBoard";
+
+import BoardCard from "../../../ui/BoardCard";
+import BoardHeader from "../../organisms/BoardHeader";
+import BoardListItem from "../../organisms/BoardListItem";
 
 const leagueCategory = ["K리그", "해외 축구"];
 

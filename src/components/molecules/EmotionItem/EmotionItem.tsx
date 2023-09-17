@@ -46,7 +46,7 @@ const EmotionItem = ({
 
   return (
     <EmotionBox isSelected={isSelected} onClick={emotionHandler}>
-      <EmotionImage src={emotionImage} alt="emotion" />
+      <EmotionImage src={emotionImage} alt="Emotion icon" />
       <span>{emotionDescription}</span>
     </EmotionBox>
   );

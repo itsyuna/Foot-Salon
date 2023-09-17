@@ -104,7 +104,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
             <a href={list.url} target="_blank" rel="noreferrer">
               <Img
                 src={list.thumbnail}
-                alt="thumbnail"
+                alt="Football match thumbnail"
                 onError={imageHandler}
               />
             </a>

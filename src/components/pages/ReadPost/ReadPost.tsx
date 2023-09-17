@@ -116,7 +116,7 @@ const ReadPost = () => {
               <ContentsImageBox>
                 <img
                   src={targetPost?.board.fileURL}
-                  alt="attachment"
+                  alt="Upload file"
                   width="60%"
                   height="80%"
                 />

@@ -25,7 +25,7 @@ const StandingsList = ({ all, rank, team, points, goalsDiff }: TableProps) => {
     <tr>
       <Th scope="row">{rank}</Th>
       <Team scope="row" colSpan={2}>
-        <TeamLogo src={team.logo} alt="Team Logo" />
+        <TeamLogo src={team.logo} alt={`${team.name} club logo`} />
         <TeamName>{team.name}</TeamName>
       </Team>
       <Td>{all.played}</Td>

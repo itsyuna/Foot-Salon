@@ -64,7 +64,7 @@ const ViewPhotoModal = ({ targetPhoto, setOpenPhotoModal }: ViewPhotoProps) => {
         </Button>
       </CloseButtonBox>
       <PhotoBox>
-        <Photo src={targetPhoto.photo.fileURL} alt="view" />
+        <Photo src={targetPhoto.photo.fileURL} alt="Best shot" />
       </PhotoBox>
     </ModalWrapper>
   );

@@ -191,7 +191,7 @@ const PhotoList = ({ data, isNewPost }: PhotoItemProps) => {
             >
               <img
                 src={item.photo.fileURL}
-                alt="best-shot"
+                alt="Best shot"
                 width="100%"
                 height="100%"
               ></img>

@@ -312,10 +312,13 @@ const PhotoEditorModal = ({
             )}
           </AttachmentBox>
           <PreviewPhoto>
-            <h4>🔻 썸네일 미리보기</h4>
+            <h4>🔻 미리보기</h4>
             {attachment && (
               <UploadImageBox>
-                <UploadImage src={attachment} alt="attachment"></UploadImage>
+                <UploadImage
+                  src={attachment}
+                  alt="Upload preview"
+                ></UploadImage>
               </UploadImageBox>
             )}
           </PreviewPhoto>

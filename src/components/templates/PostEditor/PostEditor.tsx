@@ -331,7 +331,7 @@ const PostEditor = ({ isEdit }: { isEdit: boolean }) => {
           </FileWrapper>
           {attachment && (
             <UploadImageBox>
-              <img src={attachment} alt="attachment" width="20%" />
+              <img src={attachment} alt="Upload preview" width="20%" />
               <Button
                 type="button"
                 onClick={clearAttachmentHandler}

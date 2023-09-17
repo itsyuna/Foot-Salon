@@ -72,7 +72,7 @@ const Carousel = ({ images }: { images: ImageName }) => {
           <CarouselItems
             key={idx}
             src={`${process.env.PUBLIC_URL}/assets/img/${image}.jpg`}
-            alt="Carousel"
+            alt={`Carousel - ${image}`}
           />
         ))}
       </CustomCarousel>
