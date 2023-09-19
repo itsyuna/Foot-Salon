@@ -143,6 +143,7 @@ const StatList = ({
             type="button"
             onClick={leftButton}
             backgroundColor="#aac4ff"
+            border="#aac4ff"
             width="3rem"
             height="2.5rem"
           >
@@ -153,6 +154,7 @@ const StatList = ({
             type="button"
             onClick={rightButton}
             backgroundColor="#aac4ff"
+            border="#aac4ff"
             width="3rem"
             height="2.5rem"
           >
