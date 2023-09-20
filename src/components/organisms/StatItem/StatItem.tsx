@@ -86,9 +86,10 @@ const NoStatMessage = styled.div`
 const MatchScoreList = styled(MatchScore)`
   width: 17rem;
   margin: 1.3rem auto;
+  justify-content: center;
 
   div {
-    width: auto;
+    margin: 0.5rem;
   }
 `;
 
