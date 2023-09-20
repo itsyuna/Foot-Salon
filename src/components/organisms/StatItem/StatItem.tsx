@@ -84,7 +84,12 @@ const NoStatMessage = styled.div`
 `;
 
 const MatchScoreList = styled(MatchScore)`
+  width: 17rem;
   margin: 1.3rem auto;
+
+  div {
+    width: auto;
+  }
 `;
 
 const StyledEmotion = styled.img`

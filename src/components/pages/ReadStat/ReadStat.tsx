@@ -81,12 +81,12 @@ const MatchScoreDate = styled.section`
 export const MatchScore = styled.div`
   font-size: 1.2rem;
   margin: 0 auto;
-  width: 9rem;
+  width: auto;
   height: 2rem;
   line-height: 2rem;
   display: flex;
   justify-content: space-around;
-  background-color: pink;
+  background-color: #ffbbcc;
   border-radius: 5px;
 `;
 
