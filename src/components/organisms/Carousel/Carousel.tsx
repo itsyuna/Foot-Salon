@@ -66,7 +66,11 @@ let settings = {
 
 const Carousel = ({ images }: { images: ImageName }) => {
   return (
-    <CarouselWrapper>
+    <CarouselWrapper
+      onContextMenu={(e) => {
+        e.preventDefault();
+      }}
+    >
       <CustomCarousel {...settings}>
         {images.map((image, idx) => (
           <CarouselItems
