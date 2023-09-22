@@ -11,9 +11,9 @@
   <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=white"/>
 </div>
 <div>
-  <img src="https://img.shields.io/badge/Redux Toolkit-764ABC?style=flat-square&logo=Redux Toolkit&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Redux Toolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"/>
   <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Styled--components-DB7093?style=flat-square&logo=Styled--components&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Styled--components-DB7093?style=flat-square&logo=Styledcomponents&logoColor=white"/>
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
 </div>
 
