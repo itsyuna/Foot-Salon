@@ -1,8 +1,12 @@
 # Foot Salon
 `개인 프로젝트`
 
+<br>
+
 ## 💻 프로젝트 소개
 : 축구에 관한 모든 정보 & 축구를 좋아하는 사람들의 이야기 공간
+
+<br>
 
 ## 🛠 기술 스택
 <div>
@@ -16,6 +20,8 @@
   <img src="https://img.shields.io/badge/Styled--components-DB7093?style=flat-square&logo=Styledcomponents&logoColor=white"/>
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
 </div>
+
+<br>
 
 ## 📌 주요 기능
 ### Home
