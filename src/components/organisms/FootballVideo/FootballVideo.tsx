@@ -5,7 +5,7 @@ import axios, { AxiosError } from "axios";
 import ErrorMessage from "../../molecules/ErrorMessage";
 import LoadingMessage from "../../molecules/LoadingMessage";
 
-interface TableProps {
+interface VideoProps {
   title: string;
   url: string;
   thumbnail: string;
@@ -37,7 +37,7 @@ const Img = styled.img`
 `;
 
 const FootballVideo = ({ userInput }: { userInput: string }) => {
-  let [table, setTable] = useState<TableProps[]>([]);
+  let [video, setVideo] = useState<VideoProps[]>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
   let [error, setError] = useState(null);
@@ -56,7 +56,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
 
     try {
       const response = await axios.request(options);
-      setTable(response.data);
+      setVideo(response.data);
       setLoading(false);
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -85,11 +85,11 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
     return koreaDate;
   };
 
-  const filteredList = table.filter((item) => {
+  const filteredList = video.filter((item) => {
     return item.title.toUpperCase().includes(userInput.toUpperCase());
   });
 
-  const imageHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+  const thumbnailHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src = `${process.env.PUBLIC_URL}/assets/images/thumbnail-default.jpg`;
   };
 
@@ -105,7 +105,7 @@ const FootballVideo = ({ userInput }: { userInput: string }) => {
               <Img
                 src={list.thumbnail}
                 alt="Football match thumbnail"
-                onError={imageHandler}
+                onError={thumbnailHandler}
               />
             </a>
             <MatchDate>{dateHandler(list.date)}</MatchDate>
