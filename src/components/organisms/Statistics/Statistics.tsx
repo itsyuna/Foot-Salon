@@ -22,6 +22,23 @@ const matchResult = {
   win: 0,
 };
 
+const watchOption = {
+  home: 0,
+  stadium: 0,
+};
+
+let matchResultMap = new Map();
+matchResultMap.set("lost", "진");
+matchResultMap.set("draw", "비긴");
+matchResultMap.set("win", "이긴");
+
+let watchOptionMap = new Map();
+watchOptionMap.set("home", "집관");
+watchOptionMap.set("stadium", "직관");
+
+let countMatchResult = "";
+let countWatchOption = "";
+
 const Statistics = ({ myStat }: { myStat: StatListItems[] }) => {
   myStat.forEach((item) => {
     if (item.stat.matchResult === 1) matchResult.lost++;
@@ -29,16 +46,9 @@ const Statistics = ({ myStat }: { myStat: StatListItems[] }) => {
     else matchResult.win++;
   });
 
-  let countMatchResult = "";
-
   const sortMatchResult = Object.entries(matchResult).sort(
     ([, a], [, b]) => b - a
   );
-
-  let matchResultMap = new Map();
-  matchResultMap.set("lost", "진");
-  matchResultMap.set("draw", "비긴");
-  matchResultMap.set("win", "이긴");
 
   if (
     matchResult.lost === matchResult.draw &&
@@ -54,25 +64,14 @@ const Statistics = ({ myStat }: { myStat: StatListItems[] }) => {
       sortMatchResult[0][0]
     )}' 경기가 많았어요!`;
 
-  const watchOption = {
-    home: 0,
-    stadium: 0,
-  };
-
   myStat.forEach((item) => {
     if (item.stat.watchOption === "집관 🏡") watchOption.home++;
     else watchOption.stadium++;
   });
 
-  let countWatchOption = "";
-
   const sortWatchOption = Object.entries(watchOption).sort(
     ([, a], [, b]) => b - a
   );
-
-  let watchOptionMap = new Map();
-  watchOptionMap.set("home", "집관");
-  watchOptionMap.set("stadium", "직관");
 
   if (sortWatchOption[0][1] === sortWatchOption[1][1]) {
     countWatchOption = `'${watchOptionMap.get(
