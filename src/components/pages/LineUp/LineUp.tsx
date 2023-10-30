@@ -50,7 +50,7 @@ const LineUp = () => {
             height="4vh"
           />
           <GuideText>
-            영상 클릭시 해당 링크로 이동합니다!😉 (*경기시간: 한국 시간 기준)
+            영상 클릭 시 해당 링크로 이동합니다!😉 (*경기 시간: 한국 시간 기준)
           </GuideText>
         </SearchWrapper>
       </header>
