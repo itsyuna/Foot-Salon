@@ -4,26 +4,55 @@ import { useNavigate } from "react-router-dom";
 import { userActions } from "../../../store/user";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { auth } from "../../../firebase/config";
+import { toast } from "react-toastify";
 import { Comment } from "react-loader-spinner";
 
 import Button from "../../atoms/Button/Button";
-import { toast } from "react-toastify";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const HeaderWrapper = styled.header`
   width: 100%;
-  text-align: center;
   position: relative;
+
+  ${media.small`
+    img {
+      width: 90%;   
+      margin-left: 5%;
+    }
+  `}
+
+  ${media.large`
+    text-align: center; 
+  `}
 `;
 
 const LoginUserInfoBox = styled.section`
   width: auto;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   position: absolute;
-  top: 40%;
+  top: 70%;
   right: 0;
+
+  ${media.small`
+    top: 90%;
+
+    section {
+      font-size: 0.7rem;
+      width: 100%;
+      height: 2vh;
+      line-height: 2vh;
+    }
+
+    button {
+      width: 30%;
+      height: 20%;
+      font-size: 0.7rem;
+    }
+  `}
 `;
 
 const UserInfoBox = styled.section`
@@ -34,10 +63,7 @@ const UserInfoBox = styled.section`
   line-height: 3vh;
   padding: 0 0.7rem;
   border-radius: 10px;
-
-  h3 {
-    margin: 0;
-  }
+  margin-right: 5px;
 
   span {
     color: #c780fa;
@@ -88,9 +114,7 @@ const Header = () => {
       <LoginUserInfoBox>
         {userNickname && (
           <UserInfoBox>
-            <h3>
-              <span>{userNickname}</span>님 경기장 입장! 🥳
-            </h3>
+            <span>{userNickname}</span>님 경기장 입장! 🥳
           </UserInfoBox>
         )}
         {isSpinnerOn ? (
@@ -110,6 +134,7 @@ const Header = () => {
             onClick={loginOutHandler}
             backgroundColor="#E1FFB1"
             color="#f266ab"
+            margin="0"
             top="4rem"
             border="white"
           >
