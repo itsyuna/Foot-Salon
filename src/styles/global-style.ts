@@ -1,13 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
-const backgroundImg = `${process.env.PUBLIC_URL}/assets/images/football-ground.jpg`;
+export const backgroundImg = `${process.env.PUBLIC_URL}/assets/images/football-ground.jpg`;
 
 export default createGlobalStyle` 
   body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-image: url(${backgroundImg})
+    background-image: url(${backgroundImg});
   }
 
   ul {

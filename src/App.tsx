@@ -6,14 +6,19 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/organisms/Header";
 import Navigation from "./components/organisms/Navigation";
 import Footer from "./components/organisms/Footer";
+import { media } from "./ui/MediaQuery/mediaQuery";
 
 const pitchLine = `${process.env.PUBLIC_URL}/assets/images/pitch-line.png`;
 
 const PitchLineWrapper = styled.div`
-  background-image: url(${pitchLine});
   background-repeat: no-repeat;
   background-size: 85vw 102vh;
   background-position: 46% 65%;
+  overflow: auto;
+
+  ${media.large`
+    background-image: url(${pitchLine});
+  `}
 `;
 
 const ContentWrapper = styled.div`
