@@ -53,6 +53,12 @@ const LoginUserInfoBox = styled.section`
       font-size: 0.7rem;
     }
   `}
+
+  ${media.medium`
+    section,button {
+      font-size: 0.9rem;
+    }
+  `}
 `;
 
 const UserInfoBox = styled.section`
