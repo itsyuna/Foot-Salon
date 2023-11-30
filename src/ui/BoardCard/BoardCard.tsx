@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "../MediaQuery/mediaQuery";
 
 const BoardWrapper = styled.section`
   font-family: "Do Hyeon", sans-serif;
@@ -9,6 +10,14 @@ const BoardWrapper = styled.section`
   border-collapse: collapse;
   white-space: nowrap;
   border-radius: 10px;
+
+  ${media.small`
+    font-size: 0.6rem;
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+  `}
 `;
 
 interface BoardCardProps {
