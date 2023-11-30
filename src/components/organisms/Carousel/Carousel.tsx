@@ -2,11 +2,17 @@ import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const CarouselWrapper = styled.article`
   width: 50vw;
   height: 40vh;
   margin-right: 15px;
+
+  ${media.small`
+    width: 100%;
+    margin-left: 3%;
+  `}
 `;
 
 const CustomCarousel = styled(Slider)`
@@ -15,17 +21,13 @@ const CustomCarousel = styled(Slider)`
     height: 40vh;
   }
 
-  .slick-prev,
-  .slick-next {
-  }
-
   .slick-prev {
-    z-index: 999;
-    left: 1px;
+    z-index: 998;
+    left: 0.5%;
   }
 
   .slick-next {
-    right: 5px;
+    right: 1%;
   }
 
   .slick-prev:before,
@@ -46,6 +48,18 @@ const CustomCarousel = styled(Slider)`
     color: orange;
     pacity: 1;
   }
+
+  ${media.small`
+    .slick-list {
+      width: 100%;
+    }
+    .slick-prev {
+      left: 1%;
+    }
+    .slick-dots {
+      bottom: -2.5rem;
+    }
+  `}
 `;
 
 const CarouselItems = styled.img`
