@@ -37,6 +37,10 @@
 <br>
 
 ## 📌 주요 기능
+### 반응형 웹 - <a href="https://github.com/itsyuna/Foot-Salon/wiki/%EB%B0%98%EC%9D%91%ED%98%95-%EC%9B%B9">상세 보기🔍</a>
+
+<br>
+
 ### Home - <a href="https://github.com/itsyuna/Foot-Salon/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%7C-Home">상세 보기🔍</a>
 - Carousel - 매주 축구 사진 업데이트
 - 실시간 각 리그별 팀 순위/득점자 순위 테이블
@@ -117,3 +121,5 @@
     - 사진 업로드/보기/업데이트/삭제
     - 사진 기록/수정 Editor
     - 사진 크게 보기
+
+<br/>
