@@ -24,16 +24,110 @@ import { ErrorText } from "../../pages/SignUp/SignUp";
 import PostFooter from "../../organisms/PostFooter";
 import { getDate } from "../../../utils/date";
 import NoPostMessage from "../../molecules/NoPostMessage";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const Form = styled.form`
   margin-top: 1rem;
+  padding-right: 2rem;
+
+  ${media.small`
+    padding: 0;
+
+    span {
+      height: 3vh;
+      line-height: 3vh;
+    }
+    
+    input {
+      width: 90%;
+      height: 2.8vh;
+    }
+
+    textarea {
+      width: 85%;
+    }
+
+    button,input {
+      font-size: 0.7rem;
+    }
+  `}
+
+  ${media.medium`
+    input {
+      height: 3vh;
+    }
+
+    button {
+      font-size: 0.9rem;
+    } 
+  `}
 `;
 
 export const CategoryBox = styled.section`
   width: 70%;
   margin: 0 auto 1.5rem;
+
   display: grid;
   grid-template-columns: 1fr 5fr;
+  font-size: 0.9rem;
+
+  input {
+    text-align: left;
+    padding-left: 0.5rem;
+  }
+
+  p {
+    font-size: 70%;
+
+    ${media.small`
+      font-size: 50%;
+    `}
+
+    ${media.medium`
+      font-size: 60%;
+    `}
+  }
+
+  select,
+  input {
+    font-size: 0.9rem;
+  }
+
+  ${media.small`
+    font-size: 0.7rem;
+
+    select,input {
+      font-size: 0.7rem;
+    }
+
+    select {
+      height: 3vh;
+    }
+
+    span {
+      height: 3vh;
+      line-height: 3vh;
+    }
+
+    width: 80%;
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+
+    select,input {
+      font-size: 0.8rem;
+    }
+
+    span {
+      height: 3.5vh;
+      line-height: 3.5vh;
+    }
+
+    select {
+      height: 3.5vh;
+    }
+  `}
 `;
 
 export const CategoryName = styled.span`
@@ -45,11 +139,14 @@ export const CategoryName = styled.span`
 `;
 
 export const CategoryData = styled.span`
-  font-size: 1.1rem;
   margin-left: 2rem;
   width: 95%;
   height: 4vh;
   line-height: 4vh;
+
+  ${media.small`
+    margin-left: 1rem;
+  `}
 `;
 
 const UserNickname = styled(CategoryData)`
@@ -60,44 +157,101 @@ export const BoardContents = styled.section`
   width: 70%;
   height: 30vh;
   margin: 0 auto 2rem;
+  font-size: 0.9rem;
+
   display: grid;
   grid-template-columns: 1fr 5fr;
+
+  p {
+    font-size: 70%;
+  }
+
+  ${media.small`
+    width: 80%;
+
+    span:first-child {
+      height: 3vh;
+      line-height: 3vh;
+    }
+
+    p {
+      font-size: 39%;
+    }
+  `}
+
+  ${media.medium`
+    span:first-child {
+      height: 3.5vh;
+      line-height: 3.5vh;
+    }
+
+    p {
+      font-size: 53%;
+    }
+  `}
 `;
 
 export const ContentBox = styled.div`
   text-align: center;
 `;
 
-export const CategoryContent = styled.p`
-  text-align: center;
+export const CategoryContent = styled.span`
+  display: block;
   width: 100%;
   height: 4vh;
   line-height: 4vh;
   background-color: #d9d9d9;
   margin: 0;
+
+  ${media.small`
+    font-size: 0.7rem;
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+  `}
 `;
 
 const TextArea = styled.textarea`
   font-family: "IBM Plex Sans KR", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   width: 95%;
   height: 100%;
   padding: 0.5rem;
   margin-left: 2rem;
+
+  ${media.small`
+    font-size: 0.7rem;
+
+    margin-left: 1rem;
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+  `}
 `;
 
 const FileWrapper = styled.section`
   width: 70%;
   margin: 0 auto;
   margin-top: 1rem;
+
+  ${media.small`
+    width: 80%;
+  `}
 `;
 
 const UploadImageBox = styled.div`
   width: 70%;
   margin: 0.5rem auto 0;
+
   display: flex;
   justify-content: left;
   align-items: center;
+
+  ${media.small`
+    width: 80%;
+  `}
 `;
 
 export interface BoardFormData {

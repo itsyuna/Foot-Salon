@@ -14,6 +14,7 @@ import {
 import ReadPostButton from "../../organisms/ReadPostButton";
 import NoPostMessage from "../../molecules/NoPostMessage";
 import Comments from "../../organisms/Comments";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const LastEditTimeBox = styled.div`
   width: 70%;
@@ -21,7 +22,7 @@ const LastEditTimeBox = styled.div`
   display: flex;
 
   h5 {
-    margin: 0 1rem 0 0;
+    margin: 0 0.5rem 0 0;
   }
 
   h5:nth-child(1) {
@@ -31,12 +32,21 @@ const LastEditTimeBox = styled.div`
   h5:nth-child(2) {
     color: #4d77ff;
   }
+
+  ${media.small`
+    width: 80%;
+  `}
 `;
 
 const ShowData = styled(CategoryData)`
   background-color: #c2ded1;
   border-radius: 10px;
-  padding-left: 3rem;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+
+  ${media.small`
+    margin-left: 1rem;
+  `}
 `;
 
 const ColouredUserName = styled(ShowData)`
@@ -50,13 +60,17 @@ const ColouredLeague = styled(ShowData)`
 `;
 
 const ContentsBox = styled.span`
-  width: 100%;
+  width: 96%;
   height: 100%;
   overflow: auto;
   white-space: pre-wrap;
   margin-left: 2rem;
   background-color: white;
   border: 3px solid #c2ded1;
+
+  ${media.small`
+    margin-left: 1rem;
+  `}
 `;
 
 const ContentsTextBox = styled.div`
@@ -67,6 +81,42 @@ const ContentsTextBox = styled.div`
 
 const ContentsImageBox = styled.div`
   text-align: center;
+
+  ${media.small`
+    img {
+      width: 90%;
+    }
+  `}
+
+  ${media.medium`
+    img {
+      width: 80%;
+    }
+  `}
+`;
+
+const PostContents = styled.article`
+  padding-right: 2rem;
+
+  ${media.small`
+    font-size: 0.5rem;
+
+    section {
+      span {
+        font-size: 0.6rem;
+      }
+    }
+
+    padding-right: 1rem;
+  `}
+
+  ${media.medium`
+    section {
+      span {
+        font-size: 0.8rem;
+      }
+    }
+  `}
 `;
 
 const ReadPost = () => {
@@ -87,7 +137,7 @@ const ReadPost = () => {
         category={category}
         targetPost={targetPost}
       />
-      <article>
+      <PostContents>
         {targetPost?.board.lastEditTime && (
           <LastEditTimeBox>
             <h5>수정됨</h5>
@@ -117,14 +167,14 @@ const ReadPost = () => {
                 <img
                   src={targetPost?.board.fileURL}
                   alt="Upload file"
-                  width="60%"
+                  width="70%"
                   height="80%"
                 />
               </ContentsImageBox>
             )}
           </ContentsBox>
         </BoardContents>
-      </article>
+      </PostContents>
       <Comments category={category} boardId={targetPost.id} />
     </BoardCard>
   ) : (

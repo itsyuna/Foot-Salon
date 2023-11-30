@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BoardListItems } from "../../../store/playBoard";
 import { useAppSelector } from "../../../store";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const BoardListWrapper = styled.article`
   background-color: #e4e3e3;
@@ -15,27 +16,52 @@ const BoardListWrapper = styled.article`
 `;
 
 export const Ul = styled.ul<StyledListItems>`
+  width: 100%;
   margin: 0;
   padding: 1rem;
   border-bottom: 1px solid gray;
   cursor: pointer;
 
-  li:nth-child(1),
+  li:nth-child(1) {
+    width: 5%;
+  }
   li:nth-child(2) {
-    width: 10%;
+    width: 20%;
   }
   li:nth-child(3) {
-    width: 50%;
+    width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   li:nth-child(4),
   li:nth-child(5) {
-    width: 15%;
+    width: 25%;
   }
 
   background-color: ${({ bgColor }) => bgColor};
   &:hover {
     background-color: ${({ hoverEffect }) => hoverEffect};
   }
+
+  ${media.small`   
+      padding-left: 0.2rem;
+
+      li:nth-child(2) {
+        display: none;
+      }
+
+      li:nth-child(3) {
+        width: 25%;
+      }
+
+      li:nth-child(5) {
+        width: 30%;
+      }
+  `}
+
+  ${media.medium`   
+      padding-left: 0.3rem;
+  `}
 `;
 
 const BoardMessage = styled.div`

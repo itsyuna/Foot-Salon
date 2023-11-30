@@ -3,11 +3,11 @@ import Button from "../../atoms/Button/Button";
 import { useNavigate } from "react-router-dom";
 
 const Section = styled.section`
-  width: 72%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const PostFooter = () => {

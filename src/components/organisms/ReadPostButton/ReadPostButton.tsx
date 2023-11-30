@@ -9,13 +9,37 @@ import { BoardListItems } from "../../../store/playBoard";
 import { StatListItems } from "../../../store/stats";
 
 import Button from "../../atoms/Button";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
-const FooterWrapper = styled.section`
+const ButtonWrapper = styled.section`
   width: 70%;
   height: 8vh;
-  margin: 0 auto;
+  margin: 0.5rem auto;
   display: flex;
   justify-content: space-between;
+
+  button:nth-child(1) {
+    margin-right: 0;
+  }
+  button:nth-child(2) {
+    margin-left: 0.2rem;
+  }
+
+  ${media.small`
+    width: 90%;
+
+    button {
+      font-size: 0.5rem;
+    }   
+  `}
+
+  ${media.medium`
+    width: 80%;
+
+    button {
+      font-size: 0.7rem;
+    }
+  `}
 `;
 
 interface ReadPostProps {
@@ -75,14 +99,14 @@ const ReadPostButton = ({
   };
 
   return (
-    <FooterWrapper>
+    <ButtonWrapper>
       <Button
         type="button"
         backgroundColor="#f9ec79"
         border="#ffb978"
         onClick={() => navigate(-1)}
       >
-        뒤로가기
+        뒤로 가기
       </Button>
       {isOwner && (
         <div>
@@ -106,7 +130,7 @@ const ReadPostButton = ({
           </Button>
         </div>
       )}
-    </FooterWrapper>
+    </ButtonWrapper>
   );
 };
 

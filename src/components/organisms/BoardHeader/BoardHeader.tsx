@@ -6,11 +6,24 @@ import Button from "../../atoms/Button/Button";
 import Select from "../../atoms/Select/Select";
 import { toast } from "react-toastify";
 import React from "react";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const Header = styled.header`
   width: 90%;
   height: 15vh;
   margin: 0 auto;
+
+  ${media.small`
+    button, select {
+      font-size: 0.6rem;
+    }
+  `}
+
+  ${media.medium`
+    button, select { 
+      font-size: 0.8rem;
+    }
+  `}
 `;
 
 const LeagueCategory = styled.section`
@@ -21,6 +34,22 @@ const BoardListUp = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  div {
+    width: auto;
+
+    button {
+      margin: 0 0 0 0.5rem;
+
+      ${media.small`
+        margin: 0;
+      `}
+
+      ${media.medium`
+        margin: 0 0 0 0.3rem;
+      `}
+    }
+  }
 `;
 
 interface BoardHeaderProps {
@@ -32,9 +61,9 @@ interface BoardHeaderProps {
 const optionList = [
   {
     value: "latest",
-    name: "latest",
+    name: "Latest",
   },
-  { value: "oldest", name: "oldest" },
+  { value: "oldest", name: "Oldest" },
 ];
 
 const BoardHeader = ({
@@ -91,6 +120,7 @@ const BoardHeader = ({
           <Select
             onChange={(e) => setSortList(e.target.value)}
             option={optionList}
+            height="3.5vh"
             backgroundColor="#f6edd9"
             color="#379237"
             border="#7a9972"
