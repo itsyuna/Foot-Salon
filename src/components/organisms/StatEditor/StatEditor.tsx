@@ -23,26 +23,109 @@ import EmotionItem from "../../molecules/EmotionItem";
 import Input from "../../atoms/Input";
 import { ErrorText } from "../../pages/SignUp/SignUp";
 import NoPostMessage from "../../molecules/NoPostMessage";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const StatEditorBox = styled.section`
   font-family: "Do Hyeon", sans-serif;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   width: 60%;
   height: 75%;
-  margin: 0.5rem auto;
+  margin: 1rem auto;
 
-  form section select {
-    margin-right: 1rem;
+  p {
+    font-size: 0.7rem;
   }
+
+  form section select:nth-child(1) {
+    margin-right: 0.2rem;
+  }
+
+  form section select:nth-child(2) {
+    margin-right: 0.5rem;
+  }
+
+  select,
+  input,
+  button,
+  textarea {
+    font-size: 0.9rem;
+  }
+
+  input {
+    height: 2.2vh;
+  }
+
+  ${media.small`
+    width: 85%;
+    font-size: 0.7rem;
+
+    p {
+      font-size: 0.5rem;
+    }
+
+    select,input,button,textarea {
+      font-size: 0.7rem;
+    }
+
+    form section select {
+      height: 2.5vh;
+      margin-right: 0;
+    }
+
+    input {
+      height: 2vh;
+    }
+
+    button {
+      height: 2.5vh;
+    }
+
+    textarea {
+      height: 7vh;
+    }
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+
+    p {
+      font-size: 0.6rem;
+    }
+
+    select,input,button,textarea {
+      font-size: 0.8rem;
+    }
+
+    form section select {
+      height: 3vh;
+    }
+
+    form section select:nth-child(1) {
+      margin-right: 0;
+    }
+
+    input {
+      height: 2vh;
+    }
+
+    button {
+      height: 3vh;
+    }
+
+    textarea {
+      height: 8vh;
+    }
+  `}
 `;
 
 export const StatItemName = styled.div`
-  width: 11rem;
+  width: 100%;
   height: 1.5rem;
   line-height: 1.6rem;
   text-align: center;
   background-color: #faf4b7;
   margin-bottom: 0.5rem;
+
   h4 {
     margin: 0.7rem 0;
   }
@@ -50,17 +133,35 @@ export const StatItemName = styled.div`
 
 export const SelectWrapper = styled.section`
   display: flex;
+  align-items: center;
   margin-bottom: 1rem;
+
+  select {
+    height: 3.5vh;
+  }
+
   p {
     margin: 0;
-    padding-top: 1rem;
   }
+
+  ${media.small`
+    display: block;
+    margin-bottom: 0.5rem;
+
+    p {
+      padding-top: 0.2rem;
+      text-align: center;
+    }
+  `}
 `;
 
 const TeamMatchDate = styled.section`
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 2rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 const EmotionItemWrapper = styled.div`
@@ -71,12 +172,13 @@ const EmotionItemWrapper = styled.div`
 
 const ContentsBox = styled.div`
   display: flex;
+  align-items: center;
   margin-top: 1rem;
 
   p {
     margin: 0;
-    margin-left: 1rem;
-    padding-top: 1rem;
+    margin-left: 0.5rem;
+    padding-top: 0.1rem;
   }
 `;
 
@@ -85,7 +187,7 @@ const TextArea = styled.textarea`
   font-size: 1rem;
   padding: 0.3rem;
   width: 99%;
-  height: 12vh;
+  height: 9vh;
 `;
 
 interface StatEditorProps {
@@ -259,6 +361,23 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
           <TeamMatchDate>
             <section>
               <StatItemName>
+                <h4>경기 날짜를 선택해 주세요.</h4>
+              </StatItemName>
+              <Controller
+                control={control}
+                defaultValue={isEdit ? targetPost?.stat.matchDate : today}
+                name="matchDate"
+                render={({ field }) => (
+                  <Input
+                    type="date"
+                    onChange={field.onChange}
+                    defaultValue={isEdit ? targetPost?.stat.matchDate : today}
+                  />
+                )}
+              />
+            </section>
+            <section>
+              <StatItemName>
                 <h4>경기팀을 적어주세요 ⚽️</h4>
               </StatItemName>
               <Controller
@@ -276,7 +395,6 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
                     placeholder="홈 팀"
                     onChange={field.onChange}
                     defaultValue={targetPost?.stat.homeTeam}
-                    height="2.5vh"
                   />
                 )}
               />
@@ -296,7 +414,6 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
                     placeholder="원정 팀"
                     onChange={field.onChange}
                     defaultValue={targetPost?.stat.awayTeam}
-                    height="2.5vh"
                   />
                 )}
               />
@@ -333,7 +450,6 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
                     placeholder="홈 팀 결과"
                     onChange={field.onChange}
                     defaultValue={targetPost?.stat.homeTeamResult}
-                    height="2.5vh"
                   />
                 )}
               />
@@ -353,7 +469,6 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
                     placeholder="원정 팀 결과"
                     onChange={field.onChange}
                     defaultValue={targetPost?.stat.awayTeamResult}
-                    height="2.5vh"
                   />
                 )}
               />
@@ -371,27 +486,10 @@ const StatEditor = ({ headText, isEdit }: StatEditorProps) => {
                 ""
               )}
             </section>
-            <section>
-              <StatItemName>
-                <h4>경기 날짜를 선택해주세요.</h4>
-              </StatItemName>
-              <Controller
-                control={control}
-                defaultValue={isEdit ? targetPost?.stat.matchDate : today}
-                name="matchDate"
-                render={({ field }) => (
-                  <Input
-                    type="date"
-                    onChange={field.onChange}
-                    defaultValue={isEdit ? targetPost?.stat.matchDate : today}
-                  />
-                )}
-              />
-            </section>
           </TeamMatchDate>
           <section>
             <StatItemName>
-              <h4>승부 결과를 체크해주세요!</h4>
+              <h4>승부 결과를 체크해 주세요!</h4>
             </StatItemName>
             <EmotionItemWrapper>
               {emotionList.map((item) => (

@@ -1,13 +1,14 @@
 import styled, { css } from "styled-components";
 
 const EmotionBox = styled.div<{ isSelected: boolean }>`
-  border: 1px solid red;
   cursor: pointer;
   padding: 0.5rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   ${({ isSelected }) =>
     isSelected
       ? css`
@@ -21,7 +22,7 @@ const EmotionBox = styled.div<{ isSelected: boolean }>`
 `;
 
 const EmotionImage = styled.img`
-  width: 3vw;
+  width: 2vw;
   margin-bottom: 0.5rem;
 `;
 

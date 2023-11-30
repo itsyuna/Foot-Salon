@@ -5,31 +5,76 @@ import { StatListItems } from "../../../store/stats";
 
 import StatList from "../../organisms/StatList";
 import Statistics from "../../organisms/Statistics";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const StatWrapper = styled.section`
   width: 100%;
   height: 65vh;
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
   background-color: white;
   border-radius: 10px;
+  overflow: auto;
+
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+
+  ${media.small`
+   display: flex;
+   flex-direction: column;
+    
+    & > section:nth-child(1) {
+      margin-top: 1rem;
+    }
+    & > section:nth-child(3) {    
+      height: 10vh;
+      margin: 0.3rem 0;
+    }
+  `}
 `;
 
 export const StatSectionBox = styled.section`
   width: 100%;
   font-family: "Do Hyeon", sans-serif;
-  font-size: 1.2rem;
   color: #354259;
   text-align: center;
+`;
 
-  h4 {
-    width: 70%;
-    margin: 15rem 0 1rem 3rem;
-  }
-  p {
-    color: #fc2947;
+const StatsNotice = styled.section`
+  width: 100%;
+  height: 90%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  p:nth-child(1) {
     font-size: 0.9rem;
+    margin: 0;
   }
+
+  p:nth-child(2) {
+    color: #fc2947;
+    font-size: 0.8rem;
+  }
+
+  ${media.small`
+    p:nth-child(1) {
+      font-size: 0.6rem;
+    }
+
+    p:nth-child(2) {
+      font-size: 0.5rem;
+    }
+  `}
+
+  ${media.medium`
+    p:nth-child(1) {
+      font-size: 0.6rem;
+    }
+
+    p:nth-child(2) {
+      font-size: 0.5rem;
+    }
+  `}
 `;
 
 const Stats = () => {
@@ -85,8 +130,10 @@ const Stats = () => {
   return (
     <StatWrapper>
       <StatSectionBox>
-        <h4>응원 경기를 기록하고, 나의 축덕 Stat을 쌓아보세요 :) ⚽️⚽️</h4>
-        <p>*나의 Stat은 다른 사람이 볼 수 없습니다.</p>
+        <StatsNotice>
+          <p>응원 경기를 기록하고, 나의 축덕 Stat을 쌓아보세요 :) ⚽️⚽️</p>
+          <p>*나의 Stat은 다른 사람이 볼 수 없습니다.</p>
+        </StatsNotice>
       </StatSectionBox>
       <StatList
         headText={headText}

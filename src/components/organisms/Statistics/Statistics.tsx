@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { StatListItems } from "../../../store/stats";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const StatisticsWrapper = styled.article`
   width: 70%;
   text-align: center;
   margin: 15rem auto;
-  font-size: 1rem;
+  font-size: 0.9rem;
 
   ul span {
     color: red;
@@ -14,6 +15,24 @@ const StatisticsWrapper = styled.article`
   ul + ul span {
     color: #0e49b5;
   }
+
+  ${media.small`
+    width: 100%;
+    
+    margin: 0 auto;
+    
+    ul {
+      display: flex;
+      justify-content: center;
+    }
+
+    font-size: 0.6rem;
+  `}
+
+  ${media.medium`
+    width: 95%;
+    font-size: 0.7rem;
+  `}
 `;
 
 const matchResult = {
