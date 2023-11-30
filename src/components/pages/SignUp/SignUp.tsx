@@ -19,6 +19,7 @@ import {
 import Card from "../../../ui/Card";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const SingUpWrapper = styled.section`
   width: 50%;
@@ -27,21 +28,84 @@ const SingUpWrapper = styled.section`
   font-family: "Orelega One", cursive;
   text-align: center;
 
-  > button {
-    margin-right: 40rem;
+  form {
+    width: 100%;
   }
+
+  input {
+    height: 3.5vh;
+  }
+
+  & > section {
+    text-align: left;
+  }
+
+  label,
+  button,
+  input {
+    font-size: 0.9rem;
+  }
+
+  ${media.small`
+    width: 80%;
+    
+    label,button,input {
+      font-size: 0.6rem;
+    }
+
+    p {
+      width: 60%;
+      font-size: 0.5rem;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+    }
+
+    input {
+      width: 80%;
+      height: 2.5vh;
+    }
+
+    button {
+      width: auto;
+      height: 3vh;
+    }
+  `}
+
+  ${media.medium`
+    width: 70%;
+
+    label,button,input {
+      font-size: 0.7rem;
+    }
+
+    p {
+      font-size: 0.6rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    input {  
+      width: 75%;
+      height: 3vh;
+    }
+
+    button {
+      width: auto;
+      height: 3.2vh;
+    }
+  `}
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1.8rem;
 `;
 
 const CheckInput = styled.input`
-  width: 20vw;
-  height: 4vh;
-  font-size: 1rem;
   text-align: center;
-  margin-top: 1rem;
 `;
 
 export const ErrorText = styled.p`
@@ -52,11 +116,21 @@ export const ErrorText = styled.p`
 `;
 
 const InputWrapper = styled.section`
+  width: 100%;
   font-family: "Do Hyeon", sans-serif;
-  display: grid;
-  grid-template-columns: 1fr 2.2fr 1fr;
-  align-items: center;
   margin-top: 1.5rem;
+
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 0.5fr;
+  align-items: center;
+
+  ${media.small`
+    grid-template-columns: 0.8fr 2.5fr;
+  `}
+
+  ${media.medium`
+    grid-template-columns: 0.5fr 2fr;
+  `}
 `;
 
 const Label = styled.label`
@@ -145,16 +219,18 @@ const SignUp = () => {
   return (
     <Card>
       <SingUpWrapper>
-        <Button
-          type="button"
-          onClick={() => navigate(-1)}
-          width="5rem"
-          backgroundColor="#FFD36E"
-          border="#FEB139"
-          margin="0"
-        >
-          뒤로가기
-        </Button>
+        <section>
+          <Button
+            type="button"
+            onClick={() => navigate(-1)}
+            backgroundColor="#FFD36E"
+            border="#FEB139"
+            width="5rem"
+            margin="0"
+          >
+            뒤로가기
+          </Button>
+        </section>
         <header>
           <Title>Sign up</Title>
         </header>
@@ -174,19 +250,21 @@ const SignUp = () => {
               },
             }}
             render={({ field }) => (
-              <InputWrapper>
-                <Label htmlFor="nickname">닉네임</Label>
-                <CheckInput
-                  type="text"
-                  id="nickname"
-                  placeholder="한글,영문 사용 가능(최대 12글자) / 띄어쓰기,특수문자 사용 불가"
-                  autoComplete="off"
-                  value={field.value}
-                  onChange={field.onChange}
-                  maxLength={12}
-                />
+              <>
+                <InputWrapper>
+                  <Label htmlFor="nickname">닉네임</Label>
+                  <CheckInput
+                    type="text"
+                    id="nickname"
+                    placeholder="한글,영문 사용 가능(최대 12글자) / 띄어쓰기,특수문자 사용 불가"
+                    autoComplete="off"
+                    value={field.value}
+                    onChange={field.onChange}
+                    maxLength={12}
+                  />
+                </InputWrapper>
                 <ErrorText>{!errors.nickname && nicknameCheckText}</ErrorText>
-              </InputWrapper>
+              </>
             )}
           />
           <ErrorText>{errors.nickname && errors.nickname.message}</ErrorText>
@@ -211,8 +289,6 @@ const SignUp = () => {
                   value={field.value}
                   onChange={field.onChange}
                   autoComplete="off"
-                  width="20vw"
-                  height="4vh"
                 />
               </InputWrapper>
             )}
@@ -240,8 +316,6 @@ const SignUp = () => {
                   value={field.value}
                   onChange={field.onChange}
                   autoComplete="off"
-                  width="20vw"
-                  height="4vh"
                 />
               </InputWrapper>
             )}
@@ -264,8 +338,6 @@ const SignUp = () => {
                   value={field.value}
                   onChange={field.onChange}
                   autoComplete="off"
-                  width="20vw"
-                  height="4vh"
                 />
               </InputWrapper>
             )}
