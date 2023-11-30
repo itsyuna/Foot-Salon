@@ -7,11 +7,18 @@ import StandingsList from "../StandingsList";
 import TopscorersList from "../TopscorersList";
 import LoadingMessage from "../../molecules/LoadingMessage";
 import ErrorMessage from "../../molecules/ErrorMessage";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   text-align: center;
+  font-size: 0.6rem;
+  overflow: auto;
+
+  ${media.large`
+    font-size: 0.9rem;
+  `}
 `;
 
 const Caption = styled.caption`

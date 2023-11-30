@@ -5,6 +5,7 @@ const Team = styled.th`
   border: 1px solid lightgray;
   padding: 5px;
   display: flex;
+  align-items: center;
 `;
 
 const TeamLogo = styled.img`
