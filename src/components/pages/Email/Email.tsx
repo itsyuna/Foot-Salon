@@ -5,6 +5,7 @@ import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 
 import Button from "../../atoms/Button";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const EmailWrapper = styled.section`
   font-family: "IBM Plex Sans KR", sans-serif;
@@ -15,6 +16,52 @@ const EmailWrapper = styled.section`
   border-collapse: collapse;
   white-space: nowrap;
   border-radius: 10px;
+
+  ${media.small`
+  header h2 {
+    font-size: 1rem;
+    margin-right: 0.3rem;
+  }
+
+  svg {
+    width: 4vw;
+  }
+
+  form {
+    width: 80vw;
+  }
+
+  label,input,textarea,button {
+    font-size: 0.7rem;
+  }
+
+  input,textarea {
+    width: 45vw;
+  }
+`}
+
+  ${media.medium`
+    header h2 {
+      font-size: 1.3rem;
+      margin-right: 0.4rem;
+    }
+
+    svg {
+      width: 2.5vw;
+    }
+
+    form {
+      width: 65vw;
+    }
+
+    label,input,textarea,button {
+      font-size: 0.8rem;
+    }
+
+    input,textarea {
+      width: 35vw;
+    }
+  `}
 `;
 
 const Header = styled.header`
