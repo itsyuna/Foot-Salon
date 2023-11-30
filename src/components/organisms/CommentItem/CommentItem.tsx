@@ -10,12 +10,17 @@ import { dbService } from "../../../firebase/config";
 import { CommentFormData } from "../Comments/Comments";
 import { getDate } from "../../../utils/date";
 import Button from "../../atoms/Button";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const CommentBox = styled.section`
   width: 100%;
-  height: 8vh;
+  height: 100%;
   display: block;
-  margin-bottom: 1.5rem;
+  margin: 1.6rem 0 1.7rem; 0;
+
+  ${media.small`
+    margin-bottom: 1.3rem;
+  `}
 `;
 
 const NicknameDate = styled.header<{ editComment: boolean }>`
@@ -45,50 +50,106 @@ const NicknameDate = styled.header<{ editComment: boolean }>`
   h3 {
     background-color: #ffd4b2;
     margin-right: 1rem;
-    font-size: 1.2rem;
   }
+
   h4 {
     background-color: #f3e9dd;
   }
+
+  ${media.small`
+    h3,h4 {
+      height: 1.5vh;
+      line-height: 1.5vh;
+    }
+    
+    h3 {
+      font-size: 0.7rem;
+      margin-right: 0.3rem;
+    }
+
+    h4,span {
+      font-size: 0.6rem;
+    } 
+  `}
 `;
 
-const FirstComment = styled.h5`
+const FirstComment = styled.span`
   margin: 0;
   margin-left: 0.5rem;
   color: #fc2947;
 `;
 
-const EditText = styled.h5`
+const EditText = styled.span`
   margin: 0;
   margin-left: 0.5rem;
   color: #30aadd;
 `;
 
+const CommentButton = styled.section`
+  width: 55vw;
+  display: flex;
+  justify-content: space-between;
+`;
+
 const ContentBox = styled.section`
-  width: 100%;
-  height: 5vh;
+  width: 90%;
+  height: auto;
+
   display: flex;
   justify-content: left;
   align-items: center;
 `;
 
+const ButtonBox = styled.section`
+  width: 10%;
+  text-align: center;
+
+  ${media.small`
+    button {
+      margin-right: 0.1rem;
+    }
+  `}
+
+  ${media.medium`
+    button:first-child {
+      margin-left: 0.5rem;
+    }
+  `}
+`;
+
 const Textarea = styled.textarea`
   font-family: "IBM Plex Sans KR", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 0.2rem;
   width: 50vw;
-  height: 5vh;
+  height: auto;
+
+  ${media.small`
+    font-size: 0.6rem;
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+  `}
 `;
 
 const Comment = styled.section`
   font-family: "IBM Plex Sans KR", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 0.3rem;
   background-color: #dbdfea;
-  width: 90%;
-  height: 5vh;
+  width: 100%;
+  height: auto;
   overflow: auto;
   white-space: pre-wrap;
+
+  ${media.small`
+    font-size: 0.6rem;
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+  `}
 `;
 
 interface ItemProps {
@@ -170,40 +231,48 @@ const CommentItem = ({ list, idx, boardId, category }: ItemProps) => {
         </NicknameDate>
         {editComment ? (
           <form onSubmit={handleSubmit(editCommentSubmitHandler)}>
-            <ContentBox>
-              <Textarea
-                {...register("comment", { value: `${list.comment.contents}` })}
-              />
-              <Button
-                type="submit"
-                backgroundColor="#B5DEFF"
-                border="#B5DEFF"
-                margin="0 0.5rem 0"
-              >
-                수정 완료
-              </Button>
-              <Button
-                type="button"
-                onClick={() => setEditComment(false)}
-                backgroundColor="#FFC7C7"
-                border="#FFC7C7"
-                margin="0"
-              >
-                취소
-              </Button>
-            </ContentBox>
+            <CommentButton>
+              <ContentBox>
+                <Textarea
+                  {...register("comment", {
+                    value: `${list.comment.contents}`,
+                  })}
+                />
+              </ContentBox>
+              <ButtonBox>
+                <Button
+                  type="submit"
+                  backgroundColor="#B5DEFF"
+                  border="#B5DEFF"
+                  margin="0 0.2rem 0 0.7rem"
+                >
+                  수정 완료
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => setEditComment(false)}
+                  backgroundColor="#FFC7C7"
+                  border="#FFC7C7"
+                  margin="0"
+                >
+                  취소
+                </Button>
+              </ButtonBox>
+            </CommentButton>
           </form>
         ) : (
-          <ContentBox>
-            <Comment>{list.comment.contents}</Comment>
+          <CommentButton>
+            <ContentBox>
+              <Comment>{list.comment.contents}</Comment>
+            </ContentBox>
             {userId === list.comment.creatorId && (
-              <>
+              <ButtonBox>
                 <Button
                   type="submit"
                   onClick={() => setEditComment(true)}
                   backgroundColor="#B5DEFF"
                   border="#B5DEFF"
-                  margin="0 0.5rem 0"
+                  margin="0 0.2rem 0"
                 >
                   수정
                 </Button>
@@ -216,9 +285,9 @@ const CommentItem = ({ list, idx, boardId, category }: ItemProps) => {
                 >
                   삭제
                 </Button>
-              </>
+              </ButtonBox>
             )}
-          </ContentBox>
+          </CommentButton>
         )}
       </CommentBox>
     </>

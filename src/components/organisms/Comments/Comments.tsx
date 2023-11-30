@@ -10,10 +10,31 @@ import { doc, setDoc, Timestamp, collection } from "firebase/firestore";
 import Button from "../../atoms/Button";
 import { getDate } from "../../../utils/date";
 import CommentItem from "../CommentItem";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const CommentsWrapper = styled.article`
   width: 70%;
   margin: 0px auto;
+  font-size: 0.9rem;
+
+  ${media.small`
+    width:80%;
+    font-size: 0.8rem;
+
+    button {
+      font-size: 0.6rem;
+      height: 2.3vh;
+    }
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+
+    button {
+      font-size: 0.7rem;
+      height: 2.5vh;
+    }
+  `}
 `;
 
 const CommentHeader = styled.header`
@@ -24,6 +45,13 @@ const CommentHeader = styled.header`
   h3 {
     margin-right: 0.5rem;
   }
+
+  ${media.small`
+    h3 {
+      font-size: 0.7rem;
+      margin-right: 0.2rem;
+    }
+  `}
 `;
 
 const Form = styled.form`
@@ -42,6 +70,14 @@ export const Textarea = styled.textarea`
   font-size: 1.1rem;
   width: 50vw;
   height: 6vh;
+
+  ${media.small`
+    font-size: 0.6rem;
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+  `}
 `;
 
 export interface CommentsProps {
