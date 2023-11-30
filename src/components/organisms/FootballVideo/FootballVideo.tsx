@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 
 import ErrorMessage from "../../molecules/ErrorMessage";
 import LoadingMessage from "../../molecules/LoadingMessage";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 interface VideoProps {
   title: string;
@@ -19,16 +20,35 @@ const VideoItemWrapper = styled.article`
   grid-template-columns: repeat(auto-fill, minmax(30%, auto));
   column-gap: 10px;
   row-gap: 20px;
+
+  ${media.small`
+    grid-template-columns: repeat(auto-fill, minmax(50%, auto));
+  `}
+
+  ${media.medium`
+    grid-template-columns: repeat(auto-fill, minmax(40%, auto));
+  `}
 `;
 
-const MatchTeams = styled.h3`
+const MatchTeams = styled.p`
+  font-size: 1rem;
+  font-weight: 700;
   margin-bottom: 0;
+
+  ${media.small`
+    font-size: 0.8rem;
+  `}
 `;
 
 const MatchDate = styled.p`
+  font-size: 0.9rem;
   font-weight: 600;
   color: #394867;
   margin: 0;
+
+  ${media.small`
+    font-size: 0.7rem;
+  `}
 `;
 
 const Img = styled.img`
