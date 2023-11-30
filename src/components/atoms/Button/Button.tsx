@@ -5,7 +5,7 @@ const StyledButton = styled.button<ButtonProps>`
   background-color: ${({ backgroundColor }) => backgroundColor || "white"};
   color: ${({ color }) => color || "black"};
   font-family: "Do Hyeon", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   position: ${({ position }) => position};
   top: ${({ top }) => top};
   border: 1px solid ${({ border }) => border || "white"};
@@ -13,7 +13,7 @@ const StyledButton = styled.button<ButtonProps>`
     background-color: ${({ hoverEffect }) => hoverEffect};
   }
   width: ${({ width }) => width || "auto"};
-  height: ${({ height }) => height || "4vh"};
+  height: ${({ height }) => height || "3.5vh"};
   margin: ${({ margin }) => margin || "1rem"};
 `;
 

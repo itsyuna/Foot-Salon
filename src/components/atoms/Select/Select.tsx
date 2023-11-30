@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledSelect = styled.select<SelectProps>`
   width: ${({ width }) => width || "auto"};
-  height: 4vh;
+  height: ${({ height }) => height || "4vh"};
   border-radius: 3rem;
   font-family: "Do Hyeon", sans-serif;
   font-size: 1.1rem;
@@ -24,6 +24,7 @@ interface SelectProps {
   defaultValue?: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   width?: string;
+  height?: string;
   backgroundColor?: string;
   color?: string;
   border?: string;
@@ -35,6 +36,7 @@ const Select = ({
   onChange,
   option,
   width,
+  height,
   backgroundColor,
   color,
   border,
@@ -45,6 +47,7 @@ const Select = ({
       defaultValue={defaultValue}
       onChange={onChange}
       width={width}
+      height={height}
       backgroundColor={backgroundColor}
       color={color}
       border={border}
