@@ -19,6 +19,9 @@ const HeaderWrapper = styled.header`
       width: 90%;   
       margin-left: 5%;
     }
+    svg {
+      height: 3vh;
+    }
   `}
 
   ${media.large`
@@ -34,28 +37,34 @@ const LoginUserInfoBox = styled.section`
   align-items: center;
 
   position: absolute;
-  top: 70%;
+  top: 85%;
   right: 0;
 
-  ${media.small`
+  ${media.small` 
     top: 90%;
 
     section {
-      font-size: 0.7rem;
-      width: 100%;
       height: 2vh;
       line-height: 2vh;
+      font-size: 0.6rem;
+      margin-right: 0;
     }
 
-    button {
-      width: 30%;
-      height: 20%;
-      font-size: 0.7rem;
+    button {   
+      height: 2vh;
+      font-size: 0.6rem;
     }
   `}
 
   ${media.medium`
-    section,button {
+    top: 80%;
+    
+    section {
+      font-size: 0.9rem;
+      margin-right: 0.2rem;
+    }
+
+    button {
       font-size: 0.9rem;
     }
   `}
@@ -65,11 +74,11 @@ const UserInfoBox = styled.section`
   font-family: "Do Hyeon", sans-serif;
   background-color: #f9f5f6;
   width: auto;
-  height: 3vh;
-  line-height: 3vh;
-  padding: 0 0.7rem;
+  height: 2.5vh;
+  line-height: 2.5vh;
   border-radius: 10px;
-  margin-right: 5px;
+  margin-right: 0.5rem;
+  padding: 0 0.5rem;
 
   span {
     color: #c780fa;
@@ -126,8 +135,8 @@ const Header = () => {
         {isSpinnerOn ? (
           <Comment
             visible={true}
-            height="70"
-            width="80"
+            height="35"
+            width="40"
             ariaLabel="comment-loading"
             wrapperStyle={{}}
             wrapperClass="comment-wrapper"
@@ -143,6 +152,7 @@ const Header = () => {
             margin="0"
             top="4rem"
             border="white"
+            height="2.5vh"
           >
             {isLoggedIn ? "LOGOUT" : "LOGIN"}
           </Button>

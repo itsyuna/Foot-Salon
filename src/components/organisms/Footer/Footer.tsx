@@ -4,26 +4,60 @@ import { TfiSpray } from "react-icons/tfi";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
+import { media } from "../../../ui/MediaQuery/mediaQuery";
+
 const FooterWrapper = styled.footer`
   width: 100%;
   height: 15%;
 
   display: flex;
   justify-content: space-between;
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  ${media.small`
+    p {
+     font-size: 0.6rem;
+    }
+  `}
+
+  ${media.medium`
+    p {
+      font-size: 0.8rem;
+    }
+  `}
 `;
 
 const LeftSection = styled.section`
-  width: 15vw;
-  margin: 2rem 0 0 4rem;
+  width: 20%;
+  height: 10vh;
+  margin: 1.3rem 0 0 4rem;
+
+  ${media.small`
+    width: 55%;
+    margin: 5% 0 0 0;
+  `}
+
+  ${media.medium`
+    width: 35%;
+    margin: 5% 0 0 0;;
+  `}
 `;
 
 const RightSection = styled.section`
-  width: 30vw;
-  margin-top: 2rem;
-
+  width: 25%;
+  height: 10vh;
+  margin-top: 5%;
   svg {
     transform: rotate(40deg);
   }
+
+  ${media.large`
+      width: 30%;
+      margin: 1.2rem 2rem 0 0;
+  `}
 `;
 
 const SprayLineBox = styled.div`
@@ -32,32 +66,60 @@ const SprayLineBox = styled.div`
   svg {
     transform: rotate(40deg);
   }
+
+  svg,
+  img {
+    display: none;
+  }
+
+  ${media.large`
+    svg,img {
+      display: block;
+    }
+  `}
 `;
 
 const NoticeBox = styled.section`
-  width: 12vw;
+  width: 100%;
   height: 6vh;
-  margin-left: 0.6rem;
-
   display: flex;
   flex-direction: column;
+
+  ${media.small`
+    height: 4.5vh;
+
+    svg {
+      width: 2.5vw;
+    }
+  `}
+
+  ${media.medium`
+    height: 5vh;
+
+    svg {
+      width: 2vw;
+    }
+  `}
 `;
 
 const NoticeSmallBox = styled.div`
-  width: 12vw;
   height: 50%;
-  margin-left: 2.5rem;
   position: relative;
+
+  ${media.large`
+    width: 90%;
+    margin-left: 10%;
+  `}
 `;
 
 const DeveloperInfo = styled.div`
   color: white;
-  width: 75%;
+  width: 100%;
   height: 100%;
   cursor: pointer;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 
   position: absolute;
@@ -84,26 +146,46 @@ const DeveloperInfo = styled.div`
   p {
     margin: 0;
   }
+
+  ${media.small`
+    width: 50%;
+  `}
+
+  ${media.medium`
+    width: 60%;
+  `}
 `;
 
 const CopyrightText = styled.p`
   font-family: "Bebas Neue", sans-serif;
   width: 100%;
+
   text-align: center;
   position: absolute;
-  top: 12%;
+  top: 10%;
   left: 40%;
   transform: translate(-40%, -50%);
   color: white;
+
+  ${media.small`
+    top: 6%;
+  `}
+
+  ${media.medium`
+    top: 5%;
+  `}
 `;
 
 const FamousFootballQuotes = styled.p`
   font-family: "Fontdiner Swanky", cursive;
-  font-size: 1.2rem;
   color: #def8d6;
   text-shadow: #def8d6 1px 0 10px;
+  font-size: 1rem;
   margin: 0;
-  margin-left: 3.5rem;
+
+  ${media.large`   
+    margin: 0 0 0 3.5rem;
+  `}
 `;
 
 const Footer = () => {
@@ -124,7 +206,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <FaGithub size="30" color="white" />
+                <FaGithub size="25" color="white" />
                 <p>Github</p>
               </a>
               <Link to="/email">
@@ -158,12 +240,14 @@ const Footer = () => {
         <FamousFootballQuotes>
           Form is temporary, Class is permanant. - Bill Shankly
         </FamousFootballQuotes>
-        <TfiSpray size="35" color="white" />
-        <img
-          src={`${process.env.PUBLIC_URL}/assets/images/spray-line.png`}
-          alt="Spray line"
-          width="90%"
-        />
+        <SprayLineBox>
+          <TfiSpray size="35" color="white" />
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/images/spray-line.png`}
+            alt="Spray line"
+            width="90%"
+          />
+        </SprayLineBox>
       </RightSection>
     </FooterWrapper>
   );
