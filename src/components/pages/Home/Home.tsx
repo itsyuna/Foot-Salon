@@ -3,10 +3,16 @@ import styled from "styled-components";
 import Carousel from "../../organisms/Carousel";
 import KoreaFixture from "../../organisms/KoreaFixtures";
 import TableTemplate from "../../organisms/TableTemplate";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const MainWrapper = styled.main`
   width: 100%;
   height: 65vh;
+
+  ${media.small`
+    width: 100%;
+    overflow: auto;
+  `}
 `;
 
 const HomeTopSection = styled.section`
@@ -14,11 +20,25 @@ const HomeTopSection = styled.section`
   height: 40vh;
   display: flex;
   justify-content: space-around;
+
+  ${media.small`
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+  `}
 `;
 
 const HomeBottomSection = styled(HomeTopSection)`
   height: 20vh;
   margin-top: 30px;
+
+  ${media.small`
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  `}
 `;
 
 const images = [
@@ -52,7 +72,7 @@ const topScorersMenu = [
   "순위",
   "선수명",
   "포지션",
-  "총 득점 수 / 페널티",
+  "총 득점 수 / 페널티 킥",
   "어시스트",
   "출장 수",
   "소속팀",
