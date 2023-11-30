@@ -20,25 +20,47 @@ import {
 import Button from "../../components/atoms/Button";
 import Input from "../../components/atoms/Input";
 import { ErrorText } from "../../components/pages/SignUp/SignUp";
+import { media } from "../MediaQuery/mediaQuery";
+import { backgroundImg } from "../../styles/global-style";
+
+const footballPitch = `${process.env.PUBLIC_URL}/assets/images/football-pitch.jpg`;
 
 const ModalBackgroundImage = styled.section<{ targetPhotoId: string }>`
+  z-index: 999;
+  position: absolute;
+  width: 80vw;
+  height: 67vh;
+  top: 51.5%;
+  left: 50%;
+  transform: translate(-50%, -49.5%);
+
   ${({ targetPhotoId }) =>
     targetPhotoId &&
     css`
-      z-index: 999;
-      position: absolute;
-      background-color: white;
-      width: 80vw;
-      height: 67vh;
-
-      top: 51.5%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      background-image: url("assets/images/football-pitch.jpg");
+      background-image: url(${footballPitch});
       background-position: 50% 50%;
       background-size: 90vw 80vh;
     `}
+
+  ${media.small`
+    background-image: url(${backgroundImg});
+    background-repeat: initial;
+    background-size: auto;
+    
+    width: 100vw;
+    height: 100vh;
+    top: 51%;
+  `}
+
+  ${media.medium`
+    background-image: url(${backgroundImg});
+    background-repeat: initial;
+    background-size: auto;
+  
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+  `}
 `;
 
 const ModalSection = styled.section`
@@ -46,17 +68,45 @@ const ModalSection = styled.section`
   font-weight: 700;
   border: 5px solid #f0edd4;
   background-color: #f9fbe7;
-  width: 50%;
-  height: 50vh;
+  width: 52vw;
+  height: 52vh;
   margin: 0 auto;
   z-index: 999;
   position: absolute;
-  top: 51%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  input {
+    font-size: 0.8rem;
+  }
+
+  ${media.small`
+    width: 90vw;
+    height: 85vh;
+    top: 48%;
+
+    button,input,h4 {
+      font-size: 0.6rem;
+    }
+
+    p {
+      font-size: 0.5rem;
+    }
+  `}
+
+  ${media.medium`
+    width: 90vw;
+    height: 80vh;
+    top: 48%;
+  
+    button,input,p,h4 {
+      font-size: 0.7rem;
+    }
+  `}
 `;
 
-export const CloseButtonBox = styled.section`
+const CloseButtonBox = styled.section`
   font-family: "Do Hyeon", sans-serif;
   text-align: right;
 `;
@@ -65,8 +115,46 @@ const KeywordBox = styled.section`
   margin: 1rem 0;
   width: 100%;
   height: 4vh;
+  padding-left: 0.5rem;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
+  align-items: center;
+
+  ${media.small`
+   padding-left: 0;
+
+   input {
+    height: 2vh;
+   }
+
+   display: block;
+   justify-content: center;
+   margin: 2rem 0 3rem;
+
+   p {
+    text-align:center;
+   }
+  `}
+
+  ${media.medium`
+   input {
+    width: 30%;
+    height: 2.5vh;
+   }
+  `}
+`;
+
+const InputBox = styled.section`
+  margin-right: 1rem;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  ${media.small`
+    width: 100%;
+  `}
 `;
 
 const KeywordText = styled.p<{ errorCheck: boolean }>`
@@ -82,9 +170,33 @@ const KeywordText = styled.p<{ errorCheck: boolean }>`
 
 const AttachmentBox = styled.section`
   display: flex;
-  p {
-    margin: 0.2rem 0;
+  align-items: center;
+  padding-left: 1rem;
+
+  input {
+    width: 20%;
+    height: 100%;
   }
+
+  p {
+    margin: 0;
+  }
+
+  ${media.small`
+    padding-left: 0.5rem;
+
+    input {
+      width: 50%;
+    }
+  `}
+
+  ${media.medium`
+    padding-left: 0.7rem;
+
+    input {
+      width: 30%;
+    }
+  `}
 `;
 
 const PreviewPhoto = styled.section`
@@ -96,22 +208,40 @@ const PreviewPhoto = styled.section`
   h4 {
     margin: 0 1rem 0.5rem 0;
   }
+
+  ${media.small`
+    height: 50vh;
+  `}
+
+  ${media.medium`
+    height: 55vh;
+  `}
 `;
 
 const UploadImageBox = styled.section`
+  width: 30%;
+  height: 90%;
+  margin: 0 auto;
+
+  ${media.small`
+    width: 80%;
+  `}
+
+  ${media.medium`
+    width: 70%;
+  `}
+`;
+
+const UploadImage = styled.img`
   width: 100%;
   height: 100%;
 `;
 
-const UploadImage = styled.img`
-  width: 12vw;
-  height: 25vh;
-`;
-
 const ButtonBox = styled.section`
   width: 100%;
-  height: 5vh;
+  height: 3vh;
   text-align: center;
+  margin-top: 1rem;
 
   button {
     margin: 0;
@@ -251,56 +381,58 @@ const PhotoEditorModal = ({
         </CloseButtonBox>
         <form onSubmit={handleSubmit(onSubmit)}>
           <KeywordBox>
-            <Controller
-              control={control}
-              defaultValue={targetPhoto.photo.keyword1}
-              name="keyword1"
-              rules={{
-                ...(targetPhoto.id === "" && {
-                  required: "필수 입력 사항입니다.",
-                }),
-              }}
-              render={({ field }) => (
-                <Input
-                  type="text"
-                  placeholder="키워드 1"
-                  onChange={field.onChange}
-                  defaultValue={targetPhoto.photo.keyword1}
-                  width="20%"
-                  height="3.5vh"
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              defaultValue={targetPhoto.photo.keyword2}
-              name="keyword2"
-              render={({ field }) => (
-                <Input
-                  type="text"
-                  placeholder="키워드 2"
-                  onChange={field.onChange}
-                  defaultValue={targetPhoto.photo.keyword2}
-                  width="20%"
-                  height="3.5vh"
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              defaultValue={targetPhoto.photo.keyword3}
-              name="keyword3"
-              render={({ field }) => (
-                <Input
-                  type="text"
-                  placeholder="키워드 3"
-                  onChange={field.onChange}
-                  defaultValue={targetPhoto.photo.keyword3}
-                  width="20%"
-                  height="3.5vh"
-                />
-              )}
-            />
+            <InputBox>
+              <Controller
+                control={control}
+                defaultValue={targetPhoto.photo.keyword1}
+                name="keyword1"
+                rules={{
+                  ...(targetPhoto.id === "" && {
+                    required: "필수 입력 사항입니다.",
+                  }),
+                }}
+                render={({ field }) => (
+                  <Input
+                    type="text"
+                    placeholder="키워드 1"
+                    onChange={field.onChange}
+                    defaultValue={targetPhoto.photo.keyword1}
+                    width="30%"
+                    height="3vh"
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                defaultValue={targetPhoto.photo.keyword2}
+                name="keyword2"
+                render={({ field }) => (
+                  <Input
+                    type="text"
+                    placeholder="키워드 2"
+                    onChange={field.onChange}
+                    defaultValue={targetPhoto.photo.keyword2}
+                    width="30%"
+                    height="3vh"
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                defaultValue={targetPhoto.photo.keyword3}
+                name="keyword3"
+                render={({ field }) => (
+                  <Input
+                    type="text"
+                    placeholder="키워드 3"
+                    onChange={field.onChange}
+                    defaultValue={targetPhoto.photo.keyword3}
+                    width="30%"
+                    height="3vh"
+                  />
+                )}
+              />
+            </InputBox>
             <KeywordText errorCheck={errors.keyword1 ? true : false}>
               *키워드를 1가지 이상 입력해 주세요.
             </KeywordText>

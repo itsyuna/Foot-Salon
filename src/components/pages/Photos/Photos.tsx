@@ -10,6 +10,7 @@ import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import PhotoList from "../../organisms/PhotoList";
 import PhotoEditorModal from "../../../ui/PhotoEditorModal";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const PhotoHeader = styled.header<{ openEditorModal: boolean }>`
   width: 90%;
@@ -17,32 +18,84 @@ const PhotoHeader = styled.header<{ openEditorModal: boolean }>`
   margin: 1rem auto 0;
   text-align: center;
 
-  h3 {
+  h4 {
     margin: 2rem auto;
+  }
+
+  input,
+  button {
+    font-size: 0.9rem;
   }
 
   ${({ openEditorModal }) =>
     openEditorModal &&
     css`
+      ${media.large`
       background-image: url("assets/images/play-football.png");
       background-size: 31%;
     `}
+    `}
+
+  ${media.small`
+    h4 {
+      font-size: 0.7rem;
+    }
+
+    input,button {
+      font-size: 0.7rem;
+    }
+
+    input {
+      width: 40%;
+      height: 2.2vh;
+    }
+
+    button {
+      width: auto;
+      height: 2.5vh;
+    }
+
+    section {
+      justify-content: space-between;
+    }
+  `}
+
+  ${media.medium`
+  h4 {
+    font-size: 0.8rem;
+  }
+
+  input,button {
+    font-size: 0.8rem;
+  }
+
+  input {
+    width: 35%;
+    height: 2.4vh;
+  }
+
+  button {
+    width: auto;
+    height: 2.7vh;
+  }
+
+  & > section {
+    margin-top: 1.5rem;
+  }
+`}
 `;
 
 const ButtonBox = styled.section<{ isModal: boolean }>`
   width: 100%;
   height: 6vh;
+  margin: 1rem 0;
+
   display: flex;
   justify-content: right;
   text-align: center;
-  margin: 1rem 0;
 
-  button:nth-child(2) {
-    margin-left: 0.5rem;
-  }
-
-  button:nth-child(3) {
-    margin-left: 2rem;
+  section {
+    margin-right: 1rem;
   }
 
   ${({ isModal }) =>
@@ -57,6 +110,33 @@ const NoPhotoMessage = styled.section`
   height: 30vh;
   margin: 2rem auto;
   text-align: center;
+
+  p {
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  ${media.small`
+    p {
+      font-size: 0.5rem;
+    }
+    
+    svg {
+      width: 10vw;
+      height: 5vh;
+    }
+  `}
+
+  ${media.medium`
+    p {
+      font-size: 0.7rem;
+    }
+
+    svg {
+      width: 15vw;
+      height: 5vh;
+    }
+  `}
 `;
 
 export const defaultPhotolist = {
@@ -126,7 +206,7 @@ const Photos = () => {
   return (
     <Card>
       <PhotoHeader openEditorModal={openEditorModal}>
-        <h3>나의 베스트컷을 기록하고, 공유해 보세요 📸</h3>
+        <h4>나의 베스트컷을 기록하고, 공유해 보세요 📸</h4>
         <Input
           type="text"
           onChange={(e) => setSearchKeyword(e.target.value)}
@@ -135,31 +215,33 @@ const Photos = () => {
           height="3vh"
         />
         <ButtonBox isModal={openEditorModal}>
-          <Button
-            type="button"
-            value="all"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-              setPhotoFilter((e.target as HTMLButtonElement).value)
-            }
-            width="3vw"
-            margin="0"
-            backgroundColor="#DAF5FF"
-            border="#B0DAFF"
-          >
-            All
-          </Button>
-          <Button
-            type="button"
-            value="best-shot"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-              setPhotoFilter((e.target as HTMLButtonElement).value)
-            }
-            margin="0"
-            backgroundColor="#DDF7E3"
-            border="#86C8BC"
-          >
-            나의 베스트 컷📸
-          </Button>
+          <section>
+            <Button
+              type="button"
+              value="all"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                setPhotoFilter((e.target as HTMLButtonElement).value)
+              }
+              width="3vw"
+              margin="0"
+              backgroundColor="#DAF5FF"
+              border="#B0DAFF"
+            >
+              All
+            </Button>
+            <Button
+              type="button"
+              value="best-shot"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                setPhotoFilter((e.target as HTMLButtonElement).value)
+              }
+              margin="0"
+              backgroundColor="#DDF7E3"
+              border="#86C8BC"
+            >
+              나의 베스트 컷📸
+            </Button>
+          </section>
           <Button
             type="button"
             value="write"
@@ -183,8 +265,8 @@ const Photos = () => {
         <PhotoList data={getPhotoFilter()} isNewPost={isNewPost} />
       ) : (
         <NoPhotoMessage>
-          <h4>아직 공유된 사진이 없습니다 :(</h4>
-          <FcStackOfPhotos size="100" />
+          <p>아직 공유된 사진이 없습니다 :(</p>
+          <FcStackOfPhotos size="70" />
         </NoPhotoMessage>
       )}
     </Card>

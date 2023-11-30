@@ -12,15 +12,21 @@ import Button from "../../atoms/Button";
 import { defaultPhotolist } from "../../pages/Photos/Photos";
 import ViewPhotoModal from "../../../ui/ViewPhotoModal";
 import PhotoEditorModal from "../../../ui/PhotoEditorModal";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const PhotoItemWrapper = styled.article<WrapperProps>`
   font-family: "Do Hyeon", sans-serif;
+  font-size: 0.9rem;
   width: 90%;
   height: auto;
   margin: 0 auto;
 
+  button {
+    font-size: 0.9rem;
+  }
+
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 2rem;
 
   ${({ isNewPost }) =>
@@ -28,6 +34,28 @@ const PhotoItemWrapper = styled.article<WrapperProps>`
     css`
       opacity: 0;
     `}
+
+  ${media.small`
+    font-size: 0.7rem;
+
+    grid-template-columns: repeat(1, 1fr);
+
+    header div {     
+      height: 2vh;
+      line-height: 2vh;
+    }
+  `}
+
+  ${media.medium`
+    font-size: 0.8rem;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    header div {     
+      height: 2vh;
+      line-height: 2vh;
+    }
+  `}
 `;
 
 const ItemList = styled.section`
