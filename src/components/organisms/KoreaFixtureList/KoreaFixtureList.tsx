@@ -1,20 +1,33 @@
 import styled from "styled-components";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const Table = styled.table`
   border: 1px solid #116d6e;
-  width: 50%;
+  width: 90%;
   height: 100%;
   border-collapse: collapse;
   white-space: nowrap;
   margin: 5px;
+
+  ${media.large`
+    width: 50%;
+  `}
 `;
 
 const Caption = styled.caption`
   border: 1px solid #1b9c85;
   background-color: #e3f2c1;
   color: #285430;
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 10px;
+
+  ${media.small`
+    font-size: 0.8rem;
+  `}
+
+  ${media.medium`
+    font-size: 0.9rem;
+  `}
 `;
 
 const Tr = styled.tr`

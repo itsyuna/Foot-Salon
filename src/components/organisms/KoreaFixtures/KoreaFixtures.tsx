@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import KoreaFixtureList from "../KoreaFixtureList";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const KoreaFixtureWrapper = styled.article`
   font-family: "Do Hyeon", sans-serif;
@@ -10,16 +11,50 @@ const KoreaFixtureWrapper = styled.article`
   overflow: auto;
   text-align: center;
   margin-right: 15px;
+
+  ${media.small`
+    width: 100%;
+    margin: 0;
+  `}
 `;
 
 const ContentsTitle = styled.h3`
   color: #16213e;
   margin-top: 10px;
+
+  ${media.small`
+    font-size: 0.9rem;
+  `}
+
+  ${media.medium`
+    font-size: 1rem;
+  `}
 `;
 
 const FixtureInfo = styled.section`
   display: flex;
   height: auto;
+  font-size: 0.7vw;
+
+  ${media.small`
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.6rem;
+    
+    table:nth-child(2) {
+      margin-top: 2rem;
+    }
+  `}
+
+  ${media.medium`
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.7rem;
+
+    table:nth-child(2) {
+      margin-top: 1.5rem;
+    }
+  `}
 `;
 
 const warmupMatchSubtitle = "평가전";
