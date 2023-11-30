@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { CirclesWithBar } from "react-loader-spinner";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 type LoadingSize = "small" | "medium" | "large";
 
@@ -30,25 +31,37 @@ const getLoadingSize = (size: LoadingSize) => {
 
 const LoadingWrapper = styled.section<{ size: LoadingSize }>`
   font-family: "Gowun Dodum", sans-serif;
+  text-align: center;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+
   ${({ size }) => getLoadingSize(size)};
 `;
 
-const LoadingText = styled.h2`
-  width: 15vw;
+const LoadingText = styled.p`
+  width: 50vw;
+  font-size: 0.9rem;
+  font-weight: 900;
   color: #f45050;
   margin: 10px 0;
+
+  ${media.large`
+    font-size: 1.2rem;
+  `}
 `;
 
 const Message = styled.p`
-  width: 13vw;
-  font-size: 1.2rem;
+  width: 50vw;
+  font-size: 0.7rem;
   font-weight: 900;
   margin: 10px 0;
+
+  ${media.large`
+    font-size: 0.9rem;
+ `}
 `;
 
 interface LoadingContents {
@@ -62,7 +75,7 @@ const LoadingMessage = ({ contents, size }: LoadingContents) => {
       <LoadingText>⚽️{contents} 로딩 중⚽️</LoadingText>
       <CirclesWithBar
         height="50"
-        width="50"
+        width="40"
         color="#4fa94d"
         wrapperStyle={{}}
         wrapperClass=""

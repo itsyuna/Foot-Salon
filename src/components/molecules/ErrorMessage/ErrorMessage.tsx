@@ -1,22 +1,36 @@
 import styled from "styled-components";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const MessageWrapper = styled.section<{ category?: string }>`
   font-family: "Gowun Dodum", sans-serif;
   width: 100%;
   height: ${({ category }) => (category === "VIDEO" ? "70%" : "90%")};
+  text-align: center;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-const CategoryMessage = styled.h2`
+const CategoryMessage = styled.p`
+  font-size: 1rem;
+  font-weight: 900;
   color: #1b9c85;
   margin: 0;
+
+  ${media.large`
+    font-size: 1.2rem;
+  `}
 `;
 
 const Message = styled.p`
   font-weight: 800;
+  font-size: 0.8rem;
+
+  ${media.large`
+    font-size: 0.9rem;
+  `}
 `;
 
 interface ErrorProps {

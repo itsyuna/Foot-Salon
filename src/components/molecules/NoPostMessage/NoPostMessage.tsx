@@ -3,13 +3,23 @@ import { useNavigate } from "react-router-dom";
 
 import Card from "../../../ui/Card";
 import Button from "../../atoms/Button";
+import { media } from "../../../ui/MediaQuery/mediaQuery";
 
 const ErrorMessage = styled.section`
   font-family: "Do Hyeon", sans-serif;
-  width: 20%;
+  width: 30%;
   height: 20vh;
   margin: 15rem auto;
   text-align: center;
+
+  ${media.small`
+    width: 50%;
+    font-size: 0.8rem;
+
+    button {
+      font-size: 0.7rem;
+    }
+  `}
 `;
 
 const NoPostMessage = () => {
