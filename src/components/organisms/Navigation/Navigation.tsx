@@ -10,7 +10,7 @@ const NavWrapper = styled.nav<{ extendNavBar: boolean }>`
   background-color: #33aa30;
   border-radius: 20px;
   width: 100%;
-  height: 45px;
+  height: 4vh;
   line-height: 50%;
   position: relative;
   margin: 10px 0;
@@ -41,6 +41,7 @@ const NavWrapper = styled.nav<{ extendNavBar: boolean }>`
 
             ul {
               background-color: #79ac78;
+              transition: 0.3s;
             }
 
             div:last-child svg:nth-child(2) {
@@ -50,7 +51,7 @@ const NavWrapper = styled.nav<{ extendNavBar: boolean }>`
           `
         : css`
             ul {
-              transform: translateX(100vh);
+              transform: translateY(100vh);
             }
 
             div:last-child svg:nth-child(1) {
@@ -71,10 +72,11 @@ const NavWrapper = styled.nav<{ extendNavBar: boolean }>`
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: top;
+      justify-content: center;
+      gap: 3rem;
     }
 
-    height: 30px;
+    height: 3.6vh;
   }
 `;
 
@@ -155,7 +157,6 @@ const Navigation = () => {
           alt="Sonny's celebration icon"
         />
       </IconBox>
-
       <Ul>
         <li onClick={() => setExtendNavBar(!extendNavBar)}>
           <HomeMenu to="/">Home</HomeMenu>

@@ -24,10 +24,14 @@ const StatDateBox = styled.section`
   button {
     margin-left: 0;
     margin-right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   ${media.small`
-    width: 50%;
+    width: 53%;
     font-size: 0.7rem;
     margin: 0 auto;
 
@@ -36,7 +40,7 @@ const StatDateBox = styled.section`
     }
 
     button {
-      width: 1.8rem;
+      width: auto;
       height: 1.2rem;
     }
 
@@ -55,7 +59,7 @@ const StatDateBox = styled.section`
     }
 
     button {
-      width: 2.3rem;
+      width: 2rem;
       height: 1.5rem;
     }
 
@@ -70,6 +74,10 @@ const HeadTextBox = styled.div`
   width: auto;
   height: 100%;
   margin-top: 1.3rem;
+
+  ${media.small`
+    margin: 0 0.3rem;
+  `}
 `;
 
 const StatOptionBox = styled.section`

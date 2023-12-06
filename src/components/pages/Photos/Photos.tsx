@@ -53,6 +53,7 @@ const PhotoHeader = styled.header<{ openEditorModal: boolean }>`
     button {
       width: auto;
       height: 2.5vh;
+      line-height: 50%;
     }
 
     section {
@@ -92,9 +93,12 @@ const ButtonBox = styled.section<{ isModal: boolean }>`
 
   display: flex;
   justify-content: right;
+  align-items: center;
   text-align: center;
 
   section {
+    display: flex;
+    align-items: center;
     margin-right: 1rem;
   }
 
