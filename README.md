@@ -8,6 +8,7 @@
 
 <br>
 
+- 반응형 웹, 웹 표준&웹 접근성을 고려하여 UI 개발
 - Figma를 활용하여 전체 UI 디자인 및 설계
 - Atomic Design Pattern을 활용하여 프로젝트 구조 설계
 - React Hook Form을 활용하여 Form 작성
